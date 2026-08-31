@@ -117,6 +117,7 @@ export function renderPage(p: Page): string {
 <title>${esc(p.title)}</title>
 <meta name="description" content="${esc(p.description)}">
 <link rel="canonical" href="${esc(url)}">
+<link rel="sitemap" type="application/xml" href="${href("/sitemap.xml")}">
 <meta property="og:type" content="article">
 <meta property="og:title" content="${esc(p.title)}">
 <meta property="og:description" content="${esc(p.description)}">

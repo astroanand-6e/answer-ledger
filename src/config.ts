@@ -71,3 +71,27 @@ export const ENGINE_NAME_DENYLIST = [
   "chatgpt", "openai", "gpt-4", "gpt-5", "gemini", "perplexity",
   "copilot", "grok", "llama", "mistral", "deepseek",
 ] as const;
+
+/**
+ * INDEXNOW KEY — a public token, deliberately committed.
+ *
+ * IndexNow authenticates a submission by asking the search engine to fetch a
+ * file whose NAME is the key and whose BODY is the key. That file is served to
+ * the whole internet on purpose. It is not a credential: it grants nothing but
+ * the ability to say "please recrawl these URLs", and only for URLs this repo
+ * already publishes. Do not treat it as a secret, and do not rotate it without
+ * re-running scripts/indexnow-submit.sh, because the old key stops validating
+ * the moment the file changes.
+ *
+ * WHY THE FILE IS NOT AT THE ORIGIN ROOT. We are a GitHub Pages *project*
+ * site, so we can only write under BASE_PATH; `astroanand-6e.github.io/` is a
+ * user-site repo we do not own. IndexNow's Option 2 covers exactly this case:
+ * host the key anywhere and pass `keyLocation`. The cost is a scoping rule —
+ * a key at `<origin>/answer-ledger/<key>.txt` may only submit URLs beginning
+ * `<origin>/answer-ledger/`. Every URL in our sitemap does, so the constraint
+ * costs us nothing. Generated 2026-08-31 with `openssl rand -hex 16`.
+ */
+export const INDEXNOW_KEY = "8da18fef51c2e6169de0333d55f6ac2a";
+
+/** Public URL of the key file. Goes in the submission payload as keyLocation. */
+export const INDEXNOW_KEY_LOCATION = canonical(`/${INDEXNOW_KEY}.txt`);

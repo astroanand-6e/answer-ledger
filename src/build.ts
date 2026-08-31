@@ -21,7 +21,7 @@ import { renderHome } from "./render/home.ts";
 import { renderMethod } from "./render/method.ts";
 import { renderMarkdown } from "./render/markdown.ts";
 import { renderPage } from "./render/shell.ts";
-import { SITE, CANONICAL_ORIGIN, BASE_PATH, canonical, href, ENGINE_NAME_DENYLIST } from "./config.ts";
+import { SITE, CANONICAL_ORIGIN, BASE_PATH, canonical, href, ENGINE_NAME_DENYLIST, INDEXNOW_KEY } from "./config.ts";
 import { esc } from "./html.ts";
 import type { LoadedCategory } from "./types.ts";
 
@@ -189,6 +189,12 @@ function buildTree(): { tree: Tree; cats: LoadedCategory[]; delisted: string[] }
 
   tree.set("docs/robots.txt",
     `User-agent: *\nAllow: /\n\nSitemap: ${canonical("/sitemap.xml")}\n`);
+
+  // IndexNow key file. Served publicly by design; see INDEXNOW_KEY in config.ts.
+  // Body must be the key and nothing else — a trailing newline is tolerated by
+  // the spec's reference implementations, but we emit the bare key so that a
+  // byte-exact `curl | diff` check in scripts/indexnow-submit.sh is meaningful.
+  tree.set(`docs/${INDEXNOW_KEY}.txt`, INDEXNOW_KEY);
 
   // Pages must not run Jekyll over generated output.
   tree.set("docs/.nojekyll", "");
