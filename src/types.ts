@@ -9,6 +9,20 @@ export interface Source {
 }
 
 /**
+ * An editor's note attached to a brand after the fact. See `Brand.correction`.
+ */
+export interface Correction {
+  /** What actually happened, in the editor's voice. Past tense, factual. */
+  note: string;
+  /** UTC instant the check was performed. Same "...Z" format as Run.ranAt. */
+  checkedAt: string;
+  /** Evidence. REQUIRED and must be non-empty — an unsourced correction is
+   *  just a second opinion, and carries less authority than the answer it
+   *  corrects. */
+  sources: Source[];
+}
+
+/**
  * One named recommendation in one run, in the order the assistant named it.
  * "Brand" is loose: it may be a commercial vendor, an open-source project, or
  * "run it yourself on a VPS". The honest answer to several of our categories
@@ -35,6 +49,21 @@ export interface Brand {
   /** Sources the assistant cited for this brand. Empty array is legal and
    *  is rendered honestly as "cited no sources". Never pad this. */
   sources: Source[];
+  /**
+   * EDITORIAL, NOT THE ASSISTANT'S VOICE. A dated, sourced note added by a
+   * human/verification pass after the run, recording that the world moved:
+   * the product was renamed, archived, acquired, or relicensed.
+   *
+   * This is the one field on the page that is NOT part of the record of what
+   * the model said. It exists because the ledger must stay verbatim AND must
+   * not send a reader to an archived repo. It is rendered in a visually
+   * distinct block, labelled as an editor's note with its own check date, and
+   * it is never allowed to read as though the assistant said it.
+   *
+   * Unlike the run, a correction IS retrieved, so it carries real sources and
+   * is deliberately exempt from the retrieval:false => no-sources rule.
+   */
+  correction?: Correction;
 }
 
 /**

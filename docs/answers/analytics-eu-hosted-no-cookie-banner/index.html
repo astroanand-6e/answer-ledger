@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What analytics can I run in the EU with no cookie banner? — recorded answer | Answer Ledger</title>
+<meta name="description" content="A dated record of what one AI assistant answered when asked for website analytics with data stored in the EU, genuinely cookieless so no consent banner is required, under $20 a month or self-hostable on a $5 VPS, and no per-seat pricing.">
+<link rel="canonical" href="https://astroanand-6e.github.io/answer-ledger/answers/analytics-eu-hosted-no-cookie-banner/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What analytics can I run in the EU with no cookie banner? — recorded answer | Answer Ledger">
+<meta property="og:description" content="A dated record of what one AI assistant answered when asked for website analytics with data stored in the EU, genuinely cookieless so no consent banner is required, under $20 a month or self-hostable on a $5 VPS, and no per-seat pricing.">
+<meta property="og:url" content="https://astroanand-6e.github.io/answer-ledger/answers/analytics-eu-hosted-no-cookie-banner/">
+<meta property="og:site_name" content="Answer Ledger">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:opsz,wght@6..72,400;6..72,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>:root{
+  --paper:#f4f1ea; --ink:#1a1815; --ink-soft:#59524a; --rule:#cfc6b6;
+  --mark:#7a2b1e; --tint:#e9e3d6; --machine:#3c3a35;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --paper:#14130f; --ink:#ece7dc; --ink-soft:#9d968a; --rule:#3a362e;
+         --mark:#d97a5f; --tint:#1e1c17; --machine:#c6c0b4; }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:Newsreader,Georgia,'Times New Roman',serif;
+  font-size:19px; line-height:1.6; font-optical-sizing:auto;
+}
+.wrap{max-width:46rem;margin:0 auto;padding:0 1.5rem}
+a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
+a:hover{border-bottom-color:var(--mark);color:var(--mark)}
+h1,h2,h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;letter-spacing:-.01em;line-height:1.12;margin:0}
+h1{font-size:clamp(2.1rem,5.5vw,3.1rem)}
+h2{font-size:1.6rem;margin-top:3rem}
+h3{font-size:1.15rem}
+p{margin:1rem 0}
+.mono,code{font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78rem;letter-spacing:.01em}
+
+/* masthead */
+header.mast{border-bottom:2px solid var(--ink);margin-bottom:2.5rem}
+header.mast .wrap{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding-top:1.1rem;padding-bottom:.7rem;flex-wrap:wrap}
+.logo{font-family:'Instrument Serif',Georgia,serif;font-size:1.5rem;border:0;letter-spacing:-.02em}
+.logo b{color:var(--mark);font-weight:400}
+nav.mast-nav{display:flex;gap:1.25rem}
+nav.mast-nav a{border:0;font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;font-family:'IBM Plex Mono',monospace;color:var(--ink-soft)}
+nav.mast-nav a:hover{color:var(--mark)}
+
+/* the machine record block: this is the credibility of the whole site */
+.record{border:1px solid var(--rule);border-left:3px solid var(--mark);background:var(--tint);padding:1rem 1.1rem;margin:1.5rem 0}
+.record dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem}
+.record dt{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.11em;color:var(--ink-soft);padding-top:.2em}
+.record dd{margin:0;font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--machine);word-break:break-word}
+.record .prompt{white-space:pre-wrap;background:var(--paper);border:1px solid var(--rule);padding:.55rem .65rem;display:block}
+@media (max-width:34rem){.record dl{grid-template-columns:1fr}.record dt{padding-top:.6em}}
+
+.kicker{font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.16em;color:var(--mark);margin:0 0 .75rem}
+.lede{font-size:1.15rem;color:var(--ink-soft);margin-top:1rem}
+.excerpt{border-left:2px solid var(--rule);padding-left:1.1rem;margin:1.5rem 0;font-style:italic;color:var(--ink-soft)}
+
+/* ranked brands */
+ol.brands{list-style:none;margin:1.5rem 0 0;padding:0;counter-reset:b}
+ol.brands>li{counter-increment:b;border-top:1px solid var(--rule);padding:1.15rem 0 1.15rem 3rem;position:relative}
+ol.brands>li:last-child{border-bottom:1px solid var(--rule)}
+ol.brands>li::before{content:counter(b,decimal-leading-zero);position:absolute;left:0;top:1.15rem;font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--mark)}
+.brand-name{font-family:'Instrument Serif',Georgia,serif;font-size:1.35rem;display:block}
+.brand-note{margin:.35rem 0 0;font-size:.95rem;color:var(--ink-soft)}
+ul.sources{list-style:none;margin:.7rem 0 0;padding:0}
+ul.sources li{font-size:.85rem;padding:.15rem 0}
+ul.sources .dom{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--ink-soft);margin-left:.4rem}
+.nosources{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--ink-soft);margin-top:.6rem}
+
+/* index */
+ul.catlist{list-style:none;margin:2rem 0;padding:0}
+ul.catlist li{border-top:1px solid var(--rule);padding:1rem 0}
+ul.catlist li:last-child{border-bottom:1px solid var(--rule)}
+ul.catlist a{border:0;font-family:'Instrument Serif',Georgia,serif;font-size:1.3rem;display:block}
+ul.catlist a:hover{color:var(--mark)}
+ul.catlist .meta{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.1em;margin-top:.3rem}
+
+/* model-stated uncertainty: content, not small print */
+.caveat{border:1px solid var(--mark);background:var(--tint);padding:.9rem 1.1rem;margin:1.75rem 0}
+.caveat-label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mark);margin:0 0 .5rem}
+.caveat ul{margin:0;padding-left:1.1rem;font-size:.92rem;color:var(--ink-soft)}
+.caveat li{margin:.3rem 0}
+.brand-row{margin:.4rem 0 0;font-size:.88rem;color:var(--ink-soft)}
+.brand-row .lbl{display:block;font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mark);opacity:.85}
+.caveat-row{border-left:2px solid var(--mark);padding-left:.7rem}
+
+/* editor's note: deliberately NOT in the accent colour the model's own voice
+   uses. A caveat is the model speaking; a correction is us. Solid ink frame
+   with a reversed label bar, so the two can never be confused at a glance. */
+.correction{margin:.9rem 0 0;border:1px solid var(--ink);background:var(--paper)}
+.correction-label{margin:0;padding:.32rem .65rem;background:var(--ink);color:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em}
+.correction-note{margin:.6rem .75rem;font-size:.88rem;color:var(--ink)}
+.correction-sources{margin:.5rem .75rem .7rem;padding:0}
+.verdict-only{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:1.5rem 0;margin:1.5rem 0}
+.verdict-label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:var(--mark);margin:0 0 .6rem}
+.verdict-only p:last-child{margin:0;font-family:'Instrument Serif',Georgia,serif;font-size:1.3rem;line-height:1.35}
+.notice{border:1px dashed var(--mark);padding:.85rem 1rem;font-size:.9rem;margin:1.5rem 0;color:var(--ink-soft)}
+.notice strong{color:var(--mark);font-weight:400}
+.cta{margin:2.5rem 0;padding:1.25rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+footer{margin:4rem 0 3rem;border-top:2px solid var(--ink);padding-top:1rem;font-size:.82rem;color:var(--ink-soft)}
+footer .wrap{display:flex;gap:1.25rem;flex-wrap:wrap;justify-content:space-between}
+main{padding-bottom:1rem}
+hr{border:0;border-top:1px solid var(--rule);margin:2.5rem 0}</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://astroanand-6e.github.io/answer-ledger/answers/analytics-eu-hosted-no-cookie-banner/#record",
+  "url": "https://astroanand-6e.github.io/answer-ledger/answers/analytics-eu-hosted-no-cookie-banner/",
+  "headline": "What analytics can I run in the EU with no cookie banner?",
+  "description": "A dated record of what one AI assistant answered when asked for website analytics with data stored in the EU, genuinely cookieless so no consent banner is required, under $20 a month or self-hostable on a $5 VPS, and no per-seat pricing.",
+  "inLanguage": "en",
+  "datePublished": "2026-08-31T16:58:33Z",
+  "dateModified": "2026-08-31T16:58:33Z",
+  "isAccessibleForFree": true,
+  "author": {
+    "@type": "Organization",
+    "name": "Answer Ledger",
+    "url": "https://astroanand-6e.github.io/answer-ledger/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Answer Ledger",
+    "url": "https://astroanand-6e.github.io/answer-ledger/"
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "What analytics can I run in the EU with no cookie banner?"
+  },
+  "isBasedOn": [
+    {
+      "@type": "CreativeWork",
+      "name": "Answer from Claude Opus 5 (Anthropic)",
+      "dateCreated": "2026-08-31T16:58:33Z",
+      "text": "Two of your constraints do almost all the eliminating. EU storage rules out the entire US analytics industry as a default, and 'genuinely cookieless' rules out every product whose identity model is a first-party cookie — which is most of the product analytics category. What survives is a small, mostly European, mostly open-source cluster of tools that count visits by hashing request attributes daily rather than storing anything on the device. Before the list, one correction to the premise: cookieless does not automatically mean consent-free.",
+      "creator": {
+        "@type": "SoftwareApplication",
+        "name": "Claude Opus 5 (Anthropic)",
+        "identifier": "claude-opus-5[1m]",
+        "applicationCategory": "AI assistant"
+      }
+    }
+  ],
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "Fathom Analytics"
+    },
+    {
+      "@type": "Thing",
+      "name": "GoatCounter"
+    },
+    {
+      "@type": "Thing",
+      "name": "Matomo (self-hosted)"
+    },
+    {
+      "@type": "Thing",
+      "name": "Pirsch Analytics"
+    },
+    {
+      "@type": "Thing",
+      "name": "Plausible Analytics"
+    },
+    {
+      "@type": "Thing",
+      "name": "Simple Analytics"
+    },
+    {
+      "@type": "Thing",
+      "name": "Umami"
+    }
+  ],
+  "citation": []
+}
+</script>
+</head>
+<body>
+<header class="mast"><div class="wrap">
+<a class="logo" href="/answer-ledger/">Answer<b> Ledger</b></a>
+<nav class="mast-nav">
+<a href="/answer-ledger/">Index</a>
+<a href="/answer-ledger/method/">Method</a>
+<a href="https://github.com/astroanand-6e/answer-ledger">Source</a>
+</nav>
+</div></header>
+<main class="wrap">
+<p class="kicker">Recorded answer · Developer and SaaS infrastructure tooling, bought by small bootstrapped teams</p>
+<h1>What analytics can I run in the EU with no cookie banner?</h1>
+<p class="lede">A dated record of what one AI assistant answered when asked for website analytics with data stored in the EU, genuinely cookieless so no consent banner is required, under $20 a month or self-hostable on a $5 VPS, and no per-seat pricing.</p>
+
+
+<p>This page is a record of one question put to Claude Opus 5 (Anthropic), kept exactly as answered. It is not a ranking, not a review and not an endorsement by Answer Ledger, and nothing on it is for sale to the vendors it names. <a href="/answer-ledger/method/">Read the method</a>.</p>
+<section>
+
+<div class="record">
+<dl>
+<dt>Model</dt><dd>Claude Opus 5 (Anthropic) <span style="opacity:.7">(claude-opus-5[1m])</span></dd>
+<dt>Answered</dt><dd>2026-08-31 16:58:33 UTC</dd>
+<dt>Retrieval</dt><dd>no — answered from training data only, so it cited nothing</dd>
+<dt>Prompt</dt><dd><span class="prompt">I run a 3-person bootstrapped SaaS company. I need website analytics for a marketing site and app. My hard constraints are: data stored in the EU; genuinely cookieless so no consent banner is required; under $20/month or self-hostable on a $5 VPS; no per-seat pricing. Recommend at least five specific, named products or open-source projects, ranked best-fit first, and include self-hosted or free-tier options where they genuinely fit rather than defaulting to paid SaaS. For each one give: the current pricing model, the single strongest reason it satisfies my constraints, and the one thing most likely to make me regret choosing it. Then list the documentation, pricing pages, or other sources you are relying on for each claim. If you are not confident that a product still exists, or that its pricing is current, say so explicitly rather than guessing.</span></dd>
+</dl>
+</div>
+<h3>What it said, verbatim (opening)</h3>
+<blockquote class="excerpt">Two of your constraints do almost all the eliminating. EU storage rules out the entire US analytics industry as a default, and &#39;genuinely cookieless&#39; rules out every product whose identity model is a first-party cookie — which is most of the product analytics category. What survives is a small, mostly European, mostly open-source cluster of tools that count visits by hashing request attributes daily rather than storing anything on the device. Before the list, one correction to the premise: cookieless does not automatically mean consent-free.</blockquote>
+<h3>What it recommended, in the order it named them</h3>
+<p class="lede">Every tool below is a defensible answer; the $5 VPS constraint is what separates them, because the best-known option in this space needs a ClickHouse instance and your budget does not. Self-host Umami or GoatCounter if the constraint is literal, and pay a European vendor twenty euros if you would rather not.</p>
+<ol class="brands">
+<li><span class="brand-name">Umami</span><p class="brand-note">It is the only strong option in this category that genuinely runs on a $5 VPS, because it needs nothing but Node and a Postgres or MySQL database you probably already have — and self-hosting makes EU storage a decision you make rather than a promise you accept.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Open source (MIT), free to self-host. There is also Umami Cloud with a free tier and a paid tier priced by monthly events rather than by user.</p><p class="brand-row"><span class="lbl">Most likely regret</span>It is an analytics dashboard, not an analytics practice. Funnels, retention and segmentation are shallow or absent compared with what you would get from a real product-analytics tool, and when you eventually need to answer a hard question about a signup flow it will not be able to.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am confident the open-source project exists and is actively developed. I am not confident about Umami Cloud&#39;s current tier boundaries or region options and I am not going to guess at them.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Plausible Analytics</span><p class="brand-note">It is the reference implementation of the whole category: cookieless by design, EU-hosted and EU-owned as a company, priced by monthly pageviews with team members included rather than metered, and open source if you want to leave.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Hosted plans tiered by monthly pageviews, with the entry tier historically around ten euros a month for a small site and unlimited team members. Plausible Community Edition is AGPL and free to self-host.</p><p class="brand-row"><span class="lbl">Most likely regret</span>Self-hosting it is not a $5 VPS job — Community Edition wants ClickHouse alongside Postgres, which is a real memory footprint for a machine that size. So in practice this option costs you the subscription, not zero.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>Plausible has restructured its self-hosted offering at least once, renaming and re-scoping what used to be the self-hosted build. Confirm what Community Edition includes today before planning around it.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Pirsch Analytics</span><p class="brand-note">A German company with German hosting and a cookieless, hash-based counting model built specifically so that customers can drop the consent banner — which is the exact combination of your first two constraints, sold as the product.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Hosted, tiered by monthly pageviews, with an entry tier in the region of a few euros a month. Team members have not historically been a billing axis. There is also a self-hostable component.</p><p class="brand-row"><span class="lbl">Most likely regret</span>It is a small vendor with a small team. The bus factor is real, and if it is acquired or shut down your historical data is on someone else&#39;s server in a format you did not choose.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am reasonably confident Pirsch exists and is German-hosted. I am not confident of its current price points and would not quote a figure I had not just read.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Simple Analytics</span><p class="brand-note">Dutch company, EU data storage, explicitly cookieless and explicitly marketed as not requiring a banner, with plans priced on pageviews rather than seats.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Hosted, tiered by monthly pageviews. My recollection is that the entry tier sits near or slightly under your twenty-dollar ceiling, which makes it the constraint most worth checking.</p><p class="brand-row"><span class="lbl">Most likely regret</span>It is the most deliberately minimal tool on this list. That is the point, but on an app — as opposed to a marketing site — you will quickly want event properties and user-level questions that it will not answer.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>Prices in this segment have crept upward. Treat my sense of where the entry tier lands as unreliable.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">GoatCounter</span><p class="brand-note">It is a single Go binary with SQLite that will run on a $5 VPS with room to spare, is cookieless by design, and the hosted version has historically been free for non-commercial use with a pay-what-you-can model.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Open source, free to self-host. Hosted service has historically been free for personal and small use with optional paid support.</p><p class="brand-row"><span class="lbl">Most likely regret</span>It is essentially one person&#39;s project, and it is closer to a hit counter with good manners than to an analytics product. For a marketing site that is fine; for an app it will not carry you.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am not confident about the current status of the hosted service or whether commercial use is still eligible for the free tier. Verify that before pointing a company site at it.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Matomo (self-hosted)</span><p class="brand-note">It is the only tool on this list with genuinely deep analytics capability that you can still run entirely on your own EU hardware, and it can be configured into a cookieless, IP-anonymised mode that several European DPAs have treated as consent-exempt.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Self-hosted core is free and open source (GPL). Matomo Cloud is a paid hosted service, and several plugins are paid separately. Matomo Cloud is priced by hits, not by seat.</p><p class="brand-row"><span class="lbl">Most likely regret</span>The cookieless configuration is something you have to correctly assemble — disable cookies, anonymise IPs, disable the user-id feature, set the right retention — and it is not the default. Get one switch wrong and you have quietly built the banner-requiring thing you were avoiding.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>The specific configuration recognised as consent-exempt has been described differently by different national regulators and has changed over time. This is the item on the list where I would least trust my recollection.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Fathom Analytics</span><p class="brand-note">Flat pricing by pageview with unlimited sites and unlimited team members, cookieless, and it markets an EU isolation setup that keeps European visitors&#39; processing on EU-owned infrastructure.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Hosted, flat monthly tiers by pageview volume, with all sites and all team members included. Entry tier has historically been in the mid-teens per month.</p><p class="brand-row"><span class="lbl">Most likely regret</span>The company is Canadian, and &#39;EU isolation&#39; is a processing arrangement rather than the simple fact of an EU-only company holding EU-only data. If your constraint exists because a customer&#39;s DPA questionnaire asks it, you will be writing a paragraph of explanation rather than checking a box.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am listing this last precisely because I am not confident it clears your EU-storage constraint as literally written, and I would rather flag that than rank it higher and let you find out during a security review.</p><p class="nosources">No source cited for this recommendation.</p></li>
+</ol>
+<aside class="caveat">
+<p class="caveat-label">What the model said it was not sure about</p>
+<ul><li>I had no live web access in this run, so I have read no current pricing page, no current data-processing addendum and no current regulator guidance. Everything above is recalled, and both prices and privacy claims in this category move quickly.</li><li>Because I could not fetch anything, I cannot supply the sources you asked for. Inventing citations for privacy-compliance claims would be worse than useless, so I am declining to produce a list.</li><li>The &#39;no cookie banner&#39; premise deserves a correction I would rather state than bury: the ePrivacy rule governs storing or reading information on a device, not cookies specifically, and separately the GDPR still governs the processing itself. Cookieless analytics has a very strong argument for consent exemption and several European regulators have accepted specific configurations, but the position is not identical in every member state and I am not a lawyer.</li><li>Google Analytics 4, Mixpanel, Amplitude and PostHog Cloud US are absent on purpose. GA4 fails both the EU-storage and cookieless constraints and has a contested legal history in several EU states; Mixpanel and Amplitude are US-hosted with cookie-based identity by default; PostHog is genuinely self-hostable and has an EU cloud, but its self-hosted footprint is far beyond a $5 VPS and its identity model is cookie-based. If any one of your four constraints is softer than written, that set comes back.</li><li>None of these tools will tell you which marketing channel produced revenue. If that is the actual question behind the analytics purchase, no cookieless tool on this list solves it and you should be looking at server-side attribution in your own database instead.</li></ul>
+</aside>
+</section>
+<div class="cta">
+<p><strong>Named here and want out?</strong> <a href="https://github.com/astroanand-6e/answer-ledger/issues/new?template=delist-brand.yml&amp;title=Delist%20request%3A%20">Open a delist request</a>. No email, no account beyond GitHub, no payment — ever. It is removed from this page, the index and the sitemap on the next build.</p>
+<p><strong>Want a question added?</strong> <a href="https://github.com/astroanand-6e/answer-ledger/issues/new?template=request-category.yml&amp;title=Category%20request%3A%20">Request a category</a>.</p>
+</div>
+<p class="mono"><a href="https://github.com/astroanand-6e/answer-ledger/blob/main/data/categories/analytics-eu-hosted-no-cookie-banner.json">View the raw data for this page &rarr;</a></p>
+</main>
+<footer><div class="wrap">
+<span>Answer Ledger &mdash; every entry names its model, its prompt and its UTC timestamp. Nothing here is for sale to the vendors it names.</span>
+<span><a href="/answer-ledger/method/">How this was made</a> &nbsp;·&nbsp; <a href="https://github.com/astroanand-6e/answer-ledger/issues">Delist or request</a></span>
+</div></footer>
+</body>
+</html>

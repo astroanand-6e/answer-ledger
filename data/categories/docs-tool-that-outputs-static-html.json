@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "slug": "docs-tool-that-outputs-static-html",
+  "question": "What docs tool gives me static HTML I actually own?",
+  "summary": "A dated record of what one AI assistant answered when asked for a documentation and knowledge-base tool that emits portable static HTML, keeps content as Markdown in your own git repo, includes search, and costs under $15 a month.",
+  "delisted": false,
+  "provisional": false,
+  "runs": [
+    {
+      "engine": "claude",
+      "model": "claude-opus-5[1m]",
+      "modelDisplay": "Claude Opus 5 (Anthropic)",
+      "prompt": "I run a 3-person bootstrapped SaaS company. I need product documentation / knowledge base. My hard constraints are: must output static HTML I can host anywhere so I am never locked in; free or under $15/month; search built in; my content stays in Markdown in my own git repo. Recommend at least five specific, named products or open-source projects, ranked best-fit first, and include self-hosted or free-tier options where they genuinely fit rather than defaulting to paid SaaS. For each one give: the current pricing model, the single strongest reason it satisfies my constraints, and the one thing most likely to make me regret choosing it. Then list the documentation, pricing pages, or other sources you are relying on for each claim. If you are not confident that a product still exists, or that its pricing is current, say so explicitly rather than guessing.",
+      "ranAt": "2026-08-31T16:41:03Z",
+      "retrieval": false,
+      "answerExcerpt": "\"Markdown in my own git repo\" plus \"static HTML I can host anywhere\" eliminates the entire hosted knowledge-base category in one move — Notion, Intercom Help Center, Zendesk Guide, HelpScout Docs and GitBook all keep your content in their database and rent you a rendering of it. What is left is static site generators, and the good news is that the best ones cost nothing and the constraint about $15/month never even comes into play. The only real decision is which generator, and the tiebreaker is whose search you trust and whose upgrade path you can stomach. I would start with Material for MkDocs.",
+      "verdict": "Every option that genuinely satisfies these constraints is a free open-source static site generator; the money question is moot. Pick Material for MkDocs unless you already have a JavaScript build pipeline, in which case pick Starlight.",
+      "brands": [
+        {
+          "name": "Material for MkDocs",
+          "rank": 1,
+          "note": "It is a Markdown-in, static-HTML-out generator with a genuinely good client-side search built into the theme, so all four constraints are satisfied by the default configuration rather than by plugins you have to assemble.",
+          "pricing": "The theme is free and open source (MIT). There is a paid sponsors-only \"Insiders\" edition with extra features, funded through GitHub Sponsors at a monthly amount; the free edition is complete enough to run a real docs site indefinitely.",
+          "regret": "It is Python. Your 3-person JavaScript shop now has a second toolchain to keep alive in CI, and the day a plugin pins an old Python version you will be debugging virtualenvs instead of writing docs.",
+          "caveat": "Insiders is a moving target — features graduate from it into the free edition over time, and I cannot confirm the current sponsorship tier or which features are currently gated. Check the project's own Insiders page before you assume a feature is free.",
+          "sources": []
+        },
+        {
+          "name": "Astro Starlight",
+          "rank": 2,
+          "note": "Content is plain Markdown/MDX files in your repo, the build emits fully static HTML with no runtime dependency on any service, and site search ships in the box via a bundled Pagefind index.",
+          "pricing": "Free and open source (MIT). No hosted component, no account, nothing to pay.",
+          "regret": "You are on the Astro release treadmill. Major versions arrive at a real clip, and a docs site is exactly the kind of low-priority repo that quietly rots two majors behind until an upgrade becomes a weekend.",
+          "sources": []
+        },
+        {
+          "name": "Docusaurus",
+          "rank": 3,
+          "note": "The most battle-tested Markdown-to-static-HTML docs generator in the JavaScript ecosystem, with first-class versioned docs — which matters the moment you ship a v2 API and still owe v1 customers a page.",
+          "pricing": "Free and open source (MIT). Its default search integration is Algolia DocSearch, which is free for qualifying open/public documentation sites but is a separate service with its own eligibility rules.",
+          "regret": "The default search is not actually yours. If DocSearch declines your site or changes its terms, your \"self-contained static site\" suddenly needs a paid search vendor or a plugin swap — swap in a local search plugin from day one if the ownership constraint is real.",
+          "caveat": "I am not confident about DocSearch's current eligibility criteria for commercial SaaS documentation, and I will not guess at them.",
+          "sources": []
+        },
+        {
+          "name": "VitePress",
+          "rank": 4,
+          "note": "Fast, minimal, Markdown files in git, static output, and a local client-side search you enable with a single line of config — no third-party search service in the loop at all.",
+          "pricing": "Free and open source (MIT).",
+          "regret": "It is deliberately spartan. When you want product-docs furniture that MkDocs and Docusaurus give you free — versioning, a tabbed API reference, admonition variety — you will be writing the theme yourself.",
+          "sources": []
+        },
+        {
+          "name": "Hugo",
+          "rank": 5,
+          "note": "Single static binary, no runtime ecosystem to maintain, and it will still build your Markdown in five years without a dependency archaeology expedition — which is the strongest possible form of \"never locked in\".",
+          "pricing": "Free and open source (Apache 2.0). Docs themes such as Docsy and Hextra are free as well.",
+          "regret": "Hugo's Go template language is the least pleasant thing in this list to customise, and search is theme-dependent rather than guaranteed — you may end up wiring Pagefind or a JSON index yourself.",
+          "caveat": "Whether search is built in depends entirely on which theme you pick, so treat the search constraint as unresolved until you have chosen one.",
+          "sources": []
+        },
+        {
+          "name": "Sphinx with MyST",
+          "rank": 6,
+          "note": "Produces static HTML with a built-in search index that requires no external service, and MyST lets you keep authoring in Markdown rather than reStructuredText.",
+          "pricing": "Free and open source (BSD). Read the Docs will host it, historically with a free tier for open-source projects and paid plans for commercial ones.",
+          "regret": "Sphinx is a documentation system built for Python API reference, and you will feel that in every configuration decision. For a marketing-adjacent SaaS knowledge base it is a heavy, oddly-shaped tool.",
+          "caveat": "I am not confident about Read the Docs' current commercial pricing or the boundary of its free tier, and I am deliberately not quoting figures.",
+          "sources": []
+        }
+      ],
+      "caveats": [
+        "I had no live web access in this run, so I have not read a single current pricing page, release note or feature list. Everything above is from memory, and for the sponsorware and hosted-search components in particular that memory may already be wrong.",
+        "Because I could not fetch anything, I cannot supply the documentation and pricing sources you asked me to list. I would rather tell you that than manufacture plausible-looking citations.",
+        "I am confident all six of these projects existed and were actively maintained as of my knowledge cutoff. Static site generators are unusually durable, so I would be surprised if any had disappeared — but I cannot confirm it from here.",
+        "GitBook, Notion, Confluence, Zendesk Guide, Intercom and HelpScout are absent on purpose, not by oversight. All of them store your content in their database and none of them hands you a static HTML site you can rehost elsewhere; several are also above your price ceiling once you add a second seat. If \"static HTML I own\" is softer than you wrote it, GitBook in particular comes straight back into contention.",
+        "One structural point worth stating plainly: because everything here is free, the $15/month ceiling did no work at all in this ranking. Your real cost is engineering time, and on that axis Material for MkDocs and Starlight are the cheapest by a wide margin."
+      ]
+    }
+  ]
+}

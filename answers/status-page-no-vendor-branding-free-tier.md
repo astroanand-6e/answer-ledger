@@ -4,8 +4,6 @@
 >
 > A dated record of what one AI assistant answered when asked for a public status page with no vendor branding and a custom domain on the free or cheapest tier, usable by a two-person team.
 
-**Provisional entry.** Recorded while the site was being built, to demonstrate the format. The model, prompt, timestamp and answer below are real and unedited.
-
 ## Run: Claude Opus 5 (Anthropic)
 
 | field | value |

@@ -1,0 +1,75 @@
+# What background job queue works on one small VPS?
+
+> Canonical page: https://astroanand-6e.github.io/answer-ledger/answers/background-jobs-single-vps/
+>
+> A dated record of what one AI assistant answered when asked for a background job or task queue that runs on a single small VPS with no paid managed broker, survives process restarts, avoids Kubernetes, and works in Node, Ruby or Python.
+
+## Run: Claude Opus 5 (Anthropic)
+
+| field | value |
+| --- | --- |
+| Model | `claude-opus-5[1m]` |
+| Answered | 2026-08-31 17:09:48 UTC |
+| Retrieval | no — answered from training data, cited nothing |
+
+**Verbatim prompt:**
+
+```text
+I run a 3-person bootstrapped SaaS company. I need a background job / task queue. My hard constraints are: runs on a single small VPS without adding a managed broker I have to pay for; must survive process restarts; no Kubernetes; language-agnostic or Node/Ruby/Python. Recommend at least five specific, named products or open-source projects, ranked best-fit first, and include self-hosted or free-tier options where they genuinely fit rather than defaulting to paid SaaS. For each one give: the current pricing model, the single strongest reason it satisfies my constraints, and the one thing most likely to make me regret choosing it. Then list the documentation, pricing pages, or other sources you are relying on for each claim. If you are not confident that a product still exists, or that its pricing is current, say so explicitly rather than guessing.
+```
+
+**Answer, verbatim opening:**
+
+> "No managed broker I have to pay for" plus "must survive process restarts" collapses this question almost entirely: it means your queue should live in the Postgres database you are already running and already backing up, not in a second piece of stateful infrastructure you now have to keep alive on the same small box. That single decision eliminates every hosted queue product and most of the classic advice, and it turns out to be the right call for a 3-person team at your scale anyway. Everything below is free and open source — there is no vendor here to have a pricing model, and the correct answer to this question in 2026 is almost never a product you buy. Pick by language.
+
+**Bottom line:** Put the queue in Postgres. For three people on one VPS the operational saving of having one stateful service instead of two dwarfs the throughput advantage of a Redis-backed queue, and durability across restarts comes for free from a database you are already backing up. Choose Solid Queue for Rails, pg-boss or Graphile Worker for Node, Procrastinate for Python — and only reach for Sidekiq or BullMQ when you have measured a throughput problem that Postgres genuinely cannot handle.
+
+**Named, in the order named:**
+
+1. **Solid Queue (Ruby / Rails)** — It is the default Active Job backend in modern Rails specifically so that a small team can run a real production app without Redis, which means the answer to your constraint is not a workaround but the framework's own recommended path — jobs are rows, so restart durability is a property of Postgres rather than of your configuration.
+   - Pricing, as described: Free and open source, MIT-licensed. No hosted component and nothing to buy.
+   - Most likely regret: It is doing polling against your primary database, and if you configure a short poll interval across many worker threads you will find your job queue generating a surprising share of your total database load — on a small VPS that competes directly with the queries your users are waiting on.
+   - **Model unsure:** This is only relevant if you are on Rails, and on a reasonably recent version. Outside that, skip it.
+   - _no source cited_
+2. **pg-boss (Node)** — A job queue implemented entirely as Postgres tables and functions with no daemon of its own, so there is genuinely nothing extra running on the VPS — you add a library to the Node process you already have, and durability, retries and scheduling are all transactional with your application data.
+   - Pricing, as described: Free and open source. Library only.
+   - Most likely regret: Because it lives inside your app process, a memory leak or a runaway job takes down your web server along with your workers unless you deliberately run a separate worker process — and on a one-VPS setup the temptation to skip that separation is strong and the consequences are ugly.
+   - _no source cited_
+3. **Procrastinate (Python)** — A Postgres-backed task queue built around LISTEN/NOTIFY rather than pure polling, so it picks up work promptly without hammering the database, and it gives Python teams the Celery feature set without Celery's requirement to stand up a broker.
+   - Pricing, as described: Free and open source.
+   - Most likely regret: It has a small maintainer base and a small user base relative to Celery, so the volume of blog posts, Stack Overflow answers and battle-tested production war stories you can lean on is thin. When something behaves strangely you are reading the source.
+   - **Model unsure:** I am confident this project existed and was actively maintained as of my knowledge cutoff, but it is small enough that I cannot promise it still is. Check the commit history before adopting.
+   - _no source cited_
+4. **GoodJob (Ruby)** — The most mature Postgres-backed Active Job backend, with a genuinely good built-in web dashboard, cron-style recurring jobs, concurrency controls and job throttling — features you would otherwise be paying Sidekiq Pro for.
+   - Pricing, as described: Free and open source, MIT-licensed.
+   - Most likely regret: Its default execution mode runs workers inside the Puma process, which is delightful until a slow job starves your web threads on a box with two cores. You will end up moving to a separate worker process, which is the thing you were trying to avoid.
+   - _no source cited_
+5. **Graphile Worker (Node)** — Postgres-backed, uses LISTEN/NOTIFY for low job latency, and is deliberately narrow in scope — it does jobs and does them fast, with a claimed throughput on modest hardware that comfortably exceeds anything a 3-person SaaS will generate.
+   - Pricing, as described: Free and open source.
+   - Most likely regret: It is opinionated about being close to Postgres and expects you to be comfortable there — migrations, schema ownership and SQL-level debugging are part of the deal. If your team treats the database as an opaque store, this will feel like the wrong abstraction level.
+   - **Model unsure:** I recall a major version transition in this project that changed APIs. Confirm which version the current documentation describes before copying examples.
+   - _no source cited_
+6. **Sidekiq (open source) with Redis on the same VPS** — It satisfies your constraint on a technicality that happens to be a good one: Redis installed via your package manager on the same box is not a managed broker and costs nothing, and Sidekiq is the most battle-tested background job system in the Ruby world by a very wide margin.
+   - Pricing, as described: The open-source edition is free. Sidekiq Pro and Enterprise are commercial per-year licences that add features such as reliable fetch, batches and rate limiting.
+   - Most likely regret: The open-source edition's job fetch is not crash-safe in the way people assume — if a worker process is killed mid-job, that job can be lost, and the reliable-fetch behaviour that fixes it is a paid feature. Your second constraint says jobs must survive restarts, and the free tier honours that for graceful restarts but not for a hard kill or an OOM.
+   - **Model unsure:** Sidekiq's licensing tiers and their prices have changed over the years and I will not quote figures. The reliable-fetch-is-paid detail is the important one and is worth confirming against current documentation, because it directly bears on your constraint.
+   - _no source cited_
+7. **BullMQ (Node) with Redis on the same VPS** — The strongest Node job library by throughput and feature depth — delayed jobs, repeatable jobs, flows, rate limiting and a decent dashboard ecosystem — and a locally installed Redis costs nothing beyond the RAM it holds.
+   - Pricing, as described: Free and open source. Redis installed locally is free; there is a separate commercial hosted dashboard product in this ecosystem.
+   - Most likely regret: Redis durability is a configuration problem you now own. If you leave the default persistence settings alone you can lose recently enqueued jobs on an unclean shutdown, and appendonly mode plus fsync policy is a decision you have to make deliberately — on a small VPS, memory pressure from Redis is also competing with Postgres and your app.
+   - _no source cited_
+
+**What the model said it was not sure about:**
+
+- I had no live web access in this run, so I have read no current documentation or pricing page for any of these. Everything here is recalled from memory. Open-source libraries move quickly and APIs described above may have changed.
+- Because I could not fetch anything, I cannot give you the documentation links you asked for. I would rather state that than fabricate URLs, which for open-source projects would be especially easy to make look convincing and especially easy to get wrong.
+- Almost everything on this list is free software rather than a product with a price, so the usual pricing risk is replaced by a different one: maintenance risk. The relevant question for each is not 'will they reprice' but 'is anyone still committing'. I cannot check that from here, and for the smaller projects — Procrastinate especially — you should.
+- The vendors deliberately absent are the hosted ones: Temporal Cloud, Inngest, Trigger.dev, Zeplo, Amazon SQS, Google Cloud Tasks and Upstash QStash. Every one of them is either a paid managed broker, a usage-priced hosted service, or both, which is precisely what your first constraint rules out. Temporal is additionally excluded because self-hosting it is a substantial distributed system in its own right and does not belong on one small VPS. If you would accept a free tier with usage pricing above it, Inngest and QStash come back into contention immediately and are genuinely good.
+- Celery is absent for a narrower reason: it requires a broker, and while a locally installed Redis or RabbitMQ satisfies the letter of your constraint, RabbitMQ on a small VPS is a heavier operational commitment than the problem warrants and Celery with a Redis broker has well-known message-loss edge cases. Procrastinate exists largely because of this.
+
+---
+
+This is one model's output at one moment. It is not a survey, not a ranking and not a review.
+See the method: https://astroanand-6e.github.io/answer-ledger/method/
+
+Named here and want out? Open a delist request: https://github.com/astroanand-6e/answer-ledger/issues/new?template=delist-brand.yml — free, no email, no payment, ever.

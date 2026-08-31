@@ -1,0 +1,78 @@
+# What headless CMS is free for one non-technical editor?
+
+> Canonical page: https://astroanand-6e.github.io/answer-ledger/answers/headless-cms-free-one-editor-selfhost/
+>
+> A dated record of what one AI assistant answered when asked for a self-hostable headless CMS for a marketing site with a single non-technical editor, under $15 a month, with content exportable as plain files and no per-API-call pricing.
+
+## Run: Claude Opus 5 (Anthropic)
+
+| field | value |
+| --- | --- |
+| Model | `claude-opus-5[1m]` |
+| Answered | 2026-08-31 16:58:27 UTC |
+| Retrieval | no — answered from training data, cited nothing |
+
+**Verbatim prompt:**
+
+```text
+I run a 3-person bootstrapped SaaS company. I need a headless CMS for a marketing site with one non-technical editor. My hard constraints are: free or under $15/month for a single editor; self-hostable; content exportable as plain files; no per-API-call pricing. Recommend at least five specific, named products or open-source projects, ranked best-fit first, and include self-hosted or free-tier options where they genuinely fit rather than defaulting to paid SaaS. For each one give: the current pricing model, the single strongest reason it satisfies my constraints, and the one thing most likely to make me regret choosing it. Then list the documentation, pricing pages, or other sources you are relying on for each claim. If you are not confident that a product still exists, or that its pricing is current, say so explicitly rather than guessing.
+```
+
+**Answer, verbatim opening:**
+
+> Two of your constraints — self-hostable, and no per-API-call pricing — knock out the entire hosted headless CMS category, because metered API reads are that category's business model. The remaining field splits cleanly in two: git-based CMSes, where the "export as plain files" constraint is satisfied by construction because the files never leave your repo, and database-backed CMSes you run yourself, where export is a feature you have to trust. For a marketing site with exactly one non-technical editor, the git-based side wins on almost every axis, and I would start with Decap CMS.
+
+**Bottom line:** For one editor and a marketing site, a git-based CMS is the right shape: the content is already plain Markdown in your repo, so "exportable" stops being a feature and becomes a fact. Reach for a database-backed CMS like Payload or Directus only if the editor needs relational content that Markdown files cannot express.
+
+**Named, in the order named:**
+
+1. **Decap CMS** — It writes your editor's changes as Markdown commits directly into your git repo, which means the content is already plain files you own, there is no API to meter, and there is no database to host — the whole cost structure your constraints are guarding against simply does not exist.
+   - Pricing, as described: Free and open source (MIT). It is a JavaScript admin page you deploy alongside your own site; the only recurring cost is whatever hosts your static site.
+   - Most likely regret: Authentication is the tarpit. Decap needs an OAuth intermediary to let a non-technical editor commit to GitHub, and if you are not on Netlify you are standing up and babysitting that proxy yourself — which is exactly the piece your one editor will call you about when it breaks.
+   - **Model unsure:** Decap is the renamed continuation of Netlify CMS, and its maintenance pace has been uneven since the rename. I am not confident about how actively it is being developed today; check recent commit activity before you build on it.
+   - _no source cited_
+2. **Keystatic** — Git-based like Decap but with a markedly better editing experience and a typed schema you define in code, so a non-technical editor gets structured fields and rich text while the output on disk stays Markdown or JSON in your repo.
+   - Pricing, as described: Free and open source (MIT). It runs inside your own app; there is no hosted tier to buy and nothing metered.
+   - Most likely regret: It is tied fairly closely to the React/Next/Astro world and to one small maintainer team. If your marketing site is not built on one of its supported frameworks, you are off the happy path immediately.
+   - **Model unsure:** Keystatic is younger than most things on this list and I am less confident about its current state, maintenance status and framework support than I am about the older projects here.
+   - _no source cited_
+3. **Payload CMS** — A genuinely self-hostable, MIT-licensed CMS with an admin UI polished enough for a non-technical editor, no seat licensing on the self-hosted version, and no API metering because you are the one running the API.
+   - Pricing, as described: Self-hosted: free and open source. There is a separate paid cloud offering; the self-hosted path is the one that satisfies your constraints.
+   - Most likely regret: Content lives in a database, not files, so "exportable as plain files" becomes a script you write and remember to run rather than a property of the system. Also, you are now running and backing up a Node app and a database for a marketing site with one editor — a heavy price for brochure pages.
+   - **Model unsure:** Payload has changed shape substantially across major versions, including how it embeds into host frameworks. I am not confident I know the current architecture or the current terms of the cloud offering.
+   - _no source cited_
+4. **Directus** — It wraps a Postgres or SQLite database you already control and gives your editor a strong admin UI on top, so your content is always reachable with plain SQL — the strongest possible answer to "can I get my data out".
+   - Pricing, as described: Self-hosted is free under its own source-available licence, historically with a revenue threshold above which a commercial licence is required. There is a paid cloud offering priced separately.
+   - Most likely regret: The licence, not the software. Directus moved off a pure open-source licence to a source-available one with a commercial trigger, and a bootstrapped company that grows into that threshold discovers a bill it never budgeted for.
+   - **Model unsure:** I am not confident of the current licence terms or the current revenue threshold, and I will not guess at the number. Read the licence yourself before you commit — this is the single most important thing to verify on this page.
+   - _no source cited_
+5. **Sveltia CMS** — A drop-in modern replacement for Decap that reads the same configuration file, so you get a much faster and better-looking editor UI while keeping the identical git-commits-Markdown model your constraints want.
+   - Pricing, as described: Free and open source. No hosted component, nothing metered.
+   - Most likely regret: It is largely a single-maintainer project. Betting your editor's only content workflow on one person's continued interest is a real risk, even though the fallback — reverting to Decap with the same config — is unusually cheap.
+   - **Model unsure:** This is the item on this list I am least sure about. I believe it exists and is Decap-config-compatible, but I cannot confirm its current status, and you should verify it is still maintained before adopting it.
+   - _no source cited_
+6. **TinaCMS** — Git-backed Markdown with visual, in-context editing — the closest thing on this list to letting a non-technical editor click on the page text and change it, which is what they actually want.
+   - Pricing, as described: The core is open source and self-hostable for free. Tina Cloud is the hosted backend, historically with a free tier and paid tiers above it.
+   - Most likely regret: Fully self-hosting the backend rather than using Tina Cloud is considerably more work than the marketing suggests, and the free cloud tier is the path of least resistance — which quietly undoes your self-hosting constraint.
+   - **Model unsure:** I am not confident about Tina Cloud's current tier limits or prices and am deliberately not quoting figures.
+   - _no source cited_
+7. **Strapi** — The best-known self-hostable headless CMS, with the largest plugin ecosystem and the most hiring-pool familiarity of anything here, and no per-API-call charge when you run it yourself.
+   - Pricing, as described: Community edition is free and self-hostable. Paid Enterprise and Cloud tiers exist and are well above your ceiling.
+   - Most likely regret: Seats. Strapi has historically gated features a small team assumes are basic — additional roles, SSO, audit logs — behind the paid tier, and its major-version upgrades have been famously painful. For one editor on a marketing site it is a lot of machinery for very little content.
+   - **Model unsure:** Strapi's feature/tier boundary has moved more than once and I cannot confirm where it sits today.
+   - _no source cited_
+
+**What the model said it was not sure about:**
+
+- I had no live web access during this run, so I have read no current pricing page, licence text or changelog. Every price and licence description above is recalled, and licensing in this specific category has been unusually volatile.
+- Because I could not fetch anything, I cannot give you the source list you asked for. I would rather state that plainly than invent citations that look authoritative.
+- Licence risk is the real risk here, not price. Several self-hostable CMS vendors have relicensed from permissive open source to source-available terms with revenue triggers. Verify the licence of whatever you pick, today, before you build on it.
+- Contentful, Sanity, Storyblok, Prismic, Hygraph and Contentstack are all missing on purpose. They are the best-known headless CMSes and every one of them is hosted-only, priced per seat or per API request, or both — which is precisely what your constraints exclude. If the self-hosting constraint is softer than you wrote it, Sanity's and Storyblok's free tiers would be strong candidates for a one-editor marketing site.
+- I am confident all seven projects existed and were maintained as of my knowledge cutoff, with the least confidence attaching to Sveltia CMS and Keystatic. I cannot confirm any of them still is today.
+
+---
+
+This is one model's output at one moment. It is not a survey, not a ranking and not a review.
+See the method: https://astroanand-6e.github.io/answer-ledger/method/
+
+Named here and want out? Open a delist request: https://github.com/astroanand-6e/answer-ledger/issues/new?template=delist-brand.yml — free, no email, no payment, ever.

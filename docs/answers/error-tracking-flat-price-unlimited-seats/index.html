@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What error tracking doesn&#39;t charge me per developer? — recorded answer | Answer Ledger</title>
+<meta name="description" content="A dated record of what one AI assistant answered when asked for error and exception tracking for a Rails/Node app at a flat monthly price with unlimited team members, no per-seat charge, under $30 a month at 50k events, and a usable free tier.">
+<link rel="canonical" href="https://astroanand-6e.github.io/answer-ledger/answers/error-tracking-flat-price-unlimited-seats/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What error tracking doesn&#39;t charge me per developer? — recorded answer | Answer Ledger">
+<meta property="og:description" content="A dated record of what one AI assistant answered when asked for error and exception tracking for a Rails/Node app at a flat monthly price with unlimited team members, no per-seat charge, under $30 a month at 50k events, and a usable free tier.">
+<meta property="og:url" content="https://astroanand-6e.github.io/answer-ledger/answers/error-tracking-flat-price-unlimited-seats/">
+<meta property="og:site_name" content="Answer Ledger">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:opsz,wght@6..72,400;6..72,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>:root{
+  --paper:#f4f1ea; --ink:#1a1815; --ink-soft:#59524a; --rule:#cfc6b6;
+  --mark:#7a2b1e; --tint:#e9e3d6; --machine:#3c3a35;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --paper:#14130f; --ink:#ece7dc; --ink-soft:#9d968a; --rule:#3a362e;
+         --mark:#d97a5f; --tint:#1e1c17; --machine:#c6c0b4; }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:Newsreader,Georgia,'Times New Roman',serif;
+  font-size:19px; line-height:1.6; font-optical-sizing:auto;
+}
+.wrap{max-width:46rem;margin:0 auto;padding:0 1.5rem}
+a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
+a:hover{border-bottom-color:var(--mark);color:var(--mark)}
+h1,h2,h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;letter-spacing:-.01em;line-height:1.12;margin:0}
+h1{font-size:clamp(2.1rem,5.5vw,3.1rem)}
+h2{font-size:1.6rem;margin-top:3rem}
+h3{font-size:1.15rem}
+p{margin:1rem 0}
+.mono,code{font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78rem;letter-spacing:.01em}
+
+/* masthead */
+header.mast{border-bottom:2px solid var(--ink);margin-bottom:2.5rem}
+header.mast .wrap{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding-top:1.1rem;padding-bottom:.7rem;flex-wrap:wrap}
+.logo{font-family:'Instrument Serif',Georgia,serif;font-size:1.5rem;border:0;letter-spacing:-.02em}
+.logo b{color:var(--mark);font-weight:400}
+nav.mast-nav{display:flex;gap:1.25rem}
+nav.mast-nav a{border:0;font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;font-family:'IBM Plex Mono',monospace;color:var(--ink-soft)}
+nav.mast-nav a:hover{color:var(--mark)}
+
+/* the machine record block: this is the credibility of the whole site */
+.record{border:1px solid var(--rule);border-left:3px solid var(--mark);background:var(--tint);padding:1rem 1.1rem;margin:1.5rem 0}
+.record dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem}
+.record dt{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.11em;color:var(--ink-soft);padding-top:.2em}
+.record dd{margin:0;font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--machine);word-break:break-word}
+.record .prompt{white-space:pre-wrap;background:var(--paper);border:1px solid var(--rule);padding:.55rem .65rem;display:block}
+@media (max-width:34rem){.record dl{grid-template-columns:1fr}.record dt{padding-top:.6em}}
+
+.kicker{font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.16em;color:var(--mark);margin:0 0 .75rem}
+.lede{font-size:1.15rem;color:var(--ink-soft);margin-top:1rem}
+.excerpt{border-left:2px solid var(--rule);padding-left:1.1rem;margin:1.5rem 0;font-style:italic;color:var(--ink-soft)}
+
+/* ranked brands */
+ol.brands{list-style:none;margin:1.5rem 0 0;padding:0;counter-reset:b}
+ol.brands>li{counter-increment:b;border-top:1px solid var(--rule);padding:1.15rem 0 1.15rem 3rem;position:relative}
+ol.brands>li:last-child{border-bottom:1px solid var(--rule)}
+ol.brands>li::before{content:counter(b,decimal-leading-zero);position:absolute;left:0;top:1.15rem;font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--mark)}
+.brand-name{font-family:'Instrument Serif',Georgia,serif;font-size:1.35rem;display:block}
+.brand-note{margin:.35rem 0 0;font-size:.95rem;color:var(--ink-soft)}
+ul.sources{list-style:none;margin:.7rem 0 0;padding:0}
+ul.sources li{font-size:.85rem;padding:.15rem 0}
+ul.sources .dom{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--ink-soft);margin-left:.4rem}
+.nosources{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--ink-soft);margin-top:.6rem}
+
+/* index */
+ul.catlist{list-style:none;margin:2rem 0;padding:0}
+ul.catlist li{border-top:1px solid var(--rule);padding:1rem 0}
+ul.catlist li:last-child{border-bottom:1px solid var(--rule)}
+ul.catlist a{border:0;font-family:'Instrument Serif',Georgia,serif;font-size:1.3rem;display:block}
+ul.catlist a:hover{color:var(--mark)}
+ul.catlist .meta{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.1em;margin-top:.3rem}
+
+/* model-stated uncertainty: content, not small print */
+.caveat{border:1px solid var(--mark);background:var(--tint);padding:.9rem 1.1rem;margin:1.75rem 0}
+.caveat-label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mark);margin:0 0 .5rem}
+.caveat ul{margin:0;padding-left:1.1rem;font-size:.92rem;color:var(--ink-soft)}
+.caveat li{margin:.3rem 0}
+.brand-row{margin:.4rem 0 0;font-size:.88rem;color:var(--ink-soft)}
+.brand-row .lbl{display:block;font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mark);opacity:.85}
+.caveat-row{border-left:2px solid var(--mark);padding-left:.7rem}
+
+/* editor's note: deliberately NOT in the accent colour the model's own voice
+   uses. A caveat is the model speaking; a correction is us. Solid ink frame
+   with a reversed label bar, so the two can never be confused at a glance. */
+.correction{margin:.9rem 0 0;border:1px solid var(--ink);background:var(--paper)}
+.correction-label{margin:0;padding:.32rem .65rem;background:var(--ink);color:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em}
+.correction-note{margin:.6rem .75rem;font-size:.88rem;color:var(--ink)}
+.correction-sources{margin:.5rem .75rem .7rem;padding:0}
+.verdict-only{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:1.5rem 0;margin:1.5rem 0}
+.verdict-label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:var(--mark);margin:0 0 .6rem}
+.verdict-only p:last-child{margin:0;font-family:'Instrument Serif',Georgia,serif;font-size:1.3rem;line-height:1.35}
+.notice{border:1px dashed var(--mark);padding:.85rem 1rem;font-size:.9rem;margin:1.5rem 0;color:var(--ink-soft)}
+.notice strong{color:var(--mark);font-weight:400}
+.cta{margin:2.5rem 0;padding:1.25rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+footer{margin:4rem 0 3rem;border-top:2px solid var(--ink);padding-top:1rem;font-size:.82rem;color:var(--ink-soft)}
+footer .wrap{display:flex;gap:1.25rem;flex-wrap:wrap;justify-content:space-between}
+main{padding-bottom:1rem}
+hr{border:0;border-top:1px solid var(--rule);margin:2.5rem 0}</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://astroanand-6e.github.io/answer-ledger/answers/error-tracking-flat-price-unlimited-seats/#record",
+  "url": "https://astroanand-6e.github.io/answer-ledger/answers/error-tracking-flat-price-unlimited-seats/",
+  "headline": "What error tracking doesn't charge me per developer?",
+  "description": "A dated record of what one AI assistant answered when asked for error and exception tracking for a Rails/Node app at a flat monthly price with unlimited team members, no per-seat charge, under $30 a month at 50k events, and a usable free tier.",
+  "inLanguage": "en",
+  "datePublished": "2026-08-31T16:41:07Z",
+  "dateModified": "2026-08-31T16:41:07Z",
+  "isAccessibleForFree": true,
+  "author": {
+    "@type": "Organization",
+    "name": "Answer Ledger",
+    "url": "https://astroanand-6e.github.io/answer-ledger/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Answer Ledger",
+    "url": "https://astroanand-6e.github.io/answer-ledger/"
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "What error tracking doesn't charge me per developer?"
+  },
+  "isBasedOn": [
+    {
+      "@type": "CreativeWork",
+      "name": "Answer from Claude Opus 5 (Anthropic)",
+      "dateCreated": "2026-08-31T16:41:07Z",
+      "text": "The per-seat constraint is the one that does the eliminating here, and it eliminates the observability platforms rather than the error trackers. Datadog, New Relic and the APM-shaped vendors all meter people in some form, so they are out before we start. What is left divides cleanly into two groups: Sentry-compatible open source you run yourself, where the seat count is a number in your own database, and a small set of hosted vendors that historically chose to meter events instead of humans. I would start self-hosted, because at 50k events a month you are nowhere near needing anyone else's infrastructure.",
+      "creator": {
+        "@type": "SoftwareApplication",
+        "name": "Claude Opus 5 (Anthropic)",
+        "identifier": "claude-opus-5[1m]",
+        "applicationCategory": "AI assistant"
+      }
+    }
+  ],
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "AppSignal"
+    },
+    {
+      "@type": "Thing",
+      "name": "Bugsink"
+    },
+    {
+      "@type": "Thing",
+      "name": "GlitchTip"
+    },
+    {
+      "@type": "Thing",
+      "name": "Honeybadger"
+    },
+    {
+      "@type": "Thing",
+      "name": "Rollbar"
+    },
+    {
+      "@type": "Thing",
+      "name": "Self-hosted Sentry"
+    },
+    {
+      "@type": "Thing",
+      "name": "Sentry (hosted)"
+    }
+  ],
+  "citation": []
+}
+</script>
+</head>
+<body>
+<header class="mast"><div class="wrap">
+<a class="logo" href="/answer-ledger/">Answer<b> Ledger</b></a>
+<nav class="mast-nav">
+<a href="/answer-ledger/">Index</a>
+<a href="/answer-ledger/method/">Method</a>
+<a href="https://github.com/astroanand-6e/answer-ledger">Source</a>
+</nav>
+</div></header>
+<main class="wrap">
+<p class="kicker">Recorded answer · Developer and SaaS infrastructure tooling, bought by small bootstrapped teams</p>
+<h1>What error tracking doesn&#39;t charge me per developer?</h1>
+<p class="lede">A dated record of what one AI assistant answered when asked for error and exception tracking for a Rails/Node app at a flat monthly price with unlimited team members, no per-seat charge, under $30 a month at 50k events, and a usable free tier.</p>
+
+
+<p>This page is a record of one question put to Claude Opus 5 (Anthropic), kept exactly as answered. It is not a ranking, not a review and not an endorsement by Answer Ledger, and nothing on it is for sale to the vendors it names. <a href="/answer-ledger/method/">Read the method</a>.</p>
+<section>
+
+<div class="record">
+<dl>
+<dt>Model</dt><dd>Claude Opus 5 (Anthropic) <span style="opacity:.7">(claude-opus-5[1m])</span></dd>
+<dt>Answered</dt><dd>2026-08-31 16:41:07 UTC</dd>
+<dt>Retrieval</dt><dd>no — answered from training data only, so it cited nothing</dd>
+<dt>Prompt</dt><dd><span class="prompt">I run a 3-person bootstrapped SaaS company. I need error and exception tracking for a Rails/Node app. My hard constraints are: flat monthly price with unlimited team members; no per-seat charge; under $30/month at ~50k events; must include a usable free tier for a side project. Recommend at least five specific, named products or open-source projects, ranked best-fit first, and include self-hosted or free-tier options where they genuinely fit rather than defaulting to paid SaaS. For each one give: the current pricing model, the single strongest reason it satisfies my constraints, and the one thing most likely to make me regret choosing it. Then list the documentation, pricing pages, or other sources you are relying on for each claim. If you are not confident that a product still exists, or that its pricing is current, say so explicitly rather than guessing.</span></dd>
+</dl>
+</div>
+<h3>What it said, verbatim (opening)</h3>
+<blockquote class="excerpt">The per-seat constraint is the one that does the eliminating here, and it eliminates the observability platforms rather than the error trackers. Datadog, New Relic and the APM-shaped vendors all meter people in some form, so they are out before we start. What is left divides cleanly into two groups: Sentry-compatible open source you run yourself, where the seat count is a number in your own database, and a small set of hosted vendors that historically chose to meter events instead of humans. I would start self-hosted, because at 50k events a month you are nowhere near needing anyone else&#39;s infrastructure.</blockquote>
+<h3>What it recommended, in the order it named them</h3>
+<p class="lede">At 50k events a month you are a rounding error on any of these, so the cheapest correct answer is a Sentry-compatible open-source collector on a small VM you already pay for. If you want someone else on call for the error tracker itself, the hosted options that genuinely do not charge per human are a much shorter list than the market makes it look.</p>
+<ol class="brands">
+<li><span class="brand-name">GlitchTip</span><p class="brand-note">It speaks the Sentry protocol, so the official Rails and Node SDKs point at it with a one-line DSN change, and because you run it there is no seat count to charge for — your whole team plus contractors costs the same as one person.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Open source (MIT), free to self-host. There is also a hosted GlitchTip offering priced by event volume with a free allowance, which is the option I am least sure about.</p><p class="brand-row"><span class="lbl">Most likely regret</span>It is a deliberately smaller reimplementation, not a Sentry clone. Performance monitoring, tracing, session replay and the newer Sentry features are largely absent, so if your debugging instincts were formed on modern Sentry the tool will feel thin.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am confident the project exists and is Sentry-SDK-compatible. I am not confident about the hosted tier&#39;s current event allowances or price and I will not invent numbers for them.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Bugsink</span><p class="brand-note">It is explicitly built to be a single self-hosted binary/container that ingests Sentry SDK events on modest hardware, which is exactly the shape of a 3-person team with 50k events and no appetite for operating a cluster.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Self-hosted. My recollection is a free/open tier for small use plus a paid commercial licence rather than a per-seat SaaS subscription, but the licensing details are the part I am least sure of.</p><p class="brand-row"><span class="lbl">Most likely regret</span>It is a young, small-team project. If the maintainer&#39;s attention moves elsewhere you are the one carrying a piece of your production observability stack, and the community is not large enough to answer your edge-case question at 2am.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>This is the entry on this list I am least certain about. I believe Bugsink exists and is actively developed, but please verify both that and its licence terms before you depend on it.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Self-hosted Sentry</span><p class="brand-note">It is the real thing — same SDKs, same UI, same features — under a source-available licence, and a self-hosted install has no user seats to bill, so unlimited team members is true by construction.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free to self-host under Sentry&#39;s source-available licence (Functional Source License in recent versions). Your cost is the machine.</p><p class="brand-row"><span class="lbl">Most likely regret</span>The self-hosted stack is genuinely heavy — Kafka, ClickHouse, Redis, Postgres, Relay and a pile of workers via Docker Compose. For 50k events a month you will be running maybe 8GB of infrastructure to store what fits in a spreadsheet, and upgrades are a real maintenance chore.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>Sentry has changed its self-hosted licence and its minimum hardware guidance more than once. Check both before you build on it.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Honeybadger</span><p class="brand-note">It has historically been priced by project and event volume with team members included rather than metered, and its Rails support is first-class in a way that few competitors bother with any more.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Hosted, tiered by projects/events per month, with a free developer tier. Team members have historically not been a billing dimension.</p><p class="brand-row"><span class="lbl">Most likely regret</span>Its lower tiers have had short error retention windows and modest project counts, so the bill escalates on axes you were not watching — you solved per-seat and then got caught by per-project.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am confident Honeybadger exists and is independently run. I am not confident that team members are still unmetered or that any specific tier still lands under $30/month — verify that specific claim, because it is the whole reason it is on this list.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">AppSignal</span><p class="brand-note">Its billing dimension is request/event volume, not humans, and it bundles error tracking with basic APM for Rails and Node, so you get two tools on one bill without a seat count.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Hosted, metered on monthly request/event volume, with a minimum monthly spend. Users are not the billing axis.</p><p class="brand-row"><span class="lbl">Most likely regret</span>It has a floor price. If your side project genuinely needs to cost zero, AppSignal has historically not had a permanent free tier — only a trial — which directly fails one of your four constraints.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I believe AppSignal is EU-based, still trading, and still volume-priced, but I cannot confirm its current entry price or whether a free tier has since appeared.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Rollbar</span><p class="brand-note">Long-established, meters on events rather than seats, and has kept a free tier aimed at exactly the side-project case you described.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Hosted, tiered by monthly events, with a free tier and paid tiers above it. Seats have not historically been metered on the self-serve plans.</p><p class="brand-row"><span class="lbl">Most likely regret</span>It has drifted upmarket over the years; the self-serve tiers get less attention than the enterprise motion, and the free tier&#39;s event ceiling is low enough that a single noisy exception loop can burn a month&#39;s quota in an afternoon.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>Rollbar&#39;s tier structure has been revised repeatedly. Treat any recollection I have of its numbers as stale.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Sentry (hosted)</span><p class="brand-note">It is the best product in the category by a distance and its self-serve Team plan has historically included unlimited team members, with billing driven by event and span quotas instead.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Hosted, quota-based across errors/spans/replays, with a free developer tier and a paid entry plan. Team members have historically been unlimited on the paid self-serve plan.</p><p class="brand-row"><span class="lbl">Most likely regret</span>The quota model has grown a lot of separate meters, and the failure mode is not a per-seat bill but a surprise overage when someone turns on tracing or replay and a quota you did not know you had starts filling up.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>Sentry&#39;s pricing and quota structure has changed several times, including how seats are treated on some tiers. This is precisely the claim you should not take from me — read the current pricing page.</p><p class="nosources">No source cited for this recommendation.</p></li>
+</ol>
+<aside class="caveat">
+<p class="caveat-label">What the model said it was not sure about</p>
+<ul><li>I had no live web access in this run, so I have not read a single current pricing page. Every price, tier and allowance described above is recalled, not verified, and pricing is the fastest-decaying fact about any of these products.</li><li>Because I could not fetch anything, I cannot give you the source list you asked for. I would rather say that plainly than manufacture plausible-looking documentation links.</li><li>Datadog Error Tracking, New Relic Errors Inbox and BugSnag/Insight Hub are absent on purpose, not by oversight. Datadog and New Relic meter users as a billing dimension and are priced far above your $30 ceiling at any realistic configuration, and BugSnag&#39;s plans have historically been seat-shaped. If the per-seat constraint is softer than you wrote it, all three come back into contention.</li><li>The &#39;usable free tier for a side project&#39; constraint is the one most likely to have moved since my knowledge cutoff. Free tiers in this category get quietly narrowed far more often than paid tiers get repriced.</li><li>One structural point no pricing page will tell you: at 50k events a month, error tracking is a solved problem you should spend as little money and attention on as possible. If a self-hosted option is even slightly plausible for you, take it and stop shopping.</li></ul>
+</aside>
+</section>
+<div class="cta">
+<p><strong>Named here and want out?</strong> <a href="https://github.com/astroanand-6e/answer-ledger/issues/new?template=delist-brand.yml&amp;title=Delist%20request%3A%20">Open a delist request</a>. No email, no account beyond GitHub, no payment — ever. It is removed from this page, the index and the sitemap on the next build.</p>
+<p><strong>Want a question added?</strong> <a href="https://github.com/astroanand-6e/answer-ledger/issues/new?template=request-category.yml&amp;title=Category%20request%3A%20">Request a category</a>.</p>
+</div>
+<p class="mono"><a href="https://github.com/astroanand-6e/answer-ledger/blob/main/data/categories/error-tracking-flat-price-unlimited-seats.json">View the raw data for this page &rarr;</a></p>
+</main>
+<footer><div class="wrap">
+<span>Answer Ledger &mdash; every entry names its model, its prompt and its UTC timestamp. Nothing here is for sale to the vendors it names.</span>
+<span><a href="/answer-ledger/method/">How this was made</a> &nbsp;·&nbsp; <a href="https://github.com/astroanand-6e/answer-ledger/issues">Delist or request</a></span>
+</div></footer>
+</body>
+</html>

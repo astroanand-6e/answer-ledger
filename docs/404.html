@@ -89,6 +89,14 @@ ul.catlist .meta{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:va
 .brand-row{margin:.4rem 0 0;font-size:.88rem;color:var(--ink-soft)}
 .brand-row .lbl{display:block;font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mark);opacity:.85}
 .caveat-row{border-left:2px solid var(--mark);padding-left:.7rem}
+
+/* editor's note: deliberately NOT in the accent colour the model's own voice
+   uses. A caveat is the model speaking; a correction is us. Solid ink frame
+   with a reversed label bar, so the two can never be confused at a glance. */
+.correction{margin:.9rem 0 0;border:1px solid var(--ink);background:var(--paper)}
+.correction-label{margin:0;padding:.32rem .65rem;background:var(--ink);color:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em}
+.correction-note{margin:.6rem .75rem;font-size:.88rem;color:var(--ink)}
+.correction-sources{margin:.5rem .75rem .7rem;padding:0}
 .verdict-only{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:1.5rem 0;margin:1.5rem 0}
 .verdict-label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:var(--mark);margin:0 0 .6rem}
 .verdict-only p:last-child{margin:0;font-family:'Instrument Serif',Georgia,serif;font-size:1.3rem;line-height:1.35}

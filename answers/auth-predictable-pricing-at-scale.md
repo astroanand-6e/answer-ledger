@@ -4,8 +4,6 @@
 >
 > A dated record of what one AI assistant answered when asked for authentication that keeps predictable pricing from 100 to 50,000 monthly active users, with no per-organisation or per-SSO-connection surcharge and a clean exit.
 
-**Provisional entry.** Recorded while the site was being built, to demonstrate the format. The model, prompt, timestamp and answer below are real and unedited.
-
 ## Run: Claude Opus 5 (Anthropic)
 
 | field | value |

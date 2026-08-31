@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What uptime monitoring gives me 1-minute checks for free? — recorded answer | Answer Ledger</title>
+<meta name="description" content="A dated record of what one AI assistant answered when asked for uptime and SSL-expiry monitoring on five endpoints at a one-minute check interval or better without paying, with Slack and email alerting included.">
+<link rel="canonical" href="https://astroanand-6e.github.io/answer-ledger/answers/uptime-monitoring-one-minute-checks-free/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What uptime monitoring gives me 1-minute checks for free? — recorded answer | Answer Ledger">
+<meta property="og:description" content="A dated record of what one AI assistant answered when asked for uptime and SSL-expiry monitoring on five endpoints at a one-minute check interval or better without paying, with Slack and email alerting included.">
+<meta property="og:url" content="https://astroanand-6e.github.io/answer-ledger/answers/uptime-monitoring-one-minute-checks-free/">
+<meta property="og:site_name" content="Answer Ledger">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:opsz,wght@6..72,400;6..72,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>:root{
+  --paper:#f4f1ea; --ink:#1a1815; --ink-soft:#59524a; --rule:#cfc6b6;
+  --mark:#7a2b1e; --tint:#e9e3d6; --machine:#3c3a35;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --paper:#14130f; --ink:#ece7dc; --ink-soft:#9d968a; --rule:#3a362e;
+         --mark:#d97a5f; --tint:#1e1c17; --machine:#c6c0b4; }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:Newsreader,Georgia,'Times New Roman',serif;
+  font-size:19px; line-height:1.6; font-optical-sizing:auto;
+}
+.wrap{max-width:46rem;margin:0 auto;padding:0 1.5rem}
+a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
+a:hover{border-bottom-color:var(--mark);color:var(--mark)}
+h1,h2,h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;letter-spacing:-.01em;line-height:1.12;margin:0}
+h1{font-size:clamp(2.1rem,5.5vw,3.1rem)}
+h2{font-size:1.6rem;margin-top:3rem}
+h3{font-size:1.15rem}
+p{margin:1rem 0}
+.mono,code{font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78rem;letter-spacing:.01em}
+
+/* masthead */
+header.mast{border-bottom:2px solid var(--ink);margin-bottom:2.5rem}
+header.mast .wrap{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding-top:1.1rem;padding-bottom:.7rem;flex-wrap:wrap}
+.logo{font-family:'Instrument Serif',Georgia,serif;font-size:1.5rem;border:0;letter-spacing:-.02em}
+.logo b{color:var(--mark);font-weight:400}
+nav.mast-nav{display:flex;gap:1.25rem}
+nav.mast-nav a{border:0;font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;font-family:'IBM Plex Mono',monospace;color:var(--ink-soft)}
+nav.mast-nav a:hover{color:var(--mark)}
+
+/* the machine record block: this is the credibility of the whole site */
+.record{border:1px solid var(--rule);border-left:3px solid var(--mark);background:var(--tint);padding:1rem 1.1rem;margin:1.5rem 0}
+.record dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem}
+.record dt{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.11em;color:var(--ink-soft);padding-top:.2em}
+.record dd{margin:0;font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--machine);word-break:break-word}
+.record .prompt{white-space:pre-wrap;background:var(--paper);border:1px solid var(--rule);padding:.55rem .65rem;display:block}
+@media (max-width:34rem){.record dl{grid-template-columns:1fr}.record dt{padding-top:.6em}}
+
+.kicker{font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.16em;color:var(--mark);margin:0 0 .75rem}
+.lede{font-size:1.15rem;color:var(--ink-soft);margin-top:1rem}
+.excerpt{border-left:2px solid var(--rule);padding-left:1.1rem;margin:1.5rem 0;font-style:italic;color:var(--ink-soft)}
+
+/* ranked brands */
+ol.brands{list-style:none;margin:1.5rem 0 0;padding:0;counter-reset:b}
+ol.brands>li{counter-increment:b;border-top:1px solid var(--rule);padding:1.15rem 0 1.15rem 3rem;position:relative}
+ol.brands>li:last-child{border-bottom:1px solid var(--rule)}
+ol.brands>li::before{content:counter(b,decimal-leading-zero);position:absolute;left:0;top:1.15rem;font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--mark)}
+.brand-name{font-family:'Instrument Serif',Georgia,serif;font-size:1.35rem;display:block}
+.brand-note{margin:.35rem 0 0;font-size:.95rem;color:var(--ink-soft)}
+ul.sources{list-style:none;margin:.7rem 0 0;padding:0}
+ul.sources li{font-size:.85rem;padding:.15rem 0}
+ul.sources .dom{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--ink-soft);margin-left:.4rem}
+.nosources{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--ink-soft);margin-top:.6rem}
+
+/* index */
+ul.catlist{list-style:none;margin:2rem 0;padding:0}
+ul.catlist li{border-top:1px solid var(--rule);padding:1rem 0}
+ul.catlist li:last-child{border-bottom:1px solid var(--rule)}
+ul.catlist a{border:0;font-family:'Instrument Serif',Georgia,serif;font-size:1.3rem;display:block}
+ul.catlist a:hover{color:var(--mark)}
+ul.catlist .meta{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.1em;margin-top:.3rem}
+
+/* model-stated uncertainty: content, not small print */
+.caveat{border:1px solid var(--mark);background:var(--tint);padding:.9rem 1.1rem;margin:1.75rem 0}
+.caveat-label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mark);margin:0 0 .5rem}
+.caveat ul{margin:0;padding-left:1.1rem;font-size:.92rem;color:var(--ink-soft)}
+.caveat li{margin:.3rem 0}
+.brand-row{margin:.4rem 0 0;font-size:.88rem;color:var(--ink-soft)}
+.brand-row .lbl{display:block;font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mark);opacity:.85}
+.caveat-row{border-left:2px solid var(--mark);padding-left:.7rem}
+
+/* editor's note: deliberately NOT in the accent colour the model's own voice
+   uses. A caveat is the model speaking; a correction is us. Solid ink frame
+   with a reversed label bar, so the two can never be confused at a glance. */
+.correction{margin:.9rem 0 0;border:1px solid var(--ink);background:var(--paper)}
+.correction-label{margin:0;padding:.32rem .65rem;background:var(--ink);color:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em}
+.correction-note{margin:.6rem .75rem;font-size:.88rem;color:var(--ink)}
+.correction-sources{margin:.5rem .75rem .7rem;padding:0}
+.verdict-only{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:1.5rem 0;margin:1.5rem 0}
+.verdict-label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:var(--mark);margin:0 0 .6rem}
+.verdict-only p:last-child{margin:0;font-family:'Instrument Serif',Georgia,serif;font-size:1.3rem;line-height:1.35}
+.notice{border:1px dashed var(--mark);padding:.85rem 1rem;font-size:.9rem;margin:1.5rem 0;color:var(--ink-soft)}
+.notice strong{color:var(--mark);font-weight:400}
+.cta{margin:2.5rem 0;padding:1.25rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+footer{margin:4rem 0 3rem;border-top:2px solid var(--ink);padding-top:1rem;font-size:.82rem;color:var(--ink-soft)}
+footer .wrap{display:flex;gap:1.25rem;flex-wrap:wrap;justify-content:space-between}
+main{padding-bottom:1rem}
+hr{border:0;border-top:1px solid var(--rule);margin:2.5rem 0}</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://astroanand-6e.github.io/answer-ledger/answers/uptime-monitoring-one-minute-checks-free/#record",
+  "url": "https://astroanand-6e.github.io/answer-ledger/answers/uptime-monitoring-one-minute-checks-free/",
+  "headline": "What uptime monitoring gives me 1-minute checks for free?",
+  "description": "A dated record of what one AI assistant answered when asked for uptime and SSL-expiry monitoring on five endpoints at a one-minute check interval or better without paying, with Slack and email alerting included.",
+  "inLanguage": "en",
+  "datePublished": "2026-08-31T16:38:14Z",
+  "dateModified": "2026-08-31T16:38:14Z",
+  "isAccessibleForFree": true,
+  "author": {
+    "@type": "Organization",
+    "name": "Answer Ledger",
+    "url": "https://astroanand-6e.github.io/answer-ledger/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Answer Ledger",
+    "url": "https://astroanand-6e.github.io/answer-ledger/"
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "What uptime monitoring gives me 1-minute checks for free?"
+  },
+  "isBasedOn": [
+    {
+      "@type": "CreativeWork",
+      "name": "Answer from Claude Opus 5 (Anthropic)",
+      "dateCreated": "2026-08-31T16:38:14Z",
+      "text": "The words \"one minute or better\" and \"without paying\" are the whole question, and together they knock out most of the hosted monitoring market in one move — sub-minute checking is the thing those vendors sell, so it is the thing they put behind the paywall. Free tiers in this category are overwhelmingly five-minute tiers. Once you accept that, the honest ranking is dominated by software you run yourself, and for five endpoints that is a genuinely small amount of work. Start with Uptime Kuma.",
+      "creator": {
+        "@type": "SoftwareApplication",
+        "name": "Claude Opus 5 (Anthropic)",
+        "identifier": "claude-opus-5[1m]",
+        "applicationCategory": "AI assistant"
+      }
+    }
+  ],
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "Better Stack (Uptime)"
+    },
+    {
+      "@type": "Thing",
+      "name": "Gatus"
+    },
+    {
+      "@type": "Thing",
+      "name": "Healthchecks.io"
+    },
+    {
+      "@type": "Thing",
+      "name": "Prometheus + Blackbox Exporter + Alertmanager"
+    },
+    {
+      "@type": "Thing",
+      "name": "Uptime Kuma"
+    },
+    {
+      "@type": "Thing",
+      "name": "UptimeRobot"
+    }
+  ],
+  "citation": []
+}
+</script>
+</head>
+<body>
+<header class="mast"><div class="wrap">
+<a class="logo" href="/answer-ledger/">Answer<b> Ledger</b></a>
+<nav class="mast-nav">
+<a href="/answer-ledger/">Index</a>
+<a href="/answer-ledger/method/">Method</a>
+<a href="https://github.com/astroanand-6e/answer-ledger">Source</a>
+</nav>
+</div></header>
+<main class="wrap">
+<p class="kicker">Recorded answer · Developer and SaaS infrastructure tooling, bought by small bootstrapped teams</p>
+<h1>What uptime monitoring gives me 1-minute checks for free?</h1>
+<p class="lede">A dated record of what one AI assistant answered when asked for uptime and SSL-expiry monitoring on five endpoints at a one-minute check interval or better without paying, with Slack and email alerting included.</p>
+
+
+<p>This page is a record of one question put to Claude Opus 5 (Anthropic), kept exactly as answered. It is not a ranking, not a review and not an endorsement by Answer Ledger, and nothing on it is for sale to the vendors it names. <a href="/answer-ledger/method/">Read the method</a>.</p>
+<section>
+
+<div class="record">
+<dl>
+<dt>Model</dt><dd>Claude Opus 5 (Anthropic) <span style="opacity:.7">(claude-opus-5[1m])</span></dd>
+<dt>Answered</dt><dd>2026-08-31 16:38:14 UTC</dd>
+<dt>Retrieval</dt><dd>no — answered from training data only, so it cited nothing</dd>
+<dt>Prompt</dt><dd><span class="prompt">I run a 3-person bootstrapped SaaS company. I need uptime and SSL-expiry monitoring for 5 endpoints. My hard constraints are: check interval of one minute or better without paying; alerting to Slack and email included; self-hosted options acceptable and welcome. Recommend at least five specific, named products or open-source projects, ranked best-fit first, and include self-hosted or free-tier options where they genuinely fit rather than defaulting to paid SaaS. For each one give: the current pricing model, the single strongest reason it satisfies my constraints, and the one thing most likely to make me regret choosing it. Then list the documentation, pricing pages, or other sources you are relying on for each claim. If you are not confident that a product still exists, or that its pricing is current, say so explicitly rather than guessing.</span></dd>
+</dl>
+</div>
+<h3>What it said, verbatim (opening)</h3>
+<blockquote class="excerpt">The words &quot;one minute or better&quot; and &quot;without paying&quot; are the whole question, and together they knock out most of the hosted monitoring market in one move — sub-minute checking is the thing those vendors sell, so it is the thing they put behind the paywall. Free tiers in this category are overwhelmingly five-minute tiers. Once you accept that, the honest ranking is dominated by software you run yourself, and for five endpoints that is a genuinely small amount of work. Start with Uptime Kuma.</blockquote>
+<h3>What it recommended, in the order it named them</h3>
+<p class="lede">For five endpoints, self-hosting wins outright: Uptime Kuma on the cheapest VPS you can rent gives you 20-second checks, certificate-expiry warnings and both Slack and email alerting for the price of the VPS, and no vendor can move that goalpost later. The hosted free tiers are mostly five-minute tiers, which does not meet the constraint as written.</p>
+<ol class="brands">
+<li><span class="brand-name">Uptime Kuma</span><p class="brand-note">It is the exact product you described, given away: check intervals configurable down to well under a minute, TLS certificate-expiry notifications built in, and Slack and SMTP among a long list of notification channels — none of it gated, because there is no tier to gate it behind.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free and open source (MIT). Your only cost is somewhere to run one Docker container; the cheapest tier at any VPS provider is more than enough for five endpoints.</p><p class="brand-row"><span class="lbl">Most likely regret</span>It runs on one box, so it goes down with that box, and it will not tell you it went down. Monitoring that shares a failure domain with nothing is the point — put it somewhere other than the machine your app runs on, and accept that nobody is watching the watcher unless you pay a free-tier hosted checker to ping it.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am confident this project existed and was very widely used as of my knowledge cutoff. I cannot confirm its current release state or that the notification integrations I remember are all still present.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Gatus</span><p class="brand-note">Checks are declared in a YAML file with an explicit interval, so a one-minute or thirty-second cadence is a line of configuration rather than a plan upgrade, and certificate expiry is expressible as an ordinary assertion alongside status code and response time.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free and open source. Single Go binary or container; no hosted component you are required to buy.</p><p class="brand-row"><span class="lbl">Most likely regret</span>Configuration-as-code means every change to a monitor is a redeploy. That is a virtue for you and an irritation for anyone on the team who just wants to add a URL from a web form at 11pm.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I remember this project as actively maintained, but I have not verified its current status and cannot confirm the exact set of alerting providers shipped today.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Prometheus + Blackbox Exporter + Alertmanager</span><p class="brand-note">Scrape interval is yours to set, the blackbox exporter exposes the certificate&#39;s expiry as a plain metric you can alert on days in advance, and Alertmanager has first-class Slack and email receivers — so both constraints are satisfied by configuration, permanently and for free.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free and open source across all three components. Cost is the host you run them on and the hours you spend on it.</p><p class="brand-row"><span class="lbl">Most likely regret</span>You will spend an afternoon on YAML to get what Uptime Kuma gives you in ten minutes, and you now own three moving parts instead of one. Only worth it if you already run Prometheus for something else.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Better Stack (Uptime)</span><p class="brand-note">Of the hosted options, this is the one I most associate with genuinely sub-minute checking on a free tier rather than five-minute checking, with Slack and email alerting included rather than sold as an add-on.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Freemium: a free tier with a limited number of monitors, then paid plans priced per monitor or per plan tier above it.</p><p class="brand-row"><span class="lbl">Most likely regret</span>Free-tier check frequency is precisely the lever this kind of vendor pulls when it needs revenue, and you will find out it moved when your five monitors quietly drop to a slower cadence.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am not confident about this product&#39;s current free-tier limits, its current check interval, or even that it is still branded this way — it has been renamed at least once. I am deliberately not quoting monitor counts or intervals. Read the pricing page before you depend on it.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">UptimeRobot</span><p class="brand-note">The best-known free uptime monitor, with a generous monitor count and both email and Slack alerting, and it will monitor certificate expiry for you.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Freemium: a free tier with a large number of monitors at a slower check interval, with faster intervals sold on paid plans.</p><p class="brand-row"><span class="lbl">Most likely regret</span>The free interval is the problem, not the monitor count. My recollection is that free checks run at five minutes and that one-minute checking is a paid feature — which fails your constraint outright. It is on this list because it is the obvious name to consider and I would rather tell you why it does not fit than leave you to discover it.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am not confident of the current free-tier interval. It has changed before and it may have changed again in either direction.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Healthchecks.io</span><p class="brand-note">Open source and self-hostable under a permissive licence, free hosted tier, Slack and email alerting included — and it solves the failure your other monitors cannot see, which is a cron job or worker that silently stopped running.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free and open source to self-host; the hosted service has a free tier and paid plans above it.</p><p class="brand-row"><span class="lbl">Most likely regret</span>It is the wrong shape for this job. It waits for your systems to check in rather than probing your endpoints from outside, so it will not tell you your TLS certificate expires in a week. Run it alongside Uptime Kuma, not instead of it.</p><p class="nosources">No source cited for this recommendation.</p></li>
+</ol>
+<aside class="caveat">
+<p class="caveat-label">What the model said it was not sure about</p>
+<ul><li>I had no live web access in this run, so I have not read a single current pricing page or free-tier limit. Every interval and tier description above is recalled, not verified, and check-interval limits on free tiers are among the fastest-moving facts in this category.</li><li>Because I could not fetch anything, I cannot supply the documentation and pricing sources you asked for. I would rather say that plainly than invent citations that look authoritative.</li><li>I am confident all six of these projects and services existed and were in active use as of my knowledge cutoff. I cannot confirm any of them still is today, and Better Stack in particular has changed its name and packaging before.</li><li>Several obvious names are absent on purpose rather than by oversight: Pingdom, Datadog Synthetics, New Relic Synthetics and StatusCake all do this job well, and all of them either have no free tier at a one-minute cadence or bundle it into a platform subscription. Your &quot;without paying&quot; constraint is what excludes them, not their quality.</li><li>One thing I cannot judge from here is check-location diversity. Free tiers usually probe from fewer regions, and a self-hosted checker probes from exactly one. If you need to distinguish &quot;our site is down&quot; from &quot;our site is down from Frankfurt&quot;, none of the free answers above is sufficient on its own.</li></ul>
+</aside>
+</section>
+<div class="cta">
+<p><strong>Named here and want out?</strong> <a href="https://github.com/astroanand-6e/answer-ledger/issues/new?template=delist-brand.yml&amp;title=Delist%20request%3A%20">Open a delist request</a>. No email, no account beyond GitHub, no payment — ever. It is removed from this page, the index and the sitemap on the next build.</p>
+<p><strong>Want a question added?</strong> <a href="https://github.com/astroanand-6e/answer-ledger/issues/new?template=request-category.yml&amp;title=Category%20request%3A%20">Request a category</a>.</p>
+</div>
+<p class="mono"><a href="https://github.com/astroanand-6e/answer-ledger/blob/main/data/categories/uptime-monitoring-one-minute-checks-free.json">View the raw data for this page &rarr;</a></p>
+</main>
+<footer><div class="wrap">
+<span>Answer Ledger &mdash; every entry names its model, its prompt and its UTC timestamp. Nothing here is for sale to the vendors it names.</span>
+<span><a href="/answer-ledger/method/">How this was made</a> &nbsp;·&nbsp; <a href="https://github.com/astroanand-6e/answer-ledger/issues">Delist or request</a></span>
+</div></footer>
+</body>
+</html>

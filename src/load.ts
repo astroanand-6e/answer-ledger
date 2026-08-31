@@ -1,6 +1,6 @@
 import { readdirSync, readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import type { Category, LoadedCategory, Run, Brand, Source } from "./types.ts";
+import type { Category, LoadedCategory, Run, Brand, Source, Correction } from "./types.ts";
 import { SITE } from "./config.ts";
 
 const SLUG_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
@@ -30,15 +30,33 @@ function loadSource(file: string, raw: any): Source {
   };
 }
 
+/**
+ * An editor's note is held to a HIGHER evidence bar than the answer it sits
+ * beside. The model is allowed to have cited nothing; an editor is not. A
+ * correction without sources is just a second opinion, so it fails the build.
+ */
+function loadCorrection(file: string, raw: any, brandName: string): Correction {
+  const note = str(file, raw?.note, `brands["${brandName}"].correction.note`);
+  const at = str(file, raw?.checkedAt, `brands["${brandName}"].correction.checkedAt`);
+  if (!UTC_RE.test(at)) throw new DataError(file, `brands["${brandName}"].correction.checkedAt must be UTC "YYYY-MM-DDTHH:MM:SSZ", got "${at}"`);
+  const sources: Source[] = Array.isArray(raw.sources) ? raw.sources.map((s: any) => loadSource(file, s)) : [];
+  if (sources.length === 0) {
+    throw new DataError(file, `brands["${brandName}"].correction must cite at least one source. An unsourced correction carries less authority than the answer it corrects.`);
+  }
+  return { note, checkedAt: at, sources };
+}
+
 function loadBrand(file: string, raw: any, i: number): Brand {
+  const name = str(file, raw?.name, `brands[${i}].name`);
   return {
-    name: str(file, raw?.name, `brands[${i}].name`),
+    name,
     rank: typeof raw.rank === "number" && raw.rank >= 1 ? raw.rank : i + 1,
     note: typeof raw.note === "string" ? raw.note : "",
     ...(typeof raw.pricing === "string" && raw.pricing.trim() ? { pricing: raw.pricing } : {}),
     ...(typeof raw.regret === "string" && raw.regret.trim() ? { regret: raw.regret } : {}),
     ...(typeof raw.caveat === "string" && raw.caveat.trim() ? { caveat: raw.caveat } : {}),
     sources: Array.isArray(raw.sources) ? raw.sources.map((s: any) => loadSource(file, s)) : [],
+    ...(raw.correction ? { correction: loadCorrection(file, raw.correction, name) } : {}),
   };
 }
 
@@ -53,6 +71,12 @@ function loadRun(file: string, raw: any, i: number): Run {
   if (!UTC_RE.test(at)) throw new DataError(file, `runs[${i}].ranAt must be UTC "YYYY-MM-DDTHH:MM:SSZ", got "${at}"`);
   if (typeof raw.retrieval !== "boolean") throw new DataError(file, `runs[${i}].retrieval must be a boolean`);
   const brands: Brand[] = Array.isArray(raw.brands) ? raw.brands.map((b: any, j: number) => loadBrand(file, b, j)) : [];
+  // DELIBERATE: this checks `b.sources` only — the sources the MODEL cited.
+  // `b.correction.sources` are excluded on purpose. A correction is an editor's
+  // note written later, by a retrieving human, and it is required to be
+  // sourced. Widening this condition to include correction sources would make
+  // every corrected brand on a retrieval:false run fail the build. Do not
+  // "fix" it.
   if (!raw.retrieval && brands.some((b) => b.sources.length > 0)) {
     throw new DataError(file, `runs[${i}] declares retrieval:false but carries sources. A model without retrieval cannot cite. Fix one or the other.`);
   }
@@ -139,6 +163,9 @@ export function loadAll(dataDir: string): LoadResult {
       redactions += before - run.brands.length;
       for (const b of run.brands) {
         b.sources = b.sources.filter((s) => !brandDelist.has(s.domain));
+        // Delist beats editorial too: an editor's note may not be the loophole
+        // that keeps a delisted domain on the page.
+        if (b.correction) b.correction.sources = b.correction.sources.filter((s) => !brandDelist.has(s.domain));
       }
       // A delisted brand must also vanish from free prose, or the delist
       // promise is cosmetic. Redact visibly; never leave the name behind.
@@ -156,6 +183,7 @@ export function loadAll(dataDir: string): LoadResult {
           if (b.pricing) b.pricing = redact(b.pricing);
           if (b.regret) b.regret = redact(b.regret);
           if (b.caveat) b.caveat = redact(b.caveat);
+          if (b.correction) b.correction.note = redact(b.correction.note);
         }
       }
     }

@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "slug": "feedback-board-no-per-seat-pricing",
+  "question": "What public feature-request board doesn't charge per teammate?",
+  "summary": "A dated record of what one AI assistant answered when asked for a public customer feedback and feature-voting board with no per-seat charge, a search-engine-indexable public board, a ceiling of $25 a month or self-hosting, and no forced SSO upgrade.",
+  "delisted": false,
+  "provisional": false,
+  "runs": [
+    {
+      "engine": "claude",
+      "model": "claude-opus-5[1m]",
+      "modelDisplay": "Claude Opus 5 (Anthropic)",
+      "prompt": "I run a 3-person bootstrapped SaaS company. I need a public customer feedback and feature-voting board. My hard constraints are: no per-seat charge for my team; public board indexable by search engines; under $25/month or self-hostable; no forced SSO upgrade. Recommend at least five specific, named products or open-source projects, ranked best-fit first, and include self-hosted or free-tier options where they genuinely fit rather than defaulting to paid SaaS. For each one give: the current pricing model, the single strongest reason it satisfies my constraints, and the one thing most likely to make me regret choosing it. Then list the documentation, pricing pages, or other sources you are relying on for each claim. If you are not confident that a product still exists, or that its pricing is current, say so explicitly rather than guessing.",
+      "ranAt": "2026-08-31T16:52:07Z",
+      "retrieval": false,
+      "answerExcerpt": "\"No per-seat charge\" removes the entire business model of the category leaders in one sentence, and the $25 ceiling removes what is left of them. Feedback-board SaaS is priced per admin seat precisely because the boards themselves are cheap to run; the seats are the product. So the honest ranking here starts with software you host yourself, and the paid options that survive are the ones that charge per board rather than per person. Start with Fider.",
+      "verdict": "Self-host Fider on a small VPS and you satisfy every constraint permanently for a few dollars a month, with unlimited admins and a board Google will happily index. If you will not run anything, the only paid products that fit the shape of your constraints are the ones priced per board rather than per teammate, and I would verify their current pricing before trusting my memory of it.",
+      "brands": [
+        {
+          "name": "Fider",
+          "rank": 1,
+          "note": "It is a purpose-built public feedback and voting board that you run yourself, so \"per teammate\" has no meaning: there are no seats to buy, no SSO tier to be pushed onto, and the board is ordinary server-rendered HTML on your own domain that search engines can crawl.",
+          "pricing": "Free and open source. Cost is a small VPS or container host plus a Postgres database, and an SMTP provider for notification email.",
+          "regret": "It is deliberately minimal. There is no roadmap view, no changelog, no per-customer revenue weighting, and no integration with your issue tracker — so once the board has 300 ideas on it you will be doing the triage by hand, in the UI, forever.",
+          "caveat": "I am confident this project existed and was maintained as of my knowledge cutoff, but its development pace was never fast and I cannot confirm its current state.",
+          "sources": []
+        },
+        {
+          "name": "GitHub Discussions",
+          "rank": 2,
+          "note": "Free on public repositories with no seat charge of any kind, the pages are public and indexed well by search engines, and the polls-and-upvotes shape of Discussions is close enough to a feature-voting board to be genuinely useful on day one with zero operational work.",
+          "pricing": "Free for public repositories. No per-teammate cost for your side, no board fee.",
+          "regret": "Your non-technical customers will not create a GitHub account to vote on a feature, and the ones who do will file their feature request as though it were a bug in your build system. You are trading conversion rate for zero cost and zero ops.",
+          "sources": []
+        },
+        {
+          "name": "Astuto",
+          "rank": 3,
+          "note": "A self-hosted open-source board explicitly modelled on the commercial feature-voting products, so you get boards, statuses and roadmap columns rather than Fider's bare list — with the same absence of seats, tiers and SSO upsells.",
+          "pricing": "Free and open source, self-hosted. Same practical cost as Fider: a small host plus Postgres.",
+          "regret": "Much smaller project and much smaller community than anything else on this list. If it stops being maintained you are the maintainer, and a feedback board is exactly the kind of thing you will not want to be maintaining.",
+          "caveat": "I am less confident about this one than about Fider. I believe it existed and was active, but I would check the repository's recent commit history before adopting it.",
+          "sources": [],
+          "correction": {
+            "note": "Astuto reached end of life. The repository was archived and made read-only on 8 February 2026, and the maintainer's closing issue states the project is no longer maintained and points users to Fider instead — which is already ranked on this page. Astuto can still be run from the archived source, but it will receive no further fixes or security updates.",
+            "checkedAt": "2026-08-31T17:30:00Z",
+            "sources": [
+              {
+                "url": "https://github.com/astuto/astuto/issues/487",
+                "title": "Astuto end of life – Thanks everyone (astuto/astuto issue #487)"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Nolt",
+          "rank": 4,
+          "note": "The paid option whose pricing model actually matches your constraint: it charges per board, flat, rather than per teammate, so adding your two colleagues as admins costs nothing.",
+          "pricing": "Flat monthly fee per board. My recollection is that it sat around the level of your $25 ceiling rather than comfortably under it.",
+          "regret": "One flat fee per board sounds cheap until you want a second board for a second product, at which point the price doubles rather than moving up a tier.",
+          "caveat": "I am not confident this price is current and I am not going to state a figure as fact — flat per-board pricing is easy to raise quietly, and I do not know whether it has been. Confirm on the pricing page before you commit.",
+          "sources": []
+        },
+        {
+          "name": "Featurebase",
+          "rank": 5,
+          "note": "A hosted feedback board with a free tier and low-cost paid tiers, sold in a way that leans on board and feature limits rather than on counting your admins.",
+          "pricing": "Freemium with paid tiers above it. I remember the entry paid tier being in the range your ceiling allows, but not precisely.",
+          "regret": "This end of the market consolidates and reprices constantly. The risk is not that the product is bad, it is that in eighteen months the tier you are on stops existing and the migration path for your customers' votes is a CSV export, if you are lucky.",
+          "caveat": "I am not confident this product still exists under this name or that its pricing is anything like what I remember. Treat this entry as a lead to check, not a recommendation to act on.",
+          "sources": []
+        },
+        {
+          "name": "Discourse",
+          "rank": 6,
+          "note": "Self-hosted, open source, unlimited staff accounts, and it produces some of the most search-engine-friendly public discussion pages of anything in this list — with voting available as a category feature rather than a paid upgrade.",
+          "pricing": "Free and open source to self-host. The hosted plans are well above your $25 ceiling.",
+          "regret": "It is a forum, not a feedback board. You are installing a large Ruby application with a Postgres and Redis dependency in order to get a votes column, and you will spend your first week configuring moderation settings you did not want to think about.",
+          "sources": []
+        }
+      ],
+      "caveats": [
+        "I had no live web access in this run, so I have read no current pricing page. Every price and tier description above is from memory, and in this category — small tools, frequent repricing, frequent acquisition — memory decays faster than almost anywhere else in SaaS.",
+        "Because I could not fetch anything, I cannot give you the documentation and pricing sources you asked for, and I would rather state that than manufacture citations.",
+        "The open-source entries carry a different risk from the paid ones: not that the price moves, but that the project stops. Before adopting Fider or Astuto, look at the commit history and the open issue count yourself. That is a five-minute check I cannot do from here.",
+        "The best-known names in this category are deliberately absent because your constraints exclude them, not because they are bad: Canny, Productboard and Aha! Ideas are all priced per admin seat, sit well above $25 a month once you have three people on them, or reserve SSO for an enterprise tier. If the per-seat constraint is softer than you wrote it, Canny in particular comes straight back into contention.",
+        "One constraint I cannot verify for the hosted options is indexability. Several feedback-board products serve the public board as a client-rendered app on a shared subdomain, which indexes far worse than it looks like it should. If organic search traffic to the board matters to you, view-source on a live customer's board before you sign up."
+      ]
+    }
+  ]
+}

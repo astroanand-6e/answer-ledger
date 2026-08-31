@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What docs tool gives me static HTML I actually own? — recorded answer | Answer Ledger</title>
+<meta name="description" content="A dated record of what one AI assistant answered when asked for a documentation and knowledge-base tool that emits portable static HTML, keeps content as Markdown in your own git repo, includes search, and costs under $15 a month.">
+<link rel="canonical" href="https://astroanand-6e.github.io/answer-ledger/answers/docs-tool-that-outputs-static-html/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What docs tool gives me static HTML I actually own? — recorded answer | Answer Ledger">
+<meta property="og:description" content="A dated record of what one AI assistant answered when asked for a documentation and knowledge-base tool that emits portable static HTML, keeps content as Markdown in your own git repo, includes search, and costs under $15 a month.">
+<meta property="og:url" content="https://astroanand-6e.github.io/answer-ledger/answers/docs-tool-that-outputs-static-html/">
+<meta property="og:site_name" content="Answer Ledger">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:opsz,wght@6..72,400;6..72,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>:root{
+  --paper:#f4f1ea; --ink:#1a1815; --ink-soft:#59524a; --rule:#cfc6b6;
+  --mark:#7a2b1e; --tint:#e9e3d6; --machine:#3c3a35;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --paper:#14130f; --ink:#ece7dc; --ink-soft:#9d968a; --rule:#3a362e;
+         --mark:#d97a5f; --tint:#1e1c17; --machine:#c6c0b4; }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:Newsreader,Georgia,'Times New Roman',serif;
+  font-size:19px; line-height:1.6; font-optical-sizing:auto;
+}
+.wrap{max-width:46rem;margin:0 auto;padding:0 1.5rem}
+a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
+a:hover{border-bottom-color:var(--mark);color:var(--mark)}
+h1,h2,h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;letter-spacing:-.01em;line-height:1.12;margin:0}
+h1{font-size:clamp(2.1rem,5.5vw,3.1rem)}
+h2{font-size:1.6rem;margin-top:3rem}
+h3{font-size:1.15rem}
+p{margin:1rem 0}
+.mono,code{font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78rem;letter-spacing:.01em}
+
+/* masthead */
+header.mast{border-bottom:2px solid var(--ink);margin-bottom:2.5rem}
+header.mast .wrap{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding-top:1.1rem;padding-bottom:.7rem;flex-wrap:wrap}
+.logo{font-family:'Instrument Serif',Georgia,serif;font-size:1.5rem;border:0;letter-spacing:-.02em}
+.logo b{color:var(--mark);font-weight:400}
+nav.mast-nav{display:flex;gap:1.25rem}
+nav.mast-nav a{border:0;font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;font-family:'IBM Plex Mono',monospace;color:var(--ink-soft)}
+nav.mast-nav a:hover{color:var(--mark)}
+
+/* the machine record block: this is the credibility of the whole site */
+.record{border:1px solid var(--rule);border-left:3px solid var(--mark);background:var(--tint);padding:1rem 1.1rem;margin:1.5rem 0}
+.record dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem}
+.record dt{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.11em;color:var(--ink-soft);padding-top:.2em}
+.record dd{margin:0;font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--machine);word-break:break-word}
+.record .prompt{white-space:pre-wrap;background:var(--paper);border:1px solid var(--rule);padding:.55rem .65rem;display:block}
+@media (max-width:34rem){.record dl{grid-template-columns:1fr}.record dt{padding-top:.6em}}
+
+.kicker{font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.16em;color:var(--mark);margin:0 0 .75rem}
+.lede{font-size:1.15rem;color:var(--ink-soft);margin-top:1rem}
+.excerpt{border-left:2px solid var(--rule);padding-left:1.1rem;margin:1.5rem 0;font-style:italic;color:var(--ink-soft)}
+
+/* ranked brands */
+ol.brands{list-style:none;margin:1.5rem 0 0;padding:0;counter-reset:b}
+ol.brands>li{counter-increment:b;border-top:1px solid var(--rule);padding:1.15rem 0 1.15rem 3rem;position:relative}
+ol.brands>li:last-child{border-bottom:1px solid var(--rule)}
+ol.brands>li::before{content:counter(b,decimal-leading-zero);position:absolute;left:0;top:1.15rem;font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--mark)}
+.brand-name{font-family:'Instrument Serif',Georgia,serif;font-size:1.35rem;display:block}
+.brand-note{margin:.35rem 0 0;font-size:.95rem;color:var(--ink-soft)}
+ul.sources{list-style:none;margin:.7rem 0 0;padding:0}
+ul.sources li{font-size:.85rem;padding:.15rem 0}
+ul.sources .dom{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--ink-soft);margin-left:.4rem}
+.nosources{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--ink-soft);margin-top:.6rem}
+
+/* index */
+ul.catlist{list-style:none;margin:2rem 0;padding:0}
+ul.catlist li{border-top:1px solid var(--rule);padding:1rem 0}
+ul.catlist li:last-child{border-bottom:1px solid var(--rule)}
+ul.catlist a{border:0;font-family:'Instrument Serif',Georgia,serif;font-size:1.3rem;display:block}
+ul.catlist a:hover{color:var(--mark)}
+ul.catlist .meta{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.1em;margin-top:.3rem}
+
+/* model-stated uncertainty: content, not small print */
+.caveat{border:1px solid var(--mark);background:var(--tint);padding:.9rem 1.1rem;margin:1.75rem 0}
+.caveat-label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mark);margin:0 0 .5rem}
+.caveat ul{margin:0;padding-left:1.1rem;font-size:.92rem;color:var(--ink-soft)}
+.caveat li{margin:.3rem 0}
+.brand-row{margin:.4rem 0 0;font-size:.88rem;color:var(--ink-soft)}
+.brand-row .lbl{display:block;font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mark);opacity:.85}
+.caveat-row{border-left:2px solid var(--mark);padding-left:.7rem}
+
+/* editor's note: deliberately NOT in the accent colour the model's own voice
+   uses. A caveat is the model speaking; a correction is us. Solid ink frame
+   with a reversed label bar, so the two can never be confused at a glance. */
+.correction{margin:.9rem 0 0;border:1px solid var(--ink);background:var(--paper)}
+.correction-label{margin:0;padding:.32rem .65rem;background:var(--ink);color:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em}
+.correction-note{margin:.6rem .75rem;font-size:.88rem;color:var(--ink)}
+.correction-sources{margin:.5rem .75rem .7rem;padding:0}
+.verdict-only{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:1.5rem 0;margin:1.5rem 0}
+.verdict-label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:var(--mark);margin:0 0 .6rem}
+.verdict-only p:last-child{margin:0;font-family:'Instrument Serif',Georgia,serif;font-size:1.3rem;line-height:1.35}
+.notice{border:1px dashed var(--mark);padding:.85rem 1rem;font-size:.9rem;margin:1.5rem 0;color:var(--ink-soft)}
+.notice strong{color:var(--mark);font-weight:400}
+.cta{margin:2.5rem 0;padding:1.25rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+footer{margin:4rem 0 3rem;border-top:2px solid var(--ink);padding-top:1rem;font-size:.82rem;color:var(--ink-soft)}
+footer .wrap{display:flex;gap:1.25rem;flex-wrap:wrap;justify-content:space-between}
+main{padding-bottom:1rem}
+hr{border:0;border-top:1px solid var(--rule);margin:2.5rem 0}</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://astroanand-6e.github.io/answer-ledger/answers/docs-tool-that-outputs-static-html/#record",
+  "url": "https://astroanand-6e.github.io/answer-ledger/answers/docs-tool-that-outputs-static-html/",
+  "headline": "What docs tool gives me static HTML I actually own?",
+  "description": "A dated record of what one AI assistant answered when asked for a documentation and knowledge-base tool that emits portable static HTML, keeps content as Markdown in your own git repo, includes search, and costs under $15 a month.",
+  "inLanguage": "en",
+  "datePublished": "2026-08-31T16:41:03Z",
+  "dateModified": "2026-08-31T16:41:03Z",
+  "isAccessibleForFree": true,
+  "author": {
+    "@type": "Organization",
+    "name": "Answer Ledger",
+    "url": "https://astroanand-6e.github.io/answer-ledger/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Answer Ledger",
+    "url": "https://astroanand-6e.github.io/answer-ledger/"
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "What docs tool gives me static HTML I actually own?"
+  },
+  "isBasedOn": [
+    {
+      "@type": "CreativeWork",
+      "name": "Answer from Claude Opus 5 (Anthropic)",
+      "dateCreated": "2026-08-31T16:41:03Z",
+      "text": "\"Markdown in my own git repo\" plus \"static HTML I can host anywhere\" eliminates the entire hosted knowledge-base category in one move — Notion, Intercom Help Center, Zendesk Guide, HelpScout Docs and GitBook all keep your content in their database and rent you a rendering of it. What is left is static site generators, and the good news is that the best ones cost nothing and the constraint about $15/month never even comes into play. The only real decision is which generator, and the tiebreaker is whose search you trust and whose upgrade path you can stomach. I would start with Material for MkDocs.",
+      "creator": {
+        "@type": "SoftwareApplication",
+        "name": "Claude Opus 5 (Anthropic)",
+        "identifier": "claude-opus-5[1m]",
+        "applicationCategory": "AI assistant"
+      }
+    }
+  ],
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "Astro Starlight"
+    },
+    {
+      "@type": "Thing",
+      "name": "Docusaurus"
+    },
+    {
+      "@type": "Thing",
+      "name": "Hugo"
+    },
+    {
+      "@type": "Thing",
+      "name": "Material for MkDocs"
+    },
+    {
+      "@type": "Thing",
+      "name": "Sphinx with MyST"
+    },
+    {
+      "@type": "Thing",
+      "name": "VitePress"
+    }
+  ],
+  "citation": []
+}
+</script>
+</head>
+<body>
+<header class="mast"><div class="wrap">
+<a class="logo" href="/answer-ledger/">Answer<b> Ledger</b></a>
+<nav class="mast-nav">
+<a href="/answer-ledger/">Index</a>
+<a href="/answer-ledger/method/">Method</a>
+<a href="https://github.com/astroanand-6e/answer-ledger">Source</a>
+</nav>
+</div></header>
+<main class="wrap">
+<p class="kicker">Recorded answer · Developer and SaaS infrastructure tooling, bought by small bootstrapped teams</p>
+<h1>What docs tool gives me static HTML I actually own?</h1>
+<p class="lede">A dated record of what one AI assistant answered when asked for a documentation and knowledge-base tool that emits portable static HTML, keeps content as Markdown in your own git repo, includes search, and costs under $15 a month.</p>
+
+
+<p>This page is a record of one question put to Claude Opus 5 (Anthropic), kept exactly as answered. It is not a ranking, not a review and not an endorsement by Answer Ledger, and nothing on it is for sale to the vendors it names. <a href="/answer-ledger/method/">Read the method</a>.</p>
+<section>
+
+<div class="record">
+<dl>
+<dt>Model</dt><dd>Claude Opus 5 (Anthropic) <span style="opacity:.7">(claude-opus-5[1m])</span></dd>
+<dt>Answered</dt><dd>2026-08-31 16:41:03 UTC</dd>
+<dt>Retrieval</dt><dd>no — answered from training data only, so it cited nothing</dd>
+<dt>Prompt</dt><dd><span class="prompt">I run a 3-person bootstrapped SaaS company. I need product documentation / knowledge base. My hard constraints are: must output static HTML I can host anywhere so I am never locked in; free or under $15/month; search built in; my content stays in Markdown in my own git repo. Recommend at least five specific, named products or open-source projects, ranked best-fit first, and include self-hosted or free-tier options where they genuinely fit rather than defaulting to paid SaaS. For each one give: the current pricing model, the single strongest reason it satisfies my constraints, and the one thing most likely to make me regret choosing it. Then list the documentation, pricing pages, or other sources you are relying on for each claim. If you are not confident that a product still exists, or that its pricing is current, say so explicitly rather than guessing.</span></dd>
+</dl>
+</div>
+<h3>What it said, verbatim (opening)</h3>
+<blockquote class="excerpt">&quot;Markdown in my own git repo&quot; plus &quot;static HTML I can host anywhere&quot; eliminates the entire hosted knowledge-base category in one move — Notion, Intercom Help Center, Zendesk Guide, HelpScout Docs and GitBook all keep your content in their database and rent you a rendering of it. What is left is static site generators, and the good news is that the best ones cost nothing and the constraint about $15/month never even comes into play. The only real decision is which generator, and the tiebreaker is whose search you trust and whose upgrade path you can stomach. I would start with Material for MkDocs.</blockquote>
+<h3>What it recommended, in the order it named them</h3>
+<p class="lede">Every option that genuinely satisfies these constraints is a free open-source static site generator; the money question is moot. Pick Material for MkDocs unless you already have a JavaScript build pipeline, in which case pick Starlight.</p>
+<ol class="brands">
+<li><span class="brand-name">Material for MkDocs</span><p class="brand-note">It is a Markdown-in, static-HTML-out generator with a genuinely good client-side search built into the theme, so all four constraints are satisfied by the default configuration rather than by plugins you have to assemble.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>The theme is free and open source (MIT). There is a paid sponsors-only &quot;Insiders&quot; edition with extra features, funded through GitHub Sponsors at a monthly amount; the free edition is complete enough to run a real docs site indefinitely.</p><p class="brand-row"><span class="lbl">Most likely regret</span>It is Python. Your 3-person JavaScript shop now has a second toolchain to keep alive in CI, and the day a plugin pins an old Python version you will be debugging virtualenvs instead of writing docs.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>Insiders is a moving target — features graduate from it into the free edition over time, and I cannot confirm the current sponsorship tier or which features are currently gated. Check the project&#39;s own Insiders page before you assume a feature is free.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Astro Starlight</span><p class="brand-note">Content is plain Markdown/MDX files in your repo, the build emits fully static HTML with no runtime dependency on any service, and site search ships in the box via a bundled Pagefind index.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free and open source (MIT). No hosted component, no account, nothing to pay.</p><p class="brand-row"><span class="lbl">Most likely regret</span>You are on the Astro release treadmill. Major versions arrive at a real clip, and a docs site is exactly the kind of low-priority repo that quietly rots two majors behind until an upgrade becomes a weekend.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Docusaurus</span><p class="brand-note">The most battle-tested Markdown-to-static-HTML docs generator in the JavaScript ecosystem, with first-class versioned docs — which matters the moment you ship a v2 API and still owe v1 customers a page.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free and open source (MIT). Its default search integration is Algolia DocSearch, which is free for qualifying open/public documentation sites but is a separate service with its own eligibility rules.</p><p class="brand-row"><span class="lbl">Most likely regret</span>The default search is not actually yours. If DocSearch declines your site or changes its terms, your &quot;self-contained static site&quot; suddenly needs a paid search vendor or a plugin swap — swap in a local search plugin from day one if the ownership constraint is real.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am not confident about DocSearch&#39;s current eligibility criteria for commercial SaaS documentation, and I will not guess at them.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">VitePress</span><p class="brand-note">Fast, minimal, Markdown files in git, static output, and a local client-side search you enable with a single line of config — no third-party search service in the loop at all.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free and open source (MIT).</p><p class="brand-row"><span class="lbl">Most likely regret</span>It is deliberately spartan. When you want product-docs furniture that MkDocs and Docusaurus give you free — versioning, a tabbed API reference, admonition variety — you will be writing the theme yourself.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Hugo</span><p class="brand-note">Single static binary, no runtime ecosystem to maintain, and it will still build your Markdown in five years without a dependency archaeology expedition — which is the strongest possible form of &quot;never locked in&quot;.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free and open source (Apache 2.0). Docs themes such as Docsy and Hextra are free as well.</p><p class="brand-row"><span class="lbl">Most likely regret</span>Hugo&#39;s Go template language is the least pleasant thing in this list to customise, and search is theme-dependent rather than guaranteed — you may end up wiring Pagefind or a JSON index yourself.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>Whether search is built in depends entirely on which theme you pick, so treat the search constraint as unresolved until you have chosen one.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Sphinx with MyST</span><p class="brand-note">Produces static HTML with a built-in search index that requires no external service, and MyST lets you keep authoring in Markdown rather than reStructuredText.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free and open source (BSD). Read the Docs will host it, historically with a free tier for open-source projects and paid plans for commercial ones.</p><p class="brand-row"><span class="lbl">Most likely regret</span>Sphinx is a documentation system built for Python API reference, and you will feel that in every configuration decision. For a marketing-adjacent SaaS knowledge base it is a heavy, oddly-shaped tool.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am not confident about Read the Docs&#39; current commercial pricing or the boundary of its free tier, and I am deliberately not quoting figures.</p><p class="nosources">No source cited for this recommendation.</p></li>
+</ol>
+<aside class="caveat">
+<p class="caveat-label">What the model said it was not sure about</p>
+<ul><li>I had no live web access in this run, so I have not read a single current pricing page, release note or feature list. Everything above is from memory, and for the sponsorware and hosted-search components in particular that memory may already be wrong.</li><li>Because I could not fetch anything, I cannot supply the documentation and pricing sources you asked me to list. I would rather tell you that than manufacture plausible-looking citations.</li><li>I am confident all six of these projects existed and were actively maintained as of my knowledge cutoff. Static site generators are unusually durable, so I would be surprised if any had disappeared — but I cannot confirm it from here.</li><li>GitBook, Notion, Confluence, Zendesk Guide, Intercom and HelpScout are absent on purpose, not by oversight. All of them store your content in their database and none of them hands you a static HTML site you can rehost elsewhere; several are also above your price ceiling once you add a second seat. If &quot;static HTML I own&quot; is softer than you wrote it, GitBook in particular comes straight back into contention.</li><li>One structural point worth stating plainly: because everything here is free, the $15/month ceiling did no work at all in this ranking. Your real cost is engineering time, and on that axis Material for MkDocs and Starlight are the cheapest by a wide margin.</li></ul>
+</aside>
+</section>
+<div class="cta">
+<p><strong>Named here and want out?</strong> <a href="https://github.com/astroanand-6e/answer-ledger/issues/new?template=delist-brand.yml&amp;title=Delist%20request%3A%20">Open a delist request</a>. No email, no account beyond GitHub, no payment — ever. It is removed from this page, the index and the sitemap on the next build.</p>
+<p><strong>Want a question added?</strong> <a href="https://github.com/astroanand-6e/answer-ledger/issues/new?template=request-category.yml&amp;title=Category%20request%3A%20">Request a category</a>.</p>
+</div>
+<p class="mono"><a href="https://github.com/astroanand-6e/answer-ledger/blob/main/data/categories/docs-tool-that-outputs-static-html.json">View the raw data for this page &rarr;</a></p>
+</main>
+<footer><div class="wrap">
+<span>Answer Ledger &mdash; every entry names its model, its prompt and its UTC timestamp. Nothing here is for sale to the vendors it names.</span>
+<span><a href="/answer-ledger/method/">How this was made</a> &nbsp;·&nbsp; <a href="https://github.com/astroanand-6e/answer-ledger/issues">Delist or request</a></span>
+</div></footer>
+</body>
+</html>

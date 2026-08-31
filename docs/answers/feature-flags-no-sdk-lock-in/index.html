@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What feature flag tool won&#39;t lock me into a vendor SDK? — recorded answer | Answer Ledger</title>
+<meta name="description" content="A dated record of what one AI assistant answered when asked for feature flags and gradual rollouts with no proprietary SDK lock-in, a self-hosted option, no per-seat pricing, and a budget under $20 a month.">
+<link rel="canonical" href="https://astroanand-6e.github.io/answer-ledger/answers/feature-flags-no-sdk-lock-in/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What feature flag tool won&#39;t lock me into a vendor SDK? — recorded answer | Answer Ledger">
+<meta property="og:description" content="A dated record of what one AI assistant answered when asked for feature flags and gradual rollouts with no proprietary SDK lock-in, a self-hosted option, no per-seat pricing, and a budget under $20 a month.">
+<meta property="og:url" content="https://astroanand-6e.github.io/answer-ledger/answers/feature-flags-no-sdk-lock-in/">
+<meta property="og:site_name" content="Answer Ledger">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:opsz,wght@6..72,400;6..72,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>:root{
+  --paper:#f4f1ea; --ink:#1a1815; --ink-soft:#59524a; --rule:#cfc6b6;
+  --mark:#7a2b1e; --tint:#e9e3d6; --machine:#3c3a35;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --paper:#14130f; --ink:#ece7dc; --ink-soft:#9d968a; --rule:#3a362e;
+         --mark:#d97a5f; --tint:#1e1c17; --machine:#c6c0b4; }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:Newsreader,Georgia,'Times New Roman',serif;
+  font-size:19px; line-height:1.6; font-optical-sizing:auto;
+}
+.wrap{max-width:46rem;margin:0 auto;padding:0 1.5rem}
+a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
+a:hover{border-bottom-color:var(--mark);color:var(--mark)}
+h1,h2,h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;letter-spacing:-.01em;line-height:1.12;margin:0}
+h1{font-size:clamp(2.1rem,5.5vw,3.1rem)}
+h2{font-size:1.6rem;margin-top:3rem}
+h3{font-size:1.15rem}
+p{margin:1rem 0}
+.mono,code{font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78rem;letter-spacing:.01em}
+
+/* masthead */
+header.mast{border-bottom:2px solid var(--ink);margin-bottom:2.5rem}
+header.mast .wrap{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding-top:1.1rem;padding-bottom:.7rem;flex-wrap:wrap}
+.logo{font-family:'Instrument Serif',Georgia,serif;font-size:1.5rem;border:0;letter-spacing:-.02em}
+.logo b{color:var(--mark);font-weight:400}
+nav.mast-nav{display:flex;gap:1.25rem}
+nav.mast-nav a{border:0;font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;font-family:'IBM Plex Mono',monospace;color:var(--ink-soft)}
+nav.mast-nav a:hover{color:var(--mark)}
+
+/* the machine record block: this is the credibility of the whole site */
+.record{border:1px solid var(--rule);border-left:3px solid var(--mark);background:var(--tint);padding:1rem 1.1rem;margin:1.5rem 0}
+.record dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem}
+.record dt{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.11em;color:var(--ink-soft);padding-top:.2em}
+.record dd{margin:0;font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--machine);word-break:break-word}
+.record .prompt{white-space:pre-wrap;background:var(--paper);border:1px solid var(--rule);padding:.55rem .65rem;display:block}
+@media (max-width:34rem){.record dl{grid-template-columns:1fr}.record dt{padding-top:.6em}}
+
+.kicker{font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.16em;color:var(--mark);margin:0 0 .75rem}
+.lede{font-size:1.15rem;color:var(--ink-soft);margin-top:1rem}
+.excerpt{border-left:2px solid var(--rule);padding-left:1.1rem;margin:1.5rem 0;font-style:italic;color:var(--ink-soft)}
+
+/* ranked brands */
+ol.brands{list-style:none;margin:1.5rem 0 0;padding:0;counter-reset:b}
+ol.brands>li{counter-increment:b;border-top:1px solid var(--rule);padding:1.15rem 0 1.15rem 3rem;position:relative}
+ol.brands>li:last-child{border-bottom:1px solid var(--rule)}
+ol.brands>li::before{content:counter(b,decimal-leading-zero);position:absolute;left:0;top:1.15rem;font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--mark)}
+.brand-name{font-family:'Instrument Serif',Georgia,serif;font-size:1.35rem;display:block}
+.brand-note{margin:.35rem 0 0;font-size:.95rem;color:var(--ink-soft)}
+ul.sources{list-style:none;margin:.7rem 0 0;padding:0}
+ul.sources li{font-size:.85rem;padding:.15rem 0}
+ul.sources .dom{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--ink-soft);margin-left:.4rem}
+.nosources{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--ink-soft);margin-top:.6rem}
+
+/* index */
+ul.catlist{list-style:none;margin:2rem 0;padding:0}
+ul.catlist li{border-top:1px solid var(--rule);padding:1rem 0}
+ul.catlist li:last-child{border-bottom:1px solid var(--rule)}
+ul.catlist a{border:0;font-family:'Instrument Serif',Georgia,serif;font-size:1.3rem;display:block}
+ul.catlist a:hover{color:var(--mark)}
+ul.catlist .meta{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.1em;margin-top:.3rem}
+
+/* model-stated uncertainty: content, not small print */
+.caveat{border:1px solid var(--mark);background:var(--tint);padding:.9rem 1.1rem;margin:1.75rem 0}
+.caveat-label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mark);margin:0 0 .5rem}
+.caveat ul{margin:0;padding-left:1.1rem;font-size:.92rem;color:var(--ink-soft)}
+.caveat li{margin:.3rem 0}
+.brand-row{margin:.4rem 0 0;font-size:.88rem;color:var(--ink-soft)}
+.brand-row .lbl{display:block;font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mark);opacity:.85}
+.caveat-row{border-left:2px solid var(--mark);padding-left:.7rem}
+
+/* editor's note: deliberately NOT in the accent colour the model's own voice
+   uses. A caveat is the model speaking; a correction is us. Solid ink frame
+   with a reversed label bar, so the two can never be confused at a glance. */
+.correction{margin:.9rem 0 0;border:1px solid var(--ink);background:var(--paper)}
+.correction-label{margin:0;padding:.32rem .65rem;background:var(--ink);color:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em}
+.correction-note{margin:.6rem .75rem;font-size:.88rem;color:var(--ink)}
+.correction-sources{margin:.5rem .75rem .7rem;padding:0}
+.verdict-only{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:1.5rem 0;margin:1.5rem 0}
+.verdict-label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:var(--mark);margin:0 0 .6rem}
+.verdict-only p:last-child{margin:0;font-family:'Instrument Serif',Georgia,serif;font-size:1.3rem;line-height:1.35}
+.notice{border:1px dashed var(--mark);padding:.85rem 1rem;font-size:.9rem;margin:1.5rem 0;color:var(--ink-soft)}
+.notice strong{color:var(--mark);font-weight:400}
+.cta{margin:2.5rem 0;padding:1.25rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+footer{margin:4rem 0 3rem;border-top:2px solid var(--ink);padding-top:1rem;font-size:.82rem;color:var(--ink-soft)}
+footer .wrap{display:flex;gap:1.25rem;flex-wrap:wrap;justify-content:space-between}
+main{padding-bottom:1rem}
+hr{border:0;border-top:1px solid var(--rule);margin:2.5rem 0}</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://astroanand-6e.github.io/answer-ledger/answers/feature-flags-no-sdk-lock-in/#record",
+  "url": "https://astroanand-6e.github.io/answer-ledger/answers/feature-flags-no-sdk-lock-in/",
+  "headline": "What feature flag tool won't lock me into a vendor SDK?",
+  "description": "A dated record of what one AI assistant answered when asked for feature flags and gradual rollouts with no proprietary SDK lock-in, a self-hosted option, no per-seat pricing, and a budget under $20 a month.",
+  "inLanguage": "en",
+  "datePublished": "2026-08-31T16:41:12Z",
+  "dateModified": "2026-08-31T16:41:12Z",
+  "isAccessibleForFree": true,
+  "author": {
+    "@type": "Organization",
+    "name": "Answer Ledger",
+    "url": "https://astroanand-6e.github.io/answer-ledger/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Answer Ledger",
+    "url": "https://astroanand-6e.github.io/answer-ledger/"
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "What feature flag tool won't lock me into a vendor SDK?"
+  },
+  "isBasedOn": [
+    {
+      "@type": "CreativeWork",
+      "name": "Answer from Claude Opus 5 (Anthropic)",
+      "dateCreated": "2026-08-31T16:41:12Z",
+      "text": "The \"no per-seat pricing\" and \"self-hosted option\" constraints together knock out the category leader before we start, and the SDK lock-in constraint changes the shape of the question entirely: you are not really shopping for a flag service, you are shopping for a flag evaluation contract that you can re-point at something else in an afternoon. That reframing has an answer, and it is a standard: OpenFeature. Pick your provider second, and pick it knowing you can swap it.",
+      "creator": {
+        "@type": "SoftwareApplication",
+        "name": "Claude Opus 5 (Anthropic)",
+        "identifier": "claude-opus-5[1m]",
+        "applicationCategory": "AI assistant"
+      }
+    }
+  ],
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "A JSON file in your own repository"
+    },
+    {
+      "@type": "Thing",
+      "name": "Flagsmith"
+    },
+    {
+      "@type": "Thing",
+      "name": "Flipt"
+    },
+    {
+      "@type": "Thing",
+      "name": "GrowthBook"
+    },
+    {
+      "@type": "Thing",
+      "name": "OpenFeature"
+    },
+    {
+      "@type": "Thing",
+      "name": "PostHog feature flags"
+    },
+    {
+      "@type": "Thing",
+      "name": "Unleash"
+    }
+  ],
+  "citation": []
+}
+</script>
+</head>
+<body>
+<header class="mast"><div class="wrap">
+<a class="logo" href="/answer-ledger/">Answer<b> Ledger</b></a>
+<nav class="mast-nav">
+<a href="/answer-ledger/">Index</a>
+<a href="/answer-ledger/method/">Method</a>
+<a href="https://github.com/astroanand-6e/answer-ledger">Source</a>
+</nav>
+</div></header>
+<main class="wrap">
+<p class="kicker">Recorded answer · Developer and SaaS infrastructure tooling, bought by small bootstrapped teams</p>
+<h1>What feature flag tool won&#39;t lock me into a vendor SDK?</h1>
+<p class="lede">A dated record of what one AI assistant answered when asked for feature flags and gradual rollouts with no proprietary SDK lock-in, a self-hosted option, no per-seat pricing, and a budget under $20 a month.</p>
+
+
+<p>This page is a record of one question put to Claude Opus 5 (Anthropic), kept exactly as answered. It is not a ranking, not a review and not an endorsement by Answer Ledger, and nothing on it is for sale to the vendors it names. <a href="/answer-ledger/method/">Read the method</a>.</p>
+<section>
+
+<div class="record">
+<dl>
+<dt>Model</dt><dd>Claude Opus 5 (Anthropic) <span style="opacity:.7">(claude-opus-5[1m])</span></dd>
+<dt>Answered</dt><dd>2026-08-31 16:41:12 UTC</dd>
+<dt>Retrieval</dt><dd>no — answered from training data only, so it cited nothing</dd>
+<dt>Prompt</dt><dd><span class="prompt">I run a 3-person bootstrapped SaaS company. I need feature flags and gradual rollouts. My hard constraints are: no proprietary SDK lock-in — open format or trivially replaceable; free or under $20/month for a small team; self-hosted option available; no per-seat pricing. Recommend at least five specific, named products or open-source projects, ranked best-fit first, and include self-hosted or free-tier options where they genuinely fit rather than defaulting to paid SaaS. For each one give: the current pricing model, the single strongest reason it satisfies my constraints, and the one thing most likely to make me regret choosing it. Then list the documentation, pricing pages, or other sources you are relying on for each claim. If you are not confident that a product still exists, or that its pricing is current, say so explicitly rather than guessing.</span></dd>
+</dl>
+</div>
+<h3>What it said, verbatim (opening)</h3>
+<blockquote class="excerpt">The &quot;no per-seat pricing&quot; and &quot;self-hosted option&quot; constraints together knock out the category leader before we start, and the SDK lock-in constraint changes the shape of the question entirely: you are not really shopping for a flag service, you are shopping for a flag evaluation contract that you can re-point at something else in an afternoon. That reframing has an answer, and it is a standard: OpenFeature. Pick your provider second, and pick it knowing you can swap it.</blockquote>
+<h3>What it recommended, in the order it named them</h3>
+<p class="lede">Adopt OpenFeature as your interface first — that single decision satisfies the lock-in constraint no matter what you put behind it. Then run Flagsmith, Unleash or GrowthBook yourself on hardware you are already paying for, and your recurring cost for flags is zero.</p>
+<ol class="brands">
+<li><span class="brand-name">OpenFeature</span><p class="brand-note">It is not a flag vendor at all — it is a vendor-neutral SDK specification with providers for most of the major backends, so your application code never imports a vendor&#39;s client and swapping providers becomes a config change rather than a migration.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free. It is an open-source specification and SDK set under the CNCF, with no hosted component to buy.</p><p class="brand-row"><span class="lbl">Most likely regret</span>It is an abstraction layer, and abstraction layers lag. When a provider ships a feature you want, the OpenFeature provider for it may not expose that feature yet, and you will be tempted to reach past the interface — which quietly reintroduces exactly the lock-in you adopted it to avoid.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am confident OpenFeature exists and is CNCF-hosted, but I cannot verify from here which providers are currently maintained at what quality. Provider maturity varies a lot and that is the thing worth checking.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Flagsmith</span><p class="brand-note">Open-source core you can run yourself with unlimited flags and no user-count licence, and the API it exposes is simple enough that reimplementing a client against it is an evening&#39;s work — which is the practical definition of &quot;trivially replaceable&quot;.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Self-hosted open-source edition: free. There is also a hosted cloud offering with a free tier and paid plans above it; the paid plans have historically had a seat component, which is why I am ranking the self-hosted path.</p><p class="brand-row"><span class="lbl">Most likely regret</span>Self-hosting it means running a Django application plus Postgres plus, if you want the fast local-evaluation path, an edge component. That is a real service to keep alive for something as boring as booleans.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am not confident about Flagsmith Cloud&#39;s current tier structure or whether the free tier still covers a 3-person team, and I will not guess at the numbers. Read their pricing page.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Unleash</span><p class="brand-note">The open-source edition is genuinely capable rather than a crippled demo — gradual rollouts, percentage strategies and constraints are all in the free self-hosted product, not held back for the paid tier.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Open-source self-hosted edition: free. Unleash&#39;s commercial tiers are separate and have historically been priced with a seat component, so the constraint you wrote points you at the open-source edition specifically.</p><p class="brand-row"><span class="lbl">Most likely regret</span>The split between what is open source and what is enterprise moves, and the features that tend to sit on the commercial side are the governance ones — approvals, audit, SSO. If your company grows into wanting those, you will be having the pricing conversation you were trying to avoid.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I believe Unleash&#39;s OSS/enterprise feature split has changed at least once. Do not take my characterisation of which side a given feature sits on without checking.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">GrowthBook</span><p class="brand-note">Its SDKs evaluate flags locally against a plain JSON payload the server hands you, which means the actual dependency is a documented JSON shape rather than a vendor runtime — you could serve that payload from your own S3 bucket and keep working if GrowthBook vanished tomorrow.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Open-source (MIT) self-hosted edition: free. There is a hosted cloud with a free tier for small teams and paid plans above it.</p><p class="brand-row"><span class="lbl">Most likely regret</span>GrowthBook&#39;s centre of gravity is A/B testing and statistics, not flag operations. If all you want is a kill switch and a 10% rollout, you are adopting a warehouse-connected experimentation platform to get it, and most of the product will sit unused.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am not confident of GrowthBook Cloud&#39;s current free-tier user limit and am deliberately not quoting one.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Flipt</span><p class="brand-note">It is the smallest thing on this list that still counts as a flag service: a single Go binary, and it can read flag definitions declaratively from files in a Git repository, so your flag state is version-controlled text you already own.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Open source, free to self-host. Any commercial offering is secondary to the self-hosted binary.</p><p class="brand-row"><span class="lbl">Most likely regret</span>Small project, small ecosystem. The UI is spartan, the integrations you assume exist may not, and if the maintainers move on you are the maintainer.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am moderately confident Flipt is still actively developed, but of everything on this list it is the one I would most want you to confirm is alive before building on it.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">PostHog feature flags</span><p class="brand-note">Priced by usage rather than by seat, with a free monthly allowance that a 3-person company&#39;s traffic will plausibly fit inside — so it can genuinely cost you nothing while remaining a hosted product you do not operate.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Usage-based with a free monthly allowance of flag requests; you pay only above it. Team members are not charged for. There is also a self-hostable open-source edition, though it is a much heavier thing to run than the others here.</p><p class="brand-row"><span class="lbl">Most likely regret</span>Usage pricing has no ceiling. Feature flags get evaluated on every page load, so a traffic spike or a badly placed evaluation in a render loop turns into a bill rather than a rate limit, and you find out afterwards.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>PostHog&#39;s free allowances have been revised repeatedly. Treat any figure from me as stale on principle.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">A JSON file in your own repository</span><p class="brand-note">For a 3-person company shipping a handful of rollouts a month, a checked-in config file plus a percentage-hash helper function satisfies every constraint you listed absolutely, and costs nothing to run or to leave.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free. It is thirty lines of your own code.</p><p class="brand-row"><span class="lbl">Most likely regret</span>Every flag change is a deploy. The first time you need to kill a broken feature at 3am and your CI pipeline takes eleven minutes, you will understand precisely what the vendors are selling — and you should switch then, not before.</p><p class="nosources">No source cited for this recommendation.</p></li>
+</ol>
+<aside class="caveat">
+<p class="caveat-label">What the model said it was not sure about</p>
+<ul><li>I had no live web access in this run, so I have read no current pricing page for any product named above. Every pricing description is recalled from training data, and pricing is the single fastest-decaying fact about a software product. Verify before you commit.</li><li>Because I could not fetch anything, I cannot supply the list of documentation and pricing pages you asked for. I would rather tell you that than invent plausible-looking citations.</li><li>Several of these projects draw a moving line between their open-source and commercial editions. My description of which features sit on which side is the claim most likely to be wrong, more so than the prices.</li><li>LaunchDarkly is absent on purpose, not by oversight: it is the strongest product in this category and it is exactly what your constraints exclude — seat-influenced pricing well above $20/month, no self-hosted option for a small team, and a rich proprietary SDK that is the main thing you would be buying. Split.io, Statsig and similar hosted-only vendors are omitted for related reasons. If the self-hosting and per-seat constraints are softer than you wrote them, LaunchDarkly re-enters at the top immediately.</li></ul>
+</aside>
+</section>
+<div class="cta">
+<p><strong>Named here and want out?</strong> <a href="https://github.com/astroanand-6e/answer-ledger/issues/new?template=delist-brand.yml&amp;title=Delist%20request%3A%20">Open a delist request</a>. No email, no account beyond GitHub, no payment — ever. It is removed from this page, the index and the sitemap on the next build.</p>
+<p><strong>Want a question added?</strong> <a href="https://github.com/astroanand-6e/answer-ledger/issues/new?template=request-category.yml&amp;title=Category%20request%3A%20">Request a category</a>.</p>
+</div>
+<p class="mono"><a href="https://github.com/astroanand-6e/answer-ledger/blob/main/data/categories/feature-flags-no-sdk-lock-in.json">View the raw data for this page &rarr;</a></p>
+</main>
+<footer><div class="wrap">
+<span>Answer Ledger &mdash; every entry names its model, its prompt and its UTC timestamp. Nothing here is for sale to the vendors it names.</span>
+<span><a href="/answer-ledger/method/">How this was made</a> &nbsp;·&nbsp; <a href="https://github.com/astroanand-6e/answer-ledger/issues">Delist or request</a></span>
+</div></footer>
+</body>
+</html>

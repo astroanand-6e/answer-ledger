@@ -39,6 +39,10 @@ export function renderMethod(cats: LoadedCategory[]): string {
 <ul>${models.map((m) => `<li class="mono">${esc(m)}</li>`).join("")}</ul>
 <p><strong>We do not label an answer with the name of an assistant that did not produce it.</strong> If a page does not name a given assistant, that assistant was not asked. When we can run a second assistant, its answer is <em>added</em> as another run on the same page &mdash; the data format has held a slot for it since the first commit &mdash; and the existing run stays exactly as it was. Old runs are never overwritten and never quietly re-dated.</p>
 
+<h2>When the world moves after the run</h2>
+<p><strong>We never edit an answer.</strong> A model that named a product on the day it was asked said exactly that, and rewriting it later would make this a set of opinions rather than a record. But products get renamed, archived, acquired and relicensed, and a record that quietly points you at a dead repository is not much of a service either.</p>
+<p>So when a named product changes in a way that matters, we add an <em>editor&#39;s note</em> beside it: what happened, the UTC date we checked, and links to the evidence. It is ours, not the model&#39;s, it is marked as such and styled differently from everything around it, and it changes nothing above it &mdash; the recorded answer, the prompt and the timestamp stay byte-for-byte as they were. An editor&#39;s note is the only text on an answer page we wrote ourselves, and it is the only text on this site required to cite a source.</p>
+
 <h2>What this is not</h2>
 <ul>
 <li><strong>Not a survey.</strong> This is one model's output at one moment. Ask the same question tomorrow and you may get a different answer. That is a fact about language models, not a defect we are hiding.</li>

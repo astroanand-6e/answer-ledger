@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Answer Ledger — A dated, permanent public record of what an AI assistant answers when a buyer asks it to recommend software.</title>
-<meta name="description" content="A dated, permanent public record of what an AI assistant answers when a buyer asks it to recommend software. 2 recorded answers about developer and SaaS infrastructure tooling, bought by small bootstrapped teams. Each entry states the exact model, the verbatim prompt and the UTC timestamp.">
+<meta name="description" content="A dated, permanent public record of what an AI assistant answers when a buyer asks it to recommend software. 20 recorded answers about developer and SaaS infrastructure tooling, bought by small bootstrapped teams. Each entry states the exact model, the verbatim prompt and the UTC timestamp.">
 <link rel="canonical" href="https://astroanand-6e.github.io/answer-ledger/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Answer Ledger — A dated, permanent public record of what an AI assistant answers when a buyer asks it to recommend software.">
-<meta property="og:description" content="A dated, permanent public record of what an AI assistant answers when a buyer asks it to recommend software. 2 recorded answers about developer and SaaS infrastructure tooling, bought by small bootstrapped teams. Each entry states the exact model, the verbatim prompt and the UTC timestamp.">
+<meta property="og:description" content="A dated, permanent public record of what an AI assistant answers when a buyer asks it to recommend software. 20 recorded answers about developer and SaaS infrastructure tooling, bought by small bootstrapped teams. Each entry states the exact model, the verbatim prompt and the UTC timestamp.">
 <meta property="og:url" content="https://astroanand-6e.github.io/answer-ledger/">
 <meta property="og:site_name" content="Answer Ledger">
 <meta name="twitter:card" content="summary">
@@ -89,6 +89,14 @@ ul.catlist .meta{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:va
 .brand-row{margin:.4rem 0 0;font-size:.88rem;color:var(--ink-soft)}
 .brand-row .lbl{display:block;font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mark);opacity:.85}
 .caveat-row{border-left:2px solid var(--mark);padding-left:.7rem}
+
+/* editor's note: deliberately NOT in the accent colour the model's own voice
+   uses. A caveat is the model speaking; a correction is us. Solid ink frame
+   with a reversed label bar, so the two can never be confused at a glance. */
+.correction{margin:.9rem 0 0;border:1px solid var(--ink);background:var(--paper)}
+.correction-label{margin:0;padding:.32rem .65rem;background:var(--ink);color:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em}
+.correction-note{margin:.6rem .75rem;font-size:.88rem;color:var(--ink)}
+.correction-sources{margin:.5rem .75rem .7rem;padding:0}
 .verdict-only{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:1.5rem 0;margin:1.5rem 0}
 .verdict-label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:var(--mark);margin:0 0 .6rem}
 .verdict-only p:last-child{margin:0;font-family:'Instrument Serif',Georgia,serif;font-size:1.3rem;line-height:1.35}
@@ -116,15 +124,123 @@ hr{border:0;border-top:1px solid var(--rule);margin:2.5rem 0}</style>
   "hasPart": [
     {
       "@type": "Article",
+      "url": "https://astroanand-6e.github.io/answer-ledger/answers/analytics-eu-hosted-no-cookie-banner/",
+      "headline": "What analytics can I run in the EU with no cookie banner?",
+      "datePublished": "2026-08-31T16:58:33Z"
+    },
+    {
+      "@type": "Article",
+      "url": "https://astroanand-6e.github.io/answer-ledger/answers/api-docs-from-openapi-free-hosting/",
+      "headline": "Where can I host API docs generated from my OpenAPI spec for free?",
+      "datePublished": "2026-08-31T17:06:44Z"
+    },
+    {
+      "@type": "Article",
       "url": "https://astroanand-6e.github.io/answer-ledger/answers/auth-predictable-pricing-at-scale/",
       "headline": "What auth provider won't rug-pull my pricing when I hit 10,000 users?",
       "datePublished": "2026-08-31T16:20:52Z"
     },
     {
       "@type": "Article",
+      "url": "https://astroanand-6e.github.io/answer-ledger/answers/background-jobs-single-vps/",
+      "headline": "What background job queue works on one small VPS?",
+      "datePublished": "2026-08-31T17:09:48Z"
+    },
+    {
+      "@type": "Article",
+      "url": "https://astroanand-6e.github.io/answer-ledger/answers/changelog-embeddable-no-per-seat/",
+      "headline": "What in-app changelog widget doesn't use per-seat pricing?",
+      "datePublished": "2026-08-31T17:09:33Z"
+    },
+    {
+      "@type": "Article",
+      "url": "https://astroanand-6e.github.io/answer-ledger/answers/docs-tool-that-outputs-static-html/",
+      "headline": "What docs tool gives me static HTML I actually own?",
+      "datePublished": "2026-08-31T16:41:03Z"
+    },
+    {
+      "@type": "Article",
+      "url": "https://astroanand-6e.github.io/answer-ledger/answers/email-marketing-under-1000-subscribers/",
+      "headline": "What newsletter tool stays cheap under 1,000 subscribers?",
+      "datePublished": "2026-08-31T16:53:07Z"
+    },
+    {
+      "@type": "Article",
+      "url": "https://astroanand-6e.github.io/answer-ledger/answers/error-tracking-flat-price-unlimited-seats/",
+      "headline": "What error tracking doesn't charge me per developer?",
+      "datePublished": "2026-08-31T16:41:07Z"
+    },
+    {
+      "@type": "Article",
+      "url": "https://astroanand-6e.github.io/answer-ledger/answers/feature-flags-no-sdk-lock-in/",
+      "headline": "What feature flag tool won't lock me into a vendor SDK?",
+      "datePublished": "2026-08-31T16:41:12Z"
+    },
+    {
+      "@type": "Article",
+      "url": "https://astroanand-6e.github.io/answer-ledger/answers/feedback-board-no-per-seat-pricing/",
+      "headline": "What public feature-request board doesn't charge per teammate?",
+      "datePublished": "2026-08-31T16:52:07Z"
+    },
+    {
+      "@type": "Article",
+      "url": "https://astroanand-6e.github.io/answer-ledger/answers/form-backend-for-static-sites/",
+      "headline": "What form backend works for a static site without writing a server?",
+      "datePublished": "2026-08-31T17:12:44Z"
+    },
+    {
+      "@type": "Article",
+      "url": "https://astroanand-6e.github.io/answer-ledger/answers/headless-cms-free-one-editor-selfhost/",
+      "headline": "What headless CMS is free for one non-technical editor?",
+      "datePublished": "2026-08-31T16:58:27Z"
+    },
+    {
+      "@type": "Article",
+      "url": "https://astroanand-6e.github.io/answer-ledger/answers/log-management-no-per-gb-surprise-bills/",
+      "headline": "What log management won't hand me a surprise bill?",
+      "datePublished": "2026-08-31T16:41:07Z"
+    },
+    {
+      "@type": "Article",
+      "url": "https://astroanand-6e.github.io/answer-ledger/answers/managed-postgres-cheap-eu-with-backups/",
+      "headline": "What's the cheapest managed Postgres in the EU with real backups?",
+      "datePublished": "2026-08-31T16:53:22Z"
+    },
+    {
+      "@type": "Article",
+      "url": "https://astroanand-6e.github.io/answer-ledger/answers/self-hosted-scheduling-calendly-alternative/",
+      "headline": "What self-hosted Calendly alternative actually works?",
+      "datePublished": "2026-08-31T16:41:18Z"
+    },
+    {
+      "@type": "Article",
+      "url": "https://astroanand-6e.github.io/answer-ledger/answers/session-replay-eu-hosting-no-cookies/",
+      "headline": "What session replay tool is GDPR-safe and EU-hosted?",
+      "datePublished": "2026-08-31T17:09:41Z"
+    },
+    {
+      "@type": "Article",
+      "url": "https://astroanand-6e.github.io/answer-ledger/answers/shared-inbox-two-people-under-30/",
+      "headline": "What shared support inbox works for two people under $30 a month?",
+      "datePublished": "2026-08-31T16:57:04Z"
+    },
+    {
+      "@type": "Article",
       "url": "https://astroanand-6e.github.io/answer-ledger/answers/status-page-no-vendor-branding-free-tier/",
       "headline": "What status page doesn't stamp the vendor's logo on my page?",
       "datePublished": "2026-08-31T16:20:52Z"
+    },
+    {
+      "@type": "Article",
+      "url": "https://astroanand-6e.github.io/answer-ledger/answers/transactional-email-no-monthly-minimum/",
+      "headline": "What transactional email service works for a tiny app without a monthly minimum?",
+      "datePublished": "2026-08-31T17:12:44Z"
+    },
+    {
+      "@type": "Article",
+      "url": "https://astroanand-6e.github.io/answer-ledger/answers/uptime-monitoring-one-minute-checks-free/",
+      "headline": "What uptime monitoring gives me 1-minute checks for free?",
+      "datePublished": "2026-08-31T16:38:14Z"
     }
   ]
 }
@@ -145,7 +261,7 @@ hr{border:0;border-top:1px solid var(--rule);margin:2.5rem 0}</style>
 <p class="lede">Answer Ledger is a dated, permanent public record of what an AI assistant answers when a buyer asks it to recommend software — every page prints the exact prompt, the model that answered, and the timestamp, and nothing here is for sale to the vendors it names.</p>
 
 <div class="record"><dl>
-<dt>Entries</dt><dd>2 of a hard cap of 100</dd>
+<dt>Entries</dt><dd>20 of a hard cap of 100</dd>
 <dt>Vertical</dt><dd>Developer and SaaS infrastructure tooling, bought by small bootstrapped teams</dd>
 <dt>Models</dt><dd>Claude Opus 5 (Anthropic)</dd>
 <dt>Method</dt><dd>generated in batch, off the request path, committed to git &mdash; <a href="/answer-ledger/method/">read it</a></dd>
@@ -153,11 +269,65 @@ hr{border:0;border-top:1px solid var(--rule);margin:2.5rem 0}</style>
 
 <h2>The record</h2>
 <ul class="catlist"><li>
+<a href="/answer-ledger/answers/analytics-eu-hosted-no-cookie-banner/">What analytics can I run in the EU with no cookie banner?</a>
+<div class="meta">Claude Opus 5 (Anthropic) · 2026-08-31</div>
+</li><li>
+<a href="/answer-ledger/answers/api-docs-from-openapi-free-hosting/">Where can I host API docs generated from my OpenAPI spec for free?</a>
+<div class="meta">Claude Opus 5 (Anthropic) · 2026-08-31</div>
+</li><li>
 <a href="/answer-ledger/answers/auth-predictable-pricing-at-scale/">What auth provider won&#39;t rug-pull my pricing when I hit 10,000 users?</a>
-<div class="meta">Claude Opus 5 (Anthropic) · 2026-08-31 · provisional</div>
+<div class="meta">Claude Opus 5 (Anthropic) · 2026-08-31</div>
+</li><li>
+<a href="/answer-ledger/answers/background-jobs-single-vps/">What background job queue works on one small VPS?</a>
+<div class="meta">Claude Opus 5 (Anthropic) · 2026-08-31</div>
+</li><li>
+<a href="/answer-ledger/answers/changelog-embeddable-no-per-seat/">What in-app changelog widget doesn&#39;t use per-seat pricing?</a>
+<div class="meta">Claude Opus 5 (Anthropic) · 2026-08-31</div>
+</li><li>
+<a href="/answer-ledger/answers/docs-tool-that-outputs-static-html/">What docs tool gives me static HTML I actually own?</a>
+<div class="meta">Claude Opus 5 (Anthropic) · 2026-08-31</div>
+</li><li>
+<a href="/answer-ledger/answers/email-marketing-under-1000-subscribers/">What newsletter tool stays cheap under 1,000 subscribers?</a>
+<div class="meta">Claude Opus 5 (Anthropic) · 2026-08-31</div>
+</li><li>
+<a href="/answer-ledger/answers/error-tracking-flat-price-unlimited-seats/">What error tracking doesn&#39;t charge me per developer?</a>
+<div class="meta">Claude Opus 5 (Anthropic) · 2026-08-31</div>
+</li><li>
+<a href="/answer-ledger/answers/feature-flags-no-sdk-lock-in/">What feature flag tool won&#39;t lock me into a vendor SDK?</a>
+<div class="meta">Claude Opus 5 (Anthropic) · 2026-08-31</div>
+</li><li>
+<a href="/answer-ledger/answers/feedback-board-no-per-seat-pricing/">What public feature-request board doesn&#39;t charge per teammate?</a>
+<div class="meta">Claude Opus 5 (Anthropic) · 2026-08-31</div>
+</li><li>
+<a href="/answer-ledger/answers/form-backend-for-static-sites/">What form backend works for a static site without writing a server?</a>
+<div class="meta">Claude Opus 5 (Anthropic) · 2026-08-31</div>
+</li><li>
+<a href="/answer-ledger/answers/headless-cms-free-one-editor-selfhost/">What headless CMS is free for one non-technical editor?</a>
+<div class="meta">Claude Opus 5 (Anthropic) · 2026-08-31</div>
+</li><li>
+<a href="/answer-ledger/answers/log-management-no-per-gb-surprise-bills/">What log management won&#39;t hand me a surprise bill?</a>
+<div class="meta">Claude Opus 5 (Anthropic) · 2026-08-31</div>
+</li><li>
+<a href="/answer-ledger/answers/managed-postgres-cheap-eu-with-backups/">What&#39;s the cheapest managed Postgres in the EU with real backups?</a>
+<div class="meta">Claude Opus 5 (Anthropic) · 2026-08-31</div>
+</li><li>
+<a href="/answer-ledger/answers/self-hosted-scheduling-calendly-alternative/">What self-hosted Calendly alternative actually works?</a>
+<div class="meta">Claude Opus 5 (Anthropic) · 2026-08-31</div>
+</li><li>
+<a href="/answer-ledger/answers/session-replay-eu-hosting-no-cookies/">What session replay tool is GDPR-safe and EU-hosted?</a>
+<div class="meta">Claude Opus 5 (Anthropic) · 2026-08-31</div>
+</li><li>
+<a href="/answer-ledger/answers/shared-inbox-two-people-under-30/">What shared support inbox works for two people under $30 a month?</a>
+<div class="meta">Claude Opus 5 (Anthropic) · 2026-08-31</div>
 </li><li>
 <a href="/answer-ledger/answers/status-page-no-vendor-branding-free-tier/">What status page doesn&#39;t stamp the vendor&#39;s logo on my page?</a>
-<div class="meta">Claude Opus 5 (Anthropic) · 2026-08-31 · provisional</div>
+<div class="meta">Claude Opus 5 (Anthropic) · 2026-08-31</div>
+</li><li>
+<a href="/answer-ledger/answers/transactional-email-no-monthly-minimum/">What transactional email service works for a tiny app without a monthly minimum?</a>
+<div class="meta">Claude Opus 5 (Anthropic) · 2026-08-31</div>
+</li><li>
+<a href="/answer-ledger/answers/uptime-monitoring-one-minute-checks-free/">What uptime monitoring gives me 1-minute checks for free?</a>
+<div class="meta">Claude Opus 5 (Anthropic) · 2026-08-31</div>
 </li></ul>
 
 <div class="cta">

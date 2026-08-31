@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What background job queue works on one small VPS? — recorded answer | Answer Ledger</title>
+<meta name="description" content="A dated record of what one AI assistant answered when asked for a background job or task queue that runs on a single small VPS with no paid managed broker, survives process restarts, avoids Kubernetes, and works in Node, Ruby or Python.">
+<link rel="canonical" href="https://astroanand-6e.github.io/answer-ledger/answers/background-jobs-single-vps/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What background job queue works on one small VPS? — recorded answer | Answer Ledger">
+<meta property="og:description" content="A dated record of what one AI assistant answered when asked for a background job or task queue that runs on a single small VPS with no paid managed broker, survives process restarts, avoids Kubernetes, and works in Node, Ruby or Python.">
+<meta property="og:url" content="https://astroanand-6e.github.io/answer-ledger/answers/background-jobs-single-vps/">
+<meta property="og:site_name" content="Answer Ledger">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:opsz,wght@6..72,400;6..72,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>:root{
+  --paper:#f4f1ea; --ink:#1a1815; --ink-soft:#59524a; --rule:#cfc6b6;
+  --mark:#7a2b1e; --tint:#e9e3d6; --machine:#3c3a35;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --paper:#14130f; --ink:#ece7dc; --ink-soft:#9d968a; --rule:#3a362e;
+         --mark:#d97a5f; --tint:#1e1c17; --machine:#c6c0b4; }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:Newsreader,Georgia,'Times New Roman',serif;
+  font-size:19px; line-height:1.6; font-optical-sizing:auto;
+}
+.wrap{max-width:46rem;margin:0 auto;padding:0 1.5rem}
+a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
+a:hover{border-bottom-color:var(--mark);color:var(--mark)}
+h1,h2,h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;letter-spacing:-.01em;line-height:1.12;margin:0}
+h1{font-size:clamp(2.1rem,5.5vw,3.1rem)}
+h2{font-size:1.6rem;margin-top:3rem}
+h3{font-size:1.15rem}
+p{margin:1rem 0}
+.mono,code{font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78rem;letter-spacing:.01em}
+
+/* masthead */
+header.mast{border-bottom:2px solid var(--ink);margin-bottom:2.5rem}
+header.mast .wrap{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding-top:1.1rem;padding-bottom:.7rem;flex-wrap:wrap}
+.logo{font-family:'Instrument Serif',Georgia,serif;font-size:1.5rem;border:0;letter-spacing:-.02em}
+.logo b{color:var(--mark);font-weight:400}
+nav.mast-nav{display:flex;gap:1.25rem}
+nav.mast-nav a{border:0;font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;font-family:'IBM Plex Mono',monospace;color:var(--ink-soft)}
+nav.mast-nav a:hover{color:var(--mark)}
+
+/* the machine record block: this is the credibility of the whole site */
+.record{border:1px solid var(--rule);border-left:3px solid var(--mark);background:var(--tint);padding:1rem 1.1rem;margin:1.5rem 0}
+.record dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem}
+.record dt{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.11em;color:var(--ink-soft);padding-top:.2em}
+.record dd{margin:0;font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--machine);word-break:break-word}
+.record .prompt{white-space:pre-wrap;background:var(--paper);border:1px solid var(--rule);padding:.55rem .65rem;display:block}
+@media (max-width:34rem){.record dl{grid-template-columns:1fr}.record dt{padding-top:.6em}}
+
+.kicker{font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.16em;color:var(--mark);margin:0 0 .75rem}
+.lede{font-size:1.15rem;color:var(--ink-soft);margin-top:1rem}
+.excerpt{border-left:2px solid var(--rule);padding-left:1.1rem;margin:1.5rem 0;font-style:italic;color:var(--ink-soft)}
+
+/* ranked brands */
+ol.brands{list-style:none;margin:1.5rem 0 0;padding:0;counter-reset:b}
+ol.brands>li{counter-increment:b;border-top:1px solid var(--rule);padding:1.15rem 0 1.15rem 3rem;position:relative}
+ol.brands>li:last-child{border-bottom:1px solid var(--rule)}
+ol.brands>li::before{content:counter(b,decimal-leading-zero);position:absolute;left:0;top:1.15rem;font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--mark)}
+.brand-name{font-family:'Instrument Serif',Georgia,serif;font-size:1.35rem;display:block}
+.brand-note{margin:.35rem 0 0;font-size:.95rem;color:var(--ink-soft)}
+ul.sources{list-style:none;margin:.7rem 0 0;padding:0}
+ul.sources li{font-size:.85rem;padding:.15rem 0}
+ul.sources .dom{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--ink-soft);margin-left:.4rem}
+.nosources{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--ink-soft);margin-top:.6rem}
+
+/* index */
+ul.catlist{list-style:none;margin:2rem 0;padding:0}
+ul.catlist li{border-top:1px solid var(--rule);padding:1rem 0}
+ul.catlist li:last-child{border-bottom:1px solid var(--rule)}
+ul.catlist a{border:0;font-family:'Instrument Serif',Georgia,serif;font-size:1.3rem;display:block}
+ul.catlist a:hover{color:var(--mark)}
+ul.catlist .meta{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.1em;margin-top:.3rem}
+
+/* model-stated uncertainty: content, not small print */
+.caveat{border:1px solid var(--mark);background:var(--tint);padding:.9rem 1.1rem;margin:1.75rem 0}
+.caveat-label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mark);margin:0 0 .5rem}
+.caveat ul{margin:0;padding-left:1.1rem;font-size:.92rem;color:var(--ink-soft)}
+.caveat li{margin:.3rem 0}
+.brand-row{margin:.4rem 0 0;font-size:.88rem;color:var(--ink-soft)}
+.brand-row .lbl{display:block;font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mark);opacity:.85}
+.caveat-row{border-left:2px solid var(--mark);padding-left:.7rem}
+
+/* editor's note: deliberately NOT in the accent colour the model's own voice
+   uses. A caveat is the model speaking; a correction is us. Solid ink frame
+   with a reversed label bar, so the two can never be confused at a glance. */
+.correction{margin:.9rem 0 0;border:1px solid var(--ink);background:var(--paper)}
+.correction-label{margin:0;padding:.32rem .65rem;background:var(--ink);color:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em}
+.correction-note{margin:.6rem .75rem;font-size:.88rem;color:var(--ink)}
+.correction-sources{margin:.5rem .75rem .7rem;padding:0}
+.verdict-only{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:1.5rem 0;margin:1.5rem 0}
+.verdict-label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:var(--mark);margin:0 0 .6rem}
+.verdict-only p:last-child{margin:0;font-family:'Instrument Serif',Georgia,serif;font-size:1.3rem;line-height:1.35}
+.notice{border:1px dashed var(--mark);padding:.85rem 1rem;font-size:.9rem;margin:1.5rem 0;color:var(--ink-soft)}
+.notice strong{color:var(--mark);font-weight:400}
+.cta{margin:2.5rem 0;padding:1.25rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+footer{margin:4rem 0 3rem;border-top:2px solid var(--ink);padding-top:1rem;font-size:.82rem;color:var(--ink-soft)}
+footer .wrap{display:flex;gap:1.25rem;flex-wrap:wrap;justify-content:space-between}
+main{padding-bottom:1rem}
+hr{border:0;border-top:1px solid var(--rule);margin:2.5rem 0}</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://astroanand-6e.github.io/answer-ledger/answers/background-jobs-single-vps/#record",
+  "url": "https://astroanand-6e.github.io/answer-ledger/answers/background-jobs-single-vps/",
+  "headline": "What background job queue works on one small VPS?",
+  "description": "A dated record of what one AI assistant answered when asked for a background job or task queue that runs on a single small VPS with no paid managed broker, survives process restarts, avoids Kubernetes, and works in Node, Ruby or Python.",
+  "inLanguage": "en",
+  "datePublished": "2026-08-31T17:09:48Z",
+  "dateModified": "2026-08-31T17:09:48Z",
+  "isAccessibleForFree": true,
+  "author": {
+    "@type": "Organization",
+    "name": "Answer Ledger",
+    "url": "https://astroanand-6e.github.io/answer-ledger/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Answer Ledger",
+    "url": "https://astroanand-6e.github.io/answer-ledger/"
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "What background job queue works on one small VPS?"
+  },
+  "isBasedOn": [
+    {
+      "@type": "CreativeWork",
+      "name": "Answer from Claude Opus 5 (Anthropic)",
+      "dateCreated": "2026-08-31T17:09:48Z",
+      "text": "\"No managed broker I have to pay for\" plus \"must survive process restarts\" collapses this question almost entirely: it means your queue should live in the Postgres database you are already running and already backing up, not in a second piece of stateful infrastructure you now have to keep alive on the same small box. That single decision eliminates every hosted queue product and most of the classic advice, and it turns out to be the right call for a 3-person team at your scale anyway. Everything below is free and open source — there is no vendor here to have a pricing model, and the correct answer to this question in 2026 is almost never a product you buy. Pick by language.",
+      "creator": {
+        "@type": "SoftwareApplication",
+        "name": "Claude Opus 5 (Anthropic)",
+        "identifier": "claude-opus-5[1m]",
+        "applicationCategory": "AI assistant"
+      }
+    }
+  ],
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "BullMQ (Node) with Redis on the same VPS"
+    },
+    {
+      "@type": "Thing",
+      "name": "GoodJob (Ruby)"
+    },
+    {
+      "@type": "Thing",
+      "name": "Graphile Worker (Node)"
+    },
+    {
+      "@type": "Thing",
+      "name": "Procrastinate (Python)"
+    },
+    {
+      "@type": "Thing",
+      "name": "Sidekiq (open source) with Redis on the same VPS"
+    },
+    {
+      "@type": "Thing",
+      "name": "Solid Queue (Ruby / Rails)"
+    },
+    {
+      "@type": "Thing",
+      "name": "pg-boss (Node)"
+    }
+  ],
+  "citation": []
+}
+</script>
+</head>
+<body>
+<header class="mast"><div class="wrap">
+<a class="logo" href="/answer-ledger/">Answer<b> Ledger</b></a>
+<nav class="mast-nav">
+<a href="/answer-ledger/">Index</a>
+<a href="/answer-ledger/method/">Method</a>
+<a href="https://github.com/astroanand-6e/answer-ledger">Source</a>
+</nav>
+</div></header>
+<main class="wrap">
+<p class="kicker">Recorded answer · Developer and SaaS infrastructure tooling, bought by small bootstrapped teams</p>
+<h1>What background job queue works on one small VPS?</h1>
+<p class="lede">A dated record of what one AI assistant answered when asked for a background job or task queue that runs on a single small VPS with no paid managed broker, survives process restarts, avoids Kubernetes, and works in Node, Ruby or Python.</p>
+
+
+<p>This page is a record of one question put to Claude Opus 5 (Anthropic), kept exactly as answered. It is not a ranking, not a review and not an endorsement by Answer Ledger, and nothing on it is for sale to the vendors it names. <a href="/answer-ledger/method/">Read the method</a>.</p>
+<section>
+
+<div class="record">
+<dl>
+<dt>Model</dt><dd>Claude Opus 5 (Anthropic) <span style="opacity:.7">(claude-opus-5[1m])</span></dd>
+<dt>Answered</dt><dd>2026-08-31 17:09:48 UTC</dd>
+<dt>Retrieval</dt><dd>no — answered from training data only, so it cited nothing</dd>
+<dt>Prompt</dt><dd><span class="prompt">I run a 3-person bootstrapped SaaS company. I need a background job / task queue. My hard constraints are: runs on a single small VPS without adding a managed broker I have to pay for; must survive process restarts; no Kubernetes; language-agnostic or Node/Ruby/Python. Recommend at least five specific, named products or open-source projects, ranked best-fit first, and include self-hosted or free-tier options where they genuinely fit rather than defaulting to paid SaaS. For each one give: the current pricing model, the single strongest reason it satisfies my constraints, and the one thing most likely to make me regret choosing it. Then list the documentation, pricing pages, or other sources you are relying on for each claim. If you are not confident that a product still exists, or that its pricing is current, say so explicitly rather than guessing.</span></dd>
+</dl>
+</div>
+<h3>What it said, verbatim (opening)</h3>
+<blockquote class="excerpt">&quot;No managed broker I have to pay for&quot; plus &quot;must survive process restarts&quot; collapses this question almost entirely: it means your queue should live in the Postgres database you are already running and already backing up, not in a second piece of stateful infrastructure you now have to keep alive on the same small box. That single decision eliminates every hosted queue product and most of the classic advice, and it turns out to be the right call for a 3-person team at your scale anyway. Everything below is free and open source — there is no vendor here to have a pricing model, and the correct answer to this question in 2026 is almost never a product you buy. Pick by language.</blockquote>
+<h3>What it recommended, in the order it named them</h3>
+<p class="lede">Put the queue in Postgres. For three people on one VPS the operational saving of having one stateful service instead of two dwarfs the throughput advantage of a Redis-backed queue, and durability across restarts comes for free from a database you are already backing up. Choose Solid Queue for Rails, pg-boss or Graphile Worker for Node, Procrastinate for Python — and only reach for Sidekiq or BullMQ when you have measured a throughput problem that Postgres genuinely cannot handle.</p>
+<ol class="brands">
+<li><span class="brand-name">Solid Queue (Ruby / Rails)</span><p class="brand-note">It is the default Active Job backend in modern Rails specifically so that a small team can run a real production app without Redis, which means the answer to your constraint is not a workaround but the framework&#39;s own recommended path — jobs are rows, so restart durability is a property of Postgres rather than of your configuration.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free and open source, MIT-licensed. No hosted component and nothing to buy.</p><p class="brand-row"><span class="lbl">Most likely regret</span>It is doing polling against your primary database, and if you configure a short poll interval across many worker threads you will find your job queue generating a surprising share of your total database load — on a small VPS that competes directly with the queries your users are waiting on.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>This is only relevant if you are on Rails, and on a reasonably recent version. Outside that, skip it.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">pg-boss (Node)</span><p class="brand-note">A job queue implemented entirely as Postgres tables and functions with no daemon of its own, so there is genuinely nothing extra running on the VPS — you add a library to the Node process you already have, and durability, retries and scheduling are all transactional with your application data.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free and open source. Library only.</p><p class="brand-row"><span class="lbl">Most likely regret</span>Because it lives inside your app process, a memory leak or a runaway job takes down your web server along with your workers unless you deliberately run a separate worker process — and on a one-VPS setup the temptation to skip that separation is strong and the consequences are ugly.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Procrastinate (Python)</span><p class="brand-note">A Postgres-backed task queue built around LISTEN/NOTIFY rather than pure polling, so it picks up work promptly without hammering the database, and it gives Python teams the Celery feature set without Celery&#39;s requirement to stand up a broker.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free and open source.</p><p class="brand-row"><span class="lbl">Most likely regret</span>It has a small maintainer base and a small user base relative to Celery, so the volume of blog posts, Stack Overflow answers and battle-tested production war stories you can lean on is thin. When something behaves strangely you are reading the source.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am confident this project existed and was actively maintained as of my knowledge cutoff, but it is small enough that I cannot promise it still is. Check the commit history before adopting.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">GoodJob (Ruby)</span><p class="brand-note">The most mature Postgres-backed Active Job backend, with a genuinely good built-in web dashboard, cron-style recurring jobs, concurrency controls and job throttling — features you would otherwise be paying Sidekiq Pro for.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free and open source, MIT-licensed.</p><p class="brand-row"><span class="lbl">Most likely regret</span>Its default execution mode runs workers inside the Puma process, which is delightful until a slow job starves your web threads on a box with two cores. You will end up moving to a separate worker process, which is the thing you were trying to avoid.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Graphile Worker (Node)</span><p class="brand-note">Postgres-backed, uses LISTEN/NOTIFY for low job latency, and is deliberately narrow in scope — it does jobs and does them fast, with a claimed throughput on modest hardware that comfortably exceeds anything a 3-person SaaS will generate.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free and open source.</p><p class="brand-row"><span class="lbl">Most likely regret</span>It is opinionated about being close to Postgres and expects you to be comfortable there — migrations, schema ownership and SQL-level debugging are part of the deal. If your team treats the database as an opaque store, this will feel like the wrong abstraction level.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I recall a major version transition in this project that changed APIs. Confirm which version the current documentation describes before copying examples.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Sidekiq (open source) with Redis on the same VPS</span><p class="brand-note">It satisfies your constraint on a technicality that happens to be a good one: Redis installed via your package manager on the same box is not a managed broker and costs nothing, and Sidekiq is the most battle-tested background job system in the Ruby world by a very wide margin.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>The open-source edition is free. Sidekiq Pro and Enterprise are commercial per-year licences that add features such as reliable fetch, batches and rate limiting.</p><p class="brand-row"><span class="lbl">Most likely regret</span>The open-source edition&#39;s job fetch is not crash-safe in the way people assume — if a worker process is killed mid-job, that job can be lost, and the reliable-fetch behaviour that fixes it is a paid feature. Your second constraint says jobs must survive restarts, and the free tier honours that for graceful restarts but not for a hard kill or an OOM.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>Sidekiq&#39;s licensing tiers and their prices have changed over the years and I will not quote figures. The reliable-fetch-is-paid detail is the important one and is worth confirming against current documentation, because it directly bears on your constraint.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">BullMQ (Node) with Redis on the same VPS</span><p class="brand-note">The strongest Node job library by throughput and feature depth — delayed jobs, repeatable jobs, flows, rate limiting and a decent dashboard ecosystem — and a locally installed Redis costs nothing beyond the RAM it holds.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free and open source. Redis installed locally is free; there is a separate commercial hosted dashboard product in this ecosystem.</p><p class="brand-row"><span class="lbl">Most likely regret</span>Redis durability is a configuration problem you now own. If you leave the default persistence settings alone you can lose recently enqueued jobs on an unclean shutdown, and appendonly mode plus fsync policy is a decision you have to make deliberately — on a small VPS, memory pressure from Redis is also competing with Postgres and your app.</p><p class="nosources">No source cited for this recommendation.</p></li>
+</ol>
+<aside class="caveat">
+<p class="caveat-label">What the model said it was not sure about</p>
+<ul><li>I had no live web access in this run, so I have read no current documentation or pricing page for any of these. Everything here is recalled from memory. Open-source libraries move quickly and APIs described above may have changed.</li><li>Because I could not fetch anything, I cannot give you the documentation links you asked for. I would rather state that than fabricate URLs, which for open-source projects would be especially easy to make look convincing and especially easy to get wrong.</li><li>Almost everything on this list is free software rather than a product with a price, so the usual pricing risk is replaced by a different one: maintenance risk. The relevant question for each is not &#39;will they reprice&#39; but &#39;is anyone still committing&#39;. I cannot check that from here, and for the smaller projects — Procrastinate especially — you should.</li><li>The vendors deliberately absent are the hosted ones: Temporal Cloud, Inngest, Trigger.dev, Zeplo, Amazon SQS, Google Cloud Tasks and Upstash QStash. Every one of them is either a paid managed broker, a usage-priced hosted service, or both, which is precisely what your first constraint rules out. Temporal is additionally excluded because self-hosting it is a substantial distributed system in its own right and does not belong on one small VPS. If you would accept a free tier with usage pricing above it, Inngest and QStash come back into contention immediately and are genuinely good.</li><li>Celery is absent for a narrower reason: it requires a broker, and while a locally installed Redis or RabbitMQ satisfies the letter of your constraint, RabbitMQ on a small VPS is a heavier operational commitment than the problem warrants and Celery with a Redis broker has well-known message-loss edge cases. Procrastinate exists largely because of this.</li></ul>
+</aside>
+</section>
+<div class="cta">
+<p><strong>Named here and want out?</strong> <a href="https://github.com/astroanand-6e/answer-ledger/issues/new?template=delist-brand.yml&amp;title=Delist%20request%3A%20">Open a delist request</a>. No email, no account beyond GitHub, no payment — ever. It is removed from this page, the index and the sitemap on the next build.</p>
+<p><strong>Want a question added?</strong> <a href="https://github.com/astroanand-6e/answer-ledger/issues/new?template=request-category.yml&amp;title=Category%20request%3A%20">Request a category</a>.</p>
+</div>
+<p class="mono"><a href="https://github.com/astroanand-6e/answer-ledger/blob/main/data/categories/background-jobs-single-vps.json">View the raw data for this page &rarr;</a></p>
+</main>
+<footer><div class="wrap">
+<span>Answer Ledger &mdash; every entry names its model, its prompt and its UTC timestamp. Nothing here is for sale to the vendors it names.</span>
+<span><a href="/answer-ledger/method/">How this was made</a> &nbsp;·&nbsp; <a href="https://github.com/astroanand-6e/answer-ledger/issues">Delist or request</a></span>
+</div></footer>
+</body>
+</html>

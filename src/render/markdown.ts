@@ -1,6 +1,6 @@
 import type { LoadedCategory } from "../types.ts";
 import { SITE, canonical } from "../config.ts";
-import { utc } from "../html.ts";
+import { utc, utcDate } from "../html.ts";
 import { categoryPath } from "./category.ts";
 
 /**
@@ -41,6 +41,12 @@ export function renderMarkdown(cat: LoadedCategory): string {
         if (b.caveat) out.push(`   - **Model unsure:** ${b.caveat}`);
         if (b.sources.length === 0) out.push(`   - _no source cited_`);
         for (const s of b.sources) out.push(`   - [${s.title ?? s.url}](${s.url}) (${s.domain})`);
+        if (b.correction) {
+          // Editorial, not the model. Labelled as such on its own line so it
+          // cannot be quoted back as something the assistant said.
+          out.push(`   - **Editor's note (checked ${utcDate(b.correction.checkedAt)}) — not part of the answer:** ${b.correction.note}`);
+          for (const s of b.correction.sources) out.push(`     - Evidence: [${s.title ?? s.url}](${s.url}) (${s.domain})`);
+        }
       }
       out.push("");
     }

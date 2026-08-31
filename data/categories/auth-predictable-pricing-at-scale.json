@@ -4,7 +4,7 @@
   "question": "What auth provider won't rug-pull my pricing when I hit 10,000 users?",
   "summary": "A dated record of what one AI assistant answered when asked for authentication that keeps predictable pricing from 100 to 50,000 monthly active users, with no per-organisation or per-SSO-connection surcharge and a clean exit.",
   "delisted": false,
-  "provisional": true,
+  "provisional": false,
   "runs": [
     {
       "engine": "claude",

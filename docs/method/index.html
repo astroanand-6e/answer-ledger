@@ -89,6 +89,14 @@ ul.catlist .meta{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:va
 .brand-row{margin:.4rem 0 0;font-size:.88rem;color:var(--ink-soft)}
 .brand-row .lbl{display:block;font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mark);opacity:.85}
 .caveat-row{border-left:2px solid var(--mark);padding-left:.7rem}
+
+/* editor's note: deliberately NOT in the accent colour the model's own voice
+   uses. A caveat is the model speaking; a correction is us. Solid ink frame
+   with a reversed label bar, so the two can never be confused at a glance. */
+.correction{margin:.9rem 0 0;border:1px solid var(--ink);background:var(--paper)}
+.correction-label{margin:0;padding:.32rem .65rem;background:var(--ink);color:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em}
+.correction-note{margin:.6rem .75rem;font-size:.88rem;color:var(--ink)}
+.correction-sources{margin:.5rem .75rem .7rem;padding:0}
 .verdict-only{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:1.5rem 0;margin:1.5rem 0}
 .verdict-label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:var(--mark);margin:0 0 .6rem}
 .verdict-only p:last-child{margin:0;font-family:'Instrument Serif',Georgia,serif;font-size:1.3rem;line-height:1.35}
@@ -138,6 +146,10 @@ hr{border:0;border-top:1px solid var(--rule);margin:2.5rem 0}</style>
 <ul><li class="mono">Claude Opus 5 (Anthropic) (claude-opus-5[1m])</li></ul>
 <p><strong>We do not label an answer with the name of an assistant that did not produce it.</strong> If a page does not name a given assistant, that assistant was not asked. When we can run a second assistant, its answer is <em>added</em> as another run on the same page &mdash; the data format has held a slot for it since the first commit &mdash; and the existing run stays exactly as it was. Old runs are never overwritten and never quietly re-dated.</p>
 
+<h2>When the world moves after the run</h2>
+<p><strong>We never edit an answer.</strong> A model that named a product on the day it was asked said exactly that, and rewriting it later would make this a set of opinions rather than a record. But products get renamed, archived, acquired and relicensed, and a record that quietly points you at a dead repository is not much of a service either.</p>
+<p>So when a named product changes in a way that matters, we add an <em>editor&#39;s note</em> beside it: what happened, the UTC date we checked, and links to the evidence. It is ours, not the model&#39;s, it is marked as such and styled differently from everything around it, and it changes nothing above it &mdash; the recorded answer, the prompt and the timestamp stay byte-for-byte as they were. An editor&#39;s note is the only text on an answer page we wrote ourselves, and it is the only text on this site required to cite a source.</p>
+
 <h2>What this is not</h2>
 <ul>
 <li><strong>Not a survey.</strong> This is one model's output at one moment. Ask the same question tomorrow and you may get a different answer. That is a fact about language models, not a defect we are hiding.</li>
@@ -149,7 +161,7 @@ hr{border:0;border-top:1px solid var(--rule);margin:2.5rem 0}</style>
 </ul>
 
 <h2>Why one category, and why we stop</h2>
-<p>There are 2 entries here today, and the generator refuses to build past 100. That ceiling is deliberate: a corpus that grows without a stopping rule is a way of avoiding finding out whether anyone wanted it. We would rather publish a small number of questions whose constraints are sharp enough to be checkable than a large number nobody can verify. When we stop, we look at whether any of it was read, and we say what we found.</p>
+<p>There are 20 entries here today, and the generator refuses to build past 100. That ceiling is deliberate: a corpus that grows without a stopping rule is a way of avoiding finding out whether anyone wanted it. We would rather publish a small number of questions whose constraints are sharp enough to be checkable than a large number nobody can verify. When we stop, we look at whether any of it was read, and we say what we found.</p>
 
 <h2>If you are named here</h2>
 <p>Open a <a href="https://github.com/astroanand-6e/answer-ledger/issues/new?template=delist-brand.yml&amp;title=Delist%20request%3A%20">delist request</a>. It is a GitHub issue and it needs no email address from you. On the next build your brand is removed from every page, from the index and from the sitemap, and the page carries a neutral note that the record was edited &mdash; without naming you.</p>

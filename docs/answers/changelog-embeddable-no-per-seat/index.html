@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What in-app changelog widget doesn&#39;t use per-seat pricing? — recorded answer | Answer Ledger</title>
+<meta name="description" content="A dated record of what one AI assistant answered when asked for a product changelog with an embeddable in-app widget, no per-seat pricing, a widget available on the free or cheapest tier, a search-indexable public page, and self-hosting acceptable.">
+<link rel="canonical" href="https://astroanand-6e.github.io/answer-ledger/answers/changelog-embeddable-no-per-seat/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What in-app changelog widget doesn&#39;t use per-seat pricing? — recorded answer | Answer Ledger">
+<meta property="og:description" content="A dated record of what one AI assistant answered when asked for a product changelog with an embeddable in-app widget, no per-seat pricing, a widget available on the free or cheapest tier, a search-indexable public page, and self-hosting acceptable.">
+<meta property="og:url" content="https://astroanand-6e.github.io/answer-ledger/answers/changelog-embeddable-no-per-seat/">
+<meta property="og:site_name" content="Answer Ledger">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:opsz,wght@6..72,400;6..72,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>:root{
+  --paper:#f4f1ea; --ink:#1a1815; --ink-soft:#59524a; --rule:#cfc6b6;
+  --mark:#7a2b1e; --tint:#e9e3d6; --machine:#3c3a35;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --paper:#14130f; --ink:#ece7dc; --ink-soft:#9d968a; --rule:#3a362e;
+         --mark:#d97a5f; --tint:#1e1c17; --machine:#c6c0b4; }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:Newsreader,Georgia,'Times New Roman',serif;
+  font-size:19px; line-height:1.6; font-optical-sizing:auto;
+}
+.wrap{max-width:46rem;margin:0 auto;padding:0 1.5rem}
+a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
+a:hover{border-bottom-color:var(--mark);color:var(--mark)}
+h1,h2,h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;letter-spacing:-.01em;line-height:1.12;margin:0}
+h1{font-size:clamp(2.1rem,5.5vw,3.1rem)}
+h2{font-size:1.6rem;margin-top:3rem}
+h3{font-size:1.15rem}
+p{margin:1rem 0}
+.mono,code{font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78rem;letter-spacing:.01em}
+
+/* masthead */
+header.mast{border-bottom:2px solid var(--ink);margin-bottom:2.5rem}
+header.mast .wrap{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding-top:1.1rem;padding-bottom:.7rem;flex-wrap:wrap}
+.logo{font-family:'Instrument Serif',Georgia,serif;font-size:1.5rem;border:0;letter-spacing:-.02em}
+.logo b{color:var(--mark);font-weight:400}
+nav.mast-nav{display:flex;gap:1.25rem}
+nav.mast-nav a{border:0;font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;font-family:'IBM Plex Mono',monospace;color:var(--ink-soft)}
+nav.mast-nav a:hover{color:var(--mark)}
+
+/* the machine record block: this is the credibility of the whole site */
+.record{border:1px solid var(--rule);border-left:3px solid var(--mark);background:var(--tint);padding:1rem 1.1rem;margin:1.5rem 0}
+.record dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem}
+.record dt{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.11em;color:var(--ink-soft);padding-top:.2em}
+.record dd{margin:0;font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--machine);word-break:break-word}
+.record .prompt{white-space:pre-wrap;background:var(--paper);border:1px solid var(--rule);padding:.55rem .65rem;display:block}
+@media (max-width:34rem){.record dl{grid-template-columns:1fr}.record dt{padding-top:.6em}}
+
+.kicker{font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.16em;color:var(--mark);margin:0 0 .75rem}
+.lede{font-size:1.15rem;color:var(--ink-soft);margin-top:1rem}
+.excerpt{border-left:2px solid var(--rule);padding-left:1.1rem;margin:1.5rem 0;font-style:italic;color:var(--ink-soft)}
+
+/* ranked brands */
+ol.brands{list-style:none;margin:1.5rem 0 0;padding:0;counter-reset:b}
+ol.brands>li{counter-increment:b;border-top:1px solid var(--rule);padding:1.15rem 0 1.15rem 3rem;position:relative}
+ol.brands>li:last-child{border-bottom:1px solid var(--rule)}
+ol.brands>li::before{content:counter(b,decimal-leading-zero);position:absolute;left:0;top:1.15rem;font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--mark)}
+.brand-name{font-family:'Instrument Serif',Georgia,serif;font-size:1.35rem;display:block}
+.brand-note{margin:.35rem 0 0;font-size:.95rem;color:var(--ink-soft)}
+ul.sources{list-style:none;margin:.7rem 0 0;padding:0}
+ul.sources li{font-size:.85rem;padding:.15rem 0}
+ul.sources .dom{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--ink-soft);margin-left:.4rem}
+.nosources{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--ink-soft);margin-top:.6rem}
+
+/* index */
+ul.catlist{list-style:none;margin:2rem 0;padding:0}
+ul.catlist li{border-top:1px solid var(--rule);padding:1rem 0}
+ul.catlist li:last-child{border-bottom:1px solid var(--rule)}
+ul.catlist a{border:0;font-family:'Instrument Serif',Georgia,serif;font-size:1.3rem;display:block}
+ul.catlist a:hover{color:var(--mark)}
+ul.catlist .meta{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.1em;margin-top:.3rem}
+
+/* model-stated uncertainty: content, not small print */
+.caveat{border:1px solid var(--mark);background:var(--tint);padding:.9rem 1.1rem;margin:1.75rem 0}
+.caveat-label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mark);margin:0 0 .5rem}
+.caveat ul{margin:0;padding-left:1.1rem;font-size:.92rem;color:var(--ink-soft)}
+.caveat li{margin:.3rem 0}
+.brand-row{margin:.4rem 0 0;font-size:.88rem;color:var(--ink-soft)}
+.brand-row .lbl{display:block;font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mark);opacity:.85}
+.caveat-row{border-left:2px solid var(--mark);padding-left:.7rem}
+
+/* editor's note: deliberately NOT in the accent colour the model's own voice
+   uses. A caveat is the model speaking; a correction is us. Solid ink frame
+   with a reversed label bar, so the two can never be confused at a glance. */
+.correction{margin:.9rem 0 0;border:1px solid var(--ink);background:var(--paper)}
+.correction-label{margin:0;padding:.32rem .65rem;background:var(--ink);color:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em}
+.correction-note{margin:.6rem .75rem;font-size:.88rem;color:var(--ink)}
+.correction-sources{margin:.5rem .75rem .7rem;padding:0}
+.verdict-only{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:1.5rem 0;margin:1.5rem 0}
+.verdict-label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:var(--mark);margin:0 0 .6rem}
+.verdict-only p:last-child{margin:0;font-family:'Instrument Serif',Georgia,serif;font-size:1.3rem;line-height:1.35}
+.notice{border:1px dashed var(--mark);padding:.85rem 1rem;font-size:.9rem;margin:1.5rem 0;color:var(--ink-soft)}
+.notice strong{color:var(--mark);font-weight:400}
+.cta{margin:2.5rem 0;padding:1.25rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+footer{margin:4rem 0 3rem;border-top:2px solid var(--ink);padding-top:1rem;font-size:.82rem;color:var(--ink-soft)}
+footer .wrap{display:flex;gap:1.25rem;flex-wrap:wrap;justify-content:space-between}
+main{padding-bottom:1rem}
+hr{border:0;border-top:1px solid var(--rule);margin:2.5rem 0}</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://astroanand-6e.github.io/answer-ledger/answers/changelog-embeddable-no-per-seat/#record",
+  "url": "https://astroanand-6e.github.io/answer-ledger/answers/changelog-embeddable-no-per-seat/",
+  "headline": "What in-app changelog widget doesn't use per-seat pricing?",
+  "description": "A dated record of what one AI assistant answered when asked for a product changelog with an embeddable in-app widget, no per-seat pricing, a widget available on the free or cheapest tier, a search-indexable public page, and self-hosting acceptable.",
+  "inLanguage": "en",
+  "datePublished": "2026-08-31T17:09:33Z",
+  "dateModified": "2026-08-31T17:09:33Z",
+  "isAccessibleForFree": true,
+  "author": {
+    "@type": "Organization",
+    "name": "Answer Ledger",
+    "url": "https://astroanand-6e.github.io/answer-ledger/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Answer Ledger",
+    "url": "https://astroanand-6e.github.io/answer-ledger/"
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "What in-app changelog widget doesn't use per-seat pricing?"
+  },
+  "isBasedOn": [
+    {
+      "@type": "CreativeWork",
+      "name": "Answer from Claude Opus 5 (Anthropic)",
+      "dateCreated": "2026-08-31T17:09:33Z",
+      "text": "Two of your constraints quietly conflict with how this category is built. Vendors put the embeddable widget behind the paid tier because the widget is the product, and they host your public changelog on their subdomain because that is their SEO, not yours — which means the \"indexable by search engines\" constraint is usually satisfied for them rather than for you. Given that, and given that a changelog is a list of dated HTML entries, I am going to rank building it yourself first and mean it.",
+      "creator": {
+        "@type": "SoftwareApplication",
+        "name": "Claude Opus 5 (Anthropic)",
+        "identifier": "claude-opus-5[1m]",
+        "applicationCategory": "AI assistant"
+      }
+    }
+  ],
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "AnnounceKit"
+    },
+    {
+      "@type": "Thing",
+      "name": "Beamer"
+    },
+    {
+      "@type": "Thing",
+      "name": "Frill"
+    },
+    {
+      "@type": "Thing",
+      "name": "Ghost"
+    },
+    {
+      "@type": "Thing",
+      "name": "Headway"
+    },
+    {
+      "@type": "Thing",
+      "name": "Keep a Changelog in your repository, rendered on your docs site"
+    },
+    {
+      "@type": "Thing",
+      "name": "Your own static page plus an RSS feed"
+    }
+  ],
+  "citation": []
+}
+</script>
+</head>
+<body>
+<header class="mast"><div class="wrap">
+<a class="logo" href="/answer-ledger/">Answer<b> Ledger</b></a>
+<nav class="mast-nav">
+<a href="/answer-ledger/">Index</a>
+<a href="/answer-ledger/method/">Method</a>
+<a href="https://github.com/astroanand-6e/answer-ledger">Source</a>
+</nav>
+</div></header>
+<main class="wrap">
+<p class="kicker">Recorded answer · Developer and SaaS infrastructure tooling, bought by small bootstrapped teams</p>
+<h1>What in-app changelog widget doesn&#39;t use per-seat pricing?</h1>
+<p class="lede">A dated record of what one AI assistant answered when asked for a product changelog with an embeddable in-app widget, no per-seat pricing, a widget available on the free or cheapest tier, a search-indexable public page, and self-hosting acceptable.</p>
+
+
+<p>This page is a record of one question put to Claude Opus 5 (Anthropic), kept exactly as answered. It is not a ranking, not a review and not an endorsement by Answer Ledger, and nothing on it is for sale to the vendors it names. <a href="/answer-ledger/method/">Read the method</a>.</p>
+<section>
+
+<div class="record">
+<dl>
+<dt>Model</dt><dd>Claude Opus 5 (Anthropic) <span style="opacity:.7">(claude-opus-5[1m])</span></dd>
+<dt>Answered</dt><dd>2026-08-31 17:09:33 UTC</dd>
+<dt>Retrieval</dt><dd>no — answered from training data only, so it cited nothing</dd>
+<dt>Prompt</dt><dd><span class="prompt">I run a 3-person bootstrapped SaaS company. I need a product changelog with an embeddable in-app widget. My hard constraints are: no per-seat pricing; embeddable widget on the free or cheapest tier; public changelog page indexable by search engines; self-hosted acceptable. Recommend at least five specific, named products or open-source projects, ranked best-fit first, and include self-hosted or free-tier options where they genuinely fit rather than defaulting to paid SaaS. For each one give: the current pricing model, the single strongest reason it satisfies my constraints, and the one thing most likely to make me regret choosing it. Then list the documentation, pricing pages, or other sources you are relying on for each claim. If you are not confident that a product still exists, or that its pricing is current, say so explicitly rather than guessing.</span></dd>
+</dl>
+</div>
+<h3>What it said, verbatim (opening)</h3>
+<blockquote class="excerpt">Two of your constraints quietly conflict with how this category is built. Vendors put the embeddable widget behind the paid tier because the widget is the product, and they host your public changelog on their subdomain because that is their SEO, not yours — which means the &quot;indexable by search engines&quot; constraint is usually satisfied for them rather than for you. Given that, and given that a changelog is a list of dated HTML entries, I am going to rank building it yourself first and mean it.</blockquote>
+<h3>What it recommended, in the order it named them</h3>
+<p class="lede">A changelog is a static page plus an RSS feed plus about fifty lines of JavaScript, and building it yourself is the only option here that puts the indexable page on your own domain where the SEO value accrues to you. Buy a vendor only if you want the read-state tracking and the notification analytics, and know that is what you are buying.</p>
+<ol class="brands">
+<li><span class="brand-name">Your own static page plus an RSS feed</span><p class="brand-note">It is the only approach that satisfies every constraint absolutely: no seats to price, the public page lives on your own domain under your own path so the search value accrues to you, and the in-app widget is a small script that fetches your feed and renders the last few entries with a seen-marker in localStorage.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free. Markdown files in your existing repository, rendered by whatever static generator you already run, deployed with the rest of your site.</p><p class="brand-row"><span class="lbl">Most likely regret</span>Nobody schedules the maintenance for something they built in an afternoon. The widget is fine until you want per-user read state, segmented announcements or a click-through metric, and then you are building a small product instead of shipping your actual one.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Headway</span><p class="brand-note">Purpose-built for exactly this — a hosted changelog with a badge-and-panel embeddable widget — and priced per project rather than per team member, so a 3-person company pays the same as a 30-person one.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Historically a free tier with the widget included plus paid tiers for custom domain and branding removal. Per project, not per seat.</p><p class="brand-row"><span class="lbl">Most likely regret</span>On the free tier your public changelog lives on the vendor&#39;s subdomain, which means the indexable page you are building up is theirs, not yours. Getting it onto your own domain is precisely the thing you have to pay for.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am not confident Headway is still actively operated or that its pricing is anything like what I remember. This category has a high mortality rate among small vendors and Headway is one I would check exists before planning around it.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Beamer</span><p class="brand-note">Priced by audience size — monthly active users who see the widget — rather than by how many people on your team publish, which is exactly the pricing axis your constraint asks for.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Tiered by monthly active users reached, with a limited free tier. No per-seat component on the lower tiers.</p><p class="brand-row"><span class="lbl">Most likely regret</span>Audience-based pricing scales with your success rather than with your usage of the tool, so the bill grows precisely when you can least be bothered to migrate — and migrating a changelog means breaking every indexed URL you accumulated.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>Beamer&#39;s tier names, MAU thresholds and free-tier feature set have changed and I will not quote figures. Verify whether the widget is still on the free tier at all, because that is the constraint most likely to have moved.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">AnnounceKit</span><p class="brand-note">Widget-first product with a public, crawlable changelog page and a custom-domain option, priced by plan rather than by team seat.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Plan-based tiers. I recall a free or very cheap entry tier including the widget, with custom domain further up.</p><p class="brand-row"><span class="lbl">Most likely regret</span>Small vendor with a small ecosystem — you are betting your announcement channel on a company whose continued existence you cannot really assess, and the widget is embedded in your production app.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am not confident of AnnounceKit&#39;s current pricing, and I am only moderately confident about the shape of its free tier. Treat this entry as a name to go and check rather than a recommendation with numbers attached.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Ghost</span><p class="brand-note">If you self-host it the cost is a VPS with no seat licensing at all, and it gives you a genuinely well-built, fast, server-rendered public page on your own domain with an RSS feed you can point a twenty-line widget at.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Open source (MIT), free to self-host. Ghost Pro is the paid hosted version, priced by audience size rather than by team seats.</p><p class="brand-row"><span class="lbl">Most likely regret</span>It is a publishing platform, not a changelog tool. There is no in-app widget, no read-state tracking and no per-user targeting — you get a good page and a feed, and everything in-app is still your code.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am confident Ghost exists and is healthy. I am not confident of current Ghost Pro tier pricing and am not quoting it.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Frill</span><p class="brand-note">Bundles the changelog with a public roadmap and idea board on plan-based rather than seat-based pricing, which is worth something if you were going to buy a feedback tool anyway.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Plan-based monthly tiers rather than per-seat. I believe the widget sits on the paid tiers rather than a free one.</p><p class="brand-row"><span class="lbl">Most likely regret</span>You are adopting a three-product suite to get one of them, and if you later leave you are migrating a roadmap and a voting history as well as a changelog.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am genuinely unsure whether Frill still operates under that name and ownership, and equally unsure about its current tiers. Verify it exists before evaluating it.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Keep a Changelog in your repository, rendered on your docs site</span><p class="brand-note">If your users are developers, a CHANGELOG.md maintained under the Keep a Changelog convention and rendered into your existing documentation site is free, indexable, versioned alongside the code, and completely portable.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free. It is a text file.</p><p class="brand-row"><span class="lbl">Most likely regret</span>There is no in-app surface at all, so the people who most need to know a feature shipped — the ones already inside your product — never see it. This satisfies the SEO constraint and ignores the widget one.</p><p class="nosources">No source cited for this recommendation.</p></li>
+</ol>
+<aside class="caveat">
+<p class="caveat-label">What the model said it was not sure about</p>
+<ul><li>I had no live web access in this run, so I have not read a current pricing page for any of these. Everything above is from memory, and for a category of small independent vendors that memory is unusually likely to be stale — or to describe a company that has since shut down or been acquired.</li><li>I cannot provide the documentation and pricing sources you asked for, since I could not fetch anything. I would rather say so than fabricate citations.</li><li>The constraint most likely to be violated in practice is &quot;embeddable widget on the free or cheapest tier&quot;. In this category the widget is the thing being sold, so vendors move it up a tier more readily than they change headline prices. Check that specific line before anything else.</li><li>Canny, Productboard and LaunchNotes are absent by design. Canny and Productboard price around team members or tracked users in ways that collide directly with your no-per-seat constraint, and LaunchNotes is positioned and priced for companies considerably larger than three people. They are capable products; they are simply not the products your constraints describe.</li><li>One structural point that applies to every hosted option here: if the public changelog is served from the vendor&#39;s domain, the search-engine indexability you are paying for benefits their domain, not yours. Only a custom domain, or building it yourself, actually satisfies that constraint in the way you probably meant it.</li></ul>
+</aside>
+</section>
+<div class="cta">
+<p><strong>Named here and want out?</strong> <a href="https://github.com/astroanand-6e/answer-ledger/issues/new?template=delist-brand.yml&amp;title=Delist%20request%3A%20">Open a delist request</a>. No email, no account beyond GitHub, no payment — ever. It is removed from this page, the index and the sitemap on the next build.</p>
+<p><strong>Want a question added?</strong> <a href="https://github.com/astroanand-6e/answer-ledger/issues/new?template=request-category.yml&amp;title=Category%20request%3A%20">Request a category</a>.</p>
+</div>
+<p class="mono"><a href="https://github.com/astroanand-6e/answer-ledger/blob/main/data/categories/changelog-embeddable-no-per-seat.json">View the raw data for this page &rarr;</a></p>
+</main>
+<footer><div class="wrap">
+<span>Answer Ledger &mdash; every entry names its model, its prompt and its UTC timestamp. Nothing here is for sale to the vendors it names.</span>
+<span><a href="/answer-ledger/method/">How this was made</a> &nbsp;·&nbsp; <a href="https://github.com/astroanand-6e/answer-ledger/issues">Delist or request</a></span>
+</div></footer>
+</body>
+</html>

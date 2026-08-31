@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "slug": "form-backend-for-static-sites",
+  "question": "What form backend works for a static site without writing a server?",
+  "summary": "A dated record of what one AI assistant answered when asked for a form backend for a static site with no server or serverless function to maintain, spam filtering included, free under 100 submissions a month, email notifications, and no vendor branding on the confirmation page.",
+  "delisted": false,
+  "provisional": false,
+  "runs": [
+    {
+      "engine": "claude",
+      "model": "claude-opus-5[1m]",
+      "modelDisplay": "Claude Opus 5 (Anthropic)",
+      "prompt": "I run a 3-person bootstrapped SaaS company. I need a form backend for a static site (contact and signup forms). My hard constraints are: no server or serverless function to maintain; spam filtering included; free at under 100 submissions/month; email notifications; no vendor branding on the confirmation page. Recommend at least five specific, named products or open-source projects, ranked best-fit first, and include self-hosted or free-tier options where they genuinely fit rather than defaulting to paid SaaS. For each one give: the current pricing model, the single strongest reason it satisfies my constraints, and the one thing most likely to make me regret choosing it. Then list the documentation, pricing pages, or other sources you are relying on for each claim. If you are not confident that a product still exists, or that its pricing is current, say so explicitly rather than guessing.",
+      "ranAt": "2026-08-31T17:12:44Z",
+      "retrieval": false,
+      "answerExcerpt": "\"No server or serverless function to maintain\" rules out the self-hosted answer entirely, which is unusual for this kind of question — normally I would tell you to run something yourself and pay nobody, but you have explicitly forbidden the thing that would require. So this is a hosted-only field, and the differentiator is not price, because at under 100 submissions a month everything here is free. The differentiator is the branding constraint, and it has a simple universal fix: never let the vendor render your confirmation page. Set a redirect to a thank-you page on your own domain and the branding question disappears for every product below.",
+      "verdict": "At under 100 submissions a month this is a free-tier shootout, and the honest tiebreaker is who you want holding your leads. Use Netlify Forms if you are already on Netlify; otherwise Formspree, and always configure a redirect to your own thank-you page rather than accepting the vendor's hosted confirmation.",
+      "brands": [
+        {
+          "name": "Netlify Forms",
+          "rank": 1,
+          "note": "If your static site already deploys to Netlify, this is the only option that adds no third party at all: you add one attribute to your form tag, Netlify's build step detects it, and submissions, spam filtering and email notifications are handled by infrastructure you were already using.",
+          "pricing": "Included with Netlify hosting, with a monthly submission allowance on the free tier and paid add-on levels above it. Well under 100 submissions a month sits comfortably inside the free allowance.",
+          "regret": "It only exists if you host on Netlify. The day you migrate off — and bootstrapped companies do migrate off — your forms silently stop working and there is no export path that carries the integration with you.",
+          "caveat": "Netlify has revised its free-tier form allowances and its add-on pricing more than once, and I am not confident of the current numbers. Verify the current free submission cap before you rely on it.",
+          "sources": []
+        },
+        {
+          "name": "Formspree",
+          "rank": 2,
+          "note": "The most established general-purpose form backend: you point your form's action at a Formspree endpoint, and spam filtering, email notifications and redirect-to-your-own-URL are all core features rather than paid extras.",
+          "pricing": "Free tier with a monthly submission limit, then paid tiers. The free limit has historically been in the range your volume needs, but treat that as unverified.",
+          "regret": "The free tier's ceiling is the thing that bites. A single scraper or a modest launch spike blows past your monthly allowance mid-month, and the failure mode is dropped submissions — that is, silently lost leads — rather than a warning email.",
+          "caveat": "Formspree has restructured its free tier several times over the years, including changes to how many forms and how many submissions are included. I am not going to quote a number I cannot check.",
+          "sources": []
+        },
+        {
+          "name": "Basin",
+          "rank": 3,
+          "note": "Built specifically for static sites and unusually serious about spam — it layers multiple filtering approaches rather than relying on a single honeypot — while still supporting custom redirects so no vendor branding ever renders to your visitor.",
+          "pricing": "Free tier with a monthly submission allowance, then paid plans. Historically the free allowance was generous for low-volume sites.",
+          "regret": "It is a small, independent product. That is often a virtue, but it means the acquisition-or-shutdown risk is real, and your contact form is a load-bearing part of your funnel to hang on a one-team business.",
+          "caveat": "This product has also been marketed as usebasin.com. I am reasonably confident it existed and was active as of my cutoff, but I cannot confirm it still operates or that its free tier is unchanged.",
+          "sources": []
+        },
+        {
+          "name": "Web3Forms",
+          "rank": 4,
+          "note": "Its free tier is the least conditional of anything here — you get an access key by email, drop it in a hidden input, and submissions are forwarded to you with spam filtering and custom redirect support, with no account dashboard to sign up for.",
+          "pricing": "Free tier advertised as unlimited or very high volume with no account required, plus paid plans for teams and integrations.",
+          "regret": "The submission-handling logic sits behind a public access key embedded in your page's HTML. Anyone can read it and hammer your endpoint, and your defence against that is entirely their spam filtering, not anything you control.",
+          "caveat": "\"Free forever\" positioning from small services is the least durable claim in this whole category. I would not build a business-critical signup flow on it without checking the current terms.",
+          "sources": []
+        },
+        {
+          "name": "Getform",
+          "rank": 5,
+          "note": "A straightforward form endpoint with spam protection, email notifications and redirect-to-your-own-page, plus file upload handling, which most of the cheaper competitors on this list do not do well.",
+          "pricing": "Free tier with a low monthly submission cap, then paid tiers.",
+          "regret": "The free cap here is on the tight side, and the jump to the first paid tier is the kind of price that feels absurd for a contact form on a marketing site.",
+          "caveat": "I am not confident of Getform's current free-tier submission limit or its paid pricing and am deliberately not quoting figures.",
+          "sources": [],
+          "correction": {
+            "note": "Getform was renamed Forminit in January 2026. getform.io now redirects to forminit.com, which presents itself as \"Forminit (formerly Getform.io)\", and existing accounts, data and form endpoints carried over unchanged. The service described here is still operating; only the name is out of date.",
+            "checkedAt": "2026-08-31T17:30:00Z",
+            "sources": [
+              {
+                "url": "https://forminit.com/",
+                "title": "Forminit (formerly Getform.io) — Headless Form Backend API"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Formcarry",
+          "rank": 6,
+          "note": "Clean, developer-oriented endpoint with built-in spam filtering, notification emails and custom success redirects — a solid, unsurprising fit for exactly the constraints you listed.",
+          "pricing": "Free tier with a monthly submission allowance, paid plans above it.",
+          "regret": "It is the most substitutable product on this list. There is nothing it does that Formspree or Basin does not, so you are picking on aesthetics and inheriting a smaller company's longevity risk for no functional gain.",
+          "caveat": "I am less confident this service is still operating than I am about Formspree or Netlify. Verify it exists before you plan around it.",
+          "sources": []
+        },
+        {
+          "name": "FormSubmit",
+          "rank": 7,
+          "note": "The lowest-friction option in existence: you set your form's action to their URL plus your email address, confirm once, and you are done — no account, no key, no dashboard, and it supports a custom thank-you page URL.",
+          "pricing": "Free, with no account and historically no published submission limit.",
+          "regret": "You are trusting an anonymous free service with every lead that comes through your site, with no SLA, no support channel and no way to notice if it quietly stops delivering. For a contact form on a hobby site that is fine; for a SaaS signup flow it is negligent.",
+          "caveat": "This is the item I am least confident about. Free-with-no-account services of this kind disappear without notice, and I cannot confirm it still exists or still delivers reliably.",
+          "sources": []
+        }
+      ],
+      "caveats": [
+        "I had no live web access in this run, so I have not read a single current pricing page. Every free-tier allowance described above is from memory, and free-tier submission caps are among the fastest-changing facts in software — assume every number implied here is stale.",
+        "Because I could not fetch anything, I cannot supply the documentation and pricing sources you asked me to list for each claim. I would rather say so than fabricate citations.",
+        "Your \"no vendor branding on the confirmation page\" constraint is satisfiable on essentially all of these, but only if you configure a redirect to a thank-you page on your own domain. If you accept the vendor's default hosted confirmation, several of the free tiers will show their name on it. This is a configuration step, not a product-selection step, and it is the one thing most likely to be missed.",
+        "The self-hosted answer is deliberately absent. Options like a Formbricks instance, a Cloudflare Worker writing to a KV store, or a Google Apps Script endpoint would all cost you nothing, but every one of them is a server or a function you would be maintaining, which your constraints forbid. If that constraint is softer than you wrote it, a twenty-line Worker with Turnstile in front of it is the cheapest and most durable answer on this page.",
+        "Typeform, Jotform, Tally and Google Forms are missing on purpose. They are form builders that host the form itself, not backends for a form you already wrote, and their free tiers are exactly where the vendor branding you excluded tends to live."
+      ]
+    }
+  ]
+}

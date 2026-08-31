@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What form backend works for a static site without writing a server? — recorded answer | Answer Ledger</title>
+<meta name="description" content="A dated record of what one AI assistant answered when asked for a form backend for a static site with no server or serverless function to maintain, spam filtering included, free under 100 submissions a month, email notifications, and no vendor branding on the confirmation page.">
+<link rel="canonical" href="https://astroanand-6e.github.io/answer-ledger/answers/form-backend-for-static-sites/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What form backend works for a static site without writing a server? — recorded answer | Answer Ledger">
+<meta property="og:description" content="A dated record of what one AI assistant answered when asked for a form backend for a static site with no server or serverless function to maintain, spam filtering included, free under 100 submissions a month, email notifications, and no vendor branding on the confirmation page.">
+<meta property="og:url" content="https://astroanand-6e.github.io/answer-ledger/answers/form-backend-for-static-sites/">
+<meta property="og:site_name" content="Answer Ledger">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:opsz,wght@6..72,400;6..72,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>:root{
+  --paper:#f4f1ea; --ink:#1a1815; --ink-soft:#59524a; --rule:#cfc6b6;
+  --mark:#7a2b1e; --tint:#e9e3d6; --machine:#3c3a35;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --paper:#14130f; --ink:#ece7dc; --ink-soft:#9d968a; --rule:#3a362e;
+         --mark:#d97a5f; --tint:#1e1c17; --machine:#c6c0b4; }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:Newsreader,Georgia,'Times New Roman',serif;
+  font-size:19px; line-height:1.6; font-optical-sizing:auto;
+}
+.wrap{max-width:46rem;margin:0 auto;padding:0 1.5rem}
+a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
+a:hover{border-bottom-color:var(--mark);color:var(--mark)}
+h1,h2,h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;letter-spacing:-.01em;line-height:1.12;margin:0}
+h1{font-size:clamp(2.1rem,5.5vw,3.1rem)}
+h2{font-size:1.6rem;margin-top:3rem}
+h3{font-size:1.15rem}
+p{margin:1rem 0}
+.mono,code{font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78rem;letter-spacing:.01em}
+
+/* masthead */
+header.mast{border-bottom:2px solid var(--ink);margin-bottom:2.5rem}
+header.mast .wrap{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding-top:1.1rem;padding-bottom:.7rem;flex-wrap:wrap}
+.logo{font-family:'Instrument Serif',Georgia,serif;font-size:1.5rem;border:0;letter-spacing:-.02em}
+.logo b{color:var(--mark);font-weight:400}
+nav.mast-nav{display:flex;gap:1.25rem}
+nav.mast-nav a{border:0;font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;font-family:'IBM Plex Mono',monospace;color:var(--ink-soft)}
+nav.mast-nav a:hover{color:var(--mark)}
+
+/* the machine record block: this is the credibility of the whole site */
+.record{border:1px solid var(--rule);border-left:3px solid var(--mark);background:var(--tint);padding:1rem 1.1rem;margin:1.5rem 0}
+.record dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem}
+.record dt{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.11em;color:var(--ink-soft);padding-top:.2em}
+.record dd{margin:0;font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--machine);word-break:break-word}
+.record .prompt{white-space:pre-wrap;background:var(--paper);border:1px solid var(--rule);padding:.55rem .65rem;display:block}
+@media (max-width:34rem){.record dl{grid-template-columns:1fr}.record dt{padding-top:.6em}}
+
+.kicker{font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.16em;color:var(--mark);margin:0 0 .75rem}
+.lede{font-size:1.15rem;color:var(--ink-soft);margin-top:1rem}
+.excerpt{border-left:2px solid var(--rule);padding-left:1.1rem;margin:1.5rem 0;font-style:italic;color:var(--ink-soft)}
+
+/* ranked brands */
+ol.brands{list-style:none;margin:1.5rem 0 0;padding:0;counter-reset:b}
+ol.brands>li{counter-increment:b;border-top:1px solid var(--rule);padding:1.15rem 0 1.15rem 3rem;position:relative}
+ol.brands>li:last-child{border-bottom:1px solid var(--rule)}
+ol.brands>li::before{content:counter(b,decimal-leading-zero);position:absolute;left:0;top:1.15rem;font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--mark)}
+.brand-name{font-family:'Instrument Serif',Georgia,serif;font-size:1.35rem;display:block}
+.brand-note{margin:.35rem 0 0;font-size:.95rem;color:var(--ink-soft)}
+ul.sources{list-style:none;margin:.7rem 0 0;padding:0}
+ul.sources li{font-size:.85rem;padding:.15rem 0}
+ul.sources .dom{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--ink-soft);margin-left:.4rem}
+.nosources{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--ink-soft);margin-top:.6rem}
+
+/* index */
+ul.catlist{list-style:none;margin:2rem 0;padding:0}
+ul.catlist li{border-top:1px solid var(--rule);padding:1rem 0}
+ul.catlist li:last-child{border-bottom:1px solid var(--rule)}
+ul.catlist a{border:0;font-family:'Instrument Serif',Georgia,serif;font-size:1.3rem;display:block}
+ul.catlist a:hover{color:var(--mark)}
+ul.catlist .meta{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.1em;margin-top:.3rem}
+
+/* model-stated uncertainty: content, not small print */
+.caveat{border:1px solid var(--mark);background:var(--tint);padding:.9rem 1.1rem;margin:1.75rem 0}
+.caveat-label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mark);margin:0 0 .5rem}
+.caveat ul{margin:0;padding-left:1.1rem;font-size:.92rem;color:var(--ink-soft)}
+.caveat li{margin:.3rem 0}
+.brand-row{margin:.4rem 0 0;font-size:.88rem;color:var(--ink-soft)}
+.brand-row .lbl{display:block;font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mark);opacity:.85}
+.caveat-row{border-left:2px solid var(--mark);padding-left:.7rem}
+
+/* editor's note: deliberately NOT in the accent colour the model's own voice
+   uses. A caveat is the model speaking; a correction is us. Solid ink frame
+   with a reversed label bar, so the two can never be confused at a glance. */
+.correction{margin:.9rem 0 0;border:1px solid var(--ink);background:var(--paper)}
+.correction-label{margin:0;padding:.32rem .65rem;background:var(--ink);color:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em}
+.correction-note{margin:.6rem .75rem;font-size:.88rem;color:var(--ink)}
+.correction-sources{margin:.5rem .75rem .7rem;padding:0}
+.verdict-only{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:1.5rem 0;margin:1.5rem 0}
+.verdict-label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:var(--mark);margin:0 0 .6rem}
+.verdict-only p:last-child{margin:0;font-family:'Instrument Serif',Georgia,serif;font-size:1.3rem;line-height:1.35}
+.notice{border:1px dashed var(--mark);padding:.85rem 1rem;font-size:.9rem;margin:1.5rem 0;color:var(--ink-soft)}
+.notice strong{color:var(--mark);font-weight:400}
+.cta{margin:2.5rem 0;padding:1.25rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+footer{margin:4rem 0 3rem;border-top:2px solid var(--ink);padding-top:1rem;font-size:.82rem;color:var(--ink-soft)}
+footer .wrap{display:flex;gap:1.25rem;flex-wrap:wrap;justify-content:space-between}
+main{padding-bottom:1rem}
+hr{border:0;border-top:1px solid var(--rule);margin:2.5rem 0}</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://astroanand-6e.github.io/answer-ledger/answers/form-backend-for-static-sites/#record",
+  "url": "https://astroanand-6e.github.io/answer-ledger/answers/form-backend-for-static-sites/",
+  "headline": "What form backend works for a static site without writing a server?",
+  "description": "A dated record of what one AI assistant answered when asked for a form backend for a static site with no server or serverless function to maintain, spam filtering included, free under 100 submissions a month, email notifications, and no vendor branding on the confirmation page.",
+  "inLanguage": "en",
+  "datePublished": "2026-08-31T17:12:44Z",
+  "dateModified": "2026-08-31T17:12:44Z",
+  "isAccessibleForFree": true,
+  "author": {
+    "@type": "Organization",
+    "name": "Answer Ledger",
+    "url": "https://astroanand-6e.github.io/answer-ledger/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Answer Ledger",
+    "url": "https://astroanand-6e.github.io/answer-ledger/"
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "What form backend works for a static site without writing a server?"
+  },
+  "isBasedOn": [
+    {
+      "@type": "CreativeWork",
+      "name": "Answer from Claude Opus 5 (Anthropic)",
+      "dateCreated": "2026-08-31T17:12:44Z",
+      "text": "\"No server or serverless function to maintain\" rules out the self-hosted answer entirely, which is unusual for this kind of question — normally I would tell you to run something yourself and pay nobody, but you have explicitly forbidden the thing that would require. So this is a hosted-only field, and the differentiator is not price, because at under 100 submissions a month everything here is free. The differentiator is the branding constraint, and it has a simple universal fix: never let the vendor render your confirmation page. Set a redirect to a thank-you page on your own domain and the branding question disappears for every product below.",
+      "creator": {
+        "@type": "SoftwareApplication",
+        "name": "Claude Opus 5 (Anthropic)",
+        "identifier": "claude-opus-5[1m]",
+        "applicationCategory": "AI assistant"
+      }
+    }
+  ],
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "Basin"
+    },
+    {
+      "@type": "Thing",
+      "name": "FormSubmit"
+    },
+    {
+      "@type": "Thing",
+      "name": "Formcarry"
+    },
+    {
+      "@type": "Thing",
+      "name": "Formspree"
+    },
+    {
+      "@type": "Thing",
+      "name": "Getform"
+    },
+    {
+      "@type": "Thing",
+      "name": "Netlify Forms"
+    },
+    {
+      "@type": "Thing",
+      "name": "Web3Forms"
+    }
+  ],
+  "citation": []
+}
+</script>
+</head>
+<body>
+<header class="mast"><div class="wrap">
+<a class="logo" href="/answer-ledger/">Answer<b> Ledger</b></a>
+<nav class="mast-nav">
+<a href="/answer-ledger/">Index</a>
+<a href="/answer-ledger/method/">Method</a>
+<a href="https://github.com/astroanand-6e/answer-ledger">Source</a>
+</nav>
+</div></header>
+<main class="wrap">
+<p class="kicker">Recorded answer · Developer and SaaS infrastructure tooling, bought by small bootstrapped teams</p>
+<h1>What form backend works for a static site without writing a server?</h1>
+<p class="lede">A dated record of what one AI assistant answered when asked for a form backend for a static site with no server or serverless function to maintain, spam filtering included, free under 100 submissions a month, email notifications, and no vendor branding on the confirmation page.</p>
+
+
+<p>This page is a record of one question put to Claude Opus 5 (Anthropic), kept exactly as answered. It is not a ranking, not a review and not an endorsement by Answer Ledger, and nothing on it is for sale to the vendors it names. <a href="/answer-ledger/method/">Read the method</a>.</p>
+<section>
+
+<div class="record">
+<dl>
+<dt>Model</dt><dd>Claude Opus 5 (Anthropic) <span style="opacity:.7">(claude-opus-5[1m])</span></dd>
+<dt>Answered</dt><dd>2026-08-31 17:12:44 UTC</dd>
+<dt>Retrieval</dt><dd>no — answered from training data only, so it cited nothing</dd>
+<dt>Prompt</dt><dd><span class="prompt">I run a 3-person bootstrapped SaaS company. I need a form backend for a static site (contact and signup forms). My hard constraints are: no server or serverless function to maintain; spam filtering included; free at under 100 submissions/month; email notifications; no vendor branding on the confirmation page. Recommend at least five specific, named products or open-source projects, ranked best-fit first, and include self-hosted or free-tier options where they genuinely fit rather than defaulting to paid SaaS. For each one give: the current pricing model, the single strongest reason it satisfies my constraints, and the one thing most likely to make me regret choosing it. Then list the documentation, pricing pages, or other sources you are relying on for each claim. If you are not confident that a product still exists, or that its pricing is current, say so explicitly rather than guessing.</span></dd>
+</dl>
+</div>
+<h3>What it said, verbatim (opening)</h3>
+<blockquote class="excerpt">&quot;No server or serverless function to maintain&quot; rules out the self-hosted answer entirely, which is unusual for this kind of question — normally I would tell you to run something yourself and pay nobody, but you have explicitly forbidden the thing that would require. So this is a hosted-only field, and the differentiator is not price, because at under 100 submissions a month everything here is free. The differentiator is the branding constraint, and it has a simple universal fix: never let the vendor render your confirmation page. Set a redirect to a thank-you page on your own domain and the branding question disappears for every product below.</blockquote>
+<h3>What it recommended, in the order it named them</h3>
+<p class="lede">At under 100 submissions a month this is a free-tier shootout, and the honest tiebreaker is who you want holding your leads. Use Netlify Forms if you are already on Netlify; otherwise Formspree, and always configure a redirect to your own thank-you page rather than accepting the vendor&#39;s hosted confirmation.</p>
+<ol class="brands">
+<li><span class="brand-name">Netlify Forms</span><p class="brand-note">If your static site already deploys to Netlify, this is the only option that adds no third party at all: you add one attribute to your form tag, Netlify&#39;s build step detects it, and submissions, spam filtering and email notifications are handled by infrastructure you were already using.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Included with Netlify hosting, with a monthly submission allowance on the free tier and paid add-on levels above it. Well under 100 submissions a month sits comfortably inside the free allowance.</p><p class="brand-row"><span class="lbl">Most likely regret</span>It only exists if you host on Netlify. The day you migrate off — and bootstrapped companies do migrate off — your forms silently stop working and there is no export path that carries the integration with you.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>Netlify has revised its free-tier form allowances and its add-on pricing more than once, and I am not confident of the current numbers. Verify the current free submission cap before you rely on it.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Formspree</span><p class="brand-note">The most established general-purpose form backend: you point your form&#39;s action at a Formspree endpoint, and spam filtering, email notifications and redirect-to-your-own-URL are all core features rather than paid extras.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free tier with a monthly submission limit, then paid tiers. The free limit has historically been in the range your volume needs, but treat that as unverified.</p><p class="brand-row"><span class="lbl">Most likely regret</span>The free tier&#39;s ceiling is the thing that bites. A single scraper or a modest launch spike blows past your monthly allowance mid-month, and the failure mode is dropped submissions — that is, silently lost leads — rather than a warning email.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>Formspree has restructured its free tier several times over the years, including changes to how many forms and how many submissions are included. I am not going to quote a number I cannot check.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Basin</span><p class="brand-note">Built specifically for static sites and unusually serious about spam — it layers multiple filtering approaches rather than relying on a single honeypot — while still supporting custom redirects so no vendor branding ever renders to your visitor.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free tier with a monthly submission allowance, then paid plans. Historically the free allowance was generous for low-volume sites.</p><p class="brand-row"><span class="lbl">Most likely regret</span>It is a small, independent product. That is often a virtue, but it means the acquisition-or-shutdown risk is real, and your contact form is a load-bearing part of your funnel to hang on a one-team business.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>This product has also been marketed as usebasin.com. I am reasonably confident it existed and was active as of my cutoff, but I cannot confirm it still operates or that its free tier is unchanged.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Web3Forms</span><p class="brand-note">Its free tier is the least conditional of anything here — you get an access key by email, drop it in a hidden input, and submissions are forwarded to you with spam filtering and custom redirect support, with no account dashboard to sign up for.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free tier advertised as unlimited or very high volume with no account required, plus paid plans for teams and integrations.</p><p class="brand-row"><span class="lbl">Most likely regret</span>The submission-handling logic sits behind a public access key embedded in your page&#39;s HTML. Anyone can read it and hammer your endpoint, and your defence against that is entirely their spam filtering, not anything you control.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>&quot;Free forever&quot; positioning from small services is the least durable claim in this whole category. I would not build a business-critical signup flow on it without checking the current terms.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Getform</span><p class="brand-note">A straightforward form endpoint with spam protection, email notifications and redirect-to-your-own-page, plus file upload handling, which most of the cheaper competitors on this list do not do well.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free tier with a low monthly submission cap, then paid tiers.</p><p class="brand-row"><span class="lbl">Most likely regret</span>The free cap here is on the tight side, and the jump to the first paid tier is the kind of price that feels absurd for a contact form on a marketing site.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am not confident of Getform&#39;s current free-tier submission limit or its paid pricing and am deliberately not quoting figures.</p><p class="nosources">No source cited for this recommendation.</p><div class="correction">
+<p class="correction-label">Editor&#39;s note &mdash; not part of the answer &mdash; checked 2026-08-31</p>
+<p class="correction-note">Getform was renamed Forminit in January 2026. getform.io now redirects to forminit.com, which presents itself as &quot;Forminit (formerly Getform.io)&quot;, and existing accounts, data and form endpoints carried over unchanged. The service described here is still operating; only the name is out of date.</p>
+<ul class="sources correction-sources"><li><a href="https://forminit.com/" rel="nofollow noopener ugc">Forminit (formerly Getform.io) — Headless Form Backend API</a><span class="dom">forminit.com</span></li></ul>
+</div></li>
+<li><span class="brand-name">Formcarry</span><p class="brand-note">Clean, developer-oriented endpoint with built-in spam filtering, notification emails and custom success redirects — a solid, unsurprising fit for exactly the constraints you listed.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free tier with a monthly submission allowance, paid plans above it.</p><p class="brand-row"><span class="lbl">Most likely regret</span>It is the most substitutable product on this list. There is nothing it does that Formspree or Basin does not, so you are picking on aesthetics and inheriting a smaller company&#39;s longevity risk for no functional gain.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am less confident this service is still operating than I am about Formspree or Netlify. Verify it exists before you plan around it.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">FormSubmit</span><p class="brand-note">The lowest-friction option in existence: you set your form&#39;s action to their URL plus your email address, confirm once, and you are done — no account, no key, no dashboard, and it supports a custom thank-you page URL.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free, with no account and historically no published submission limit.</p><p class="brand-row"><span class="lbl">Most likely regret</span>You are trusting an anonymous free service with every lead that comes through your site, with no SLA, no support channel and no way to notice if it quietly stops delivering. For a contact form on a hobby site that is fine; for a SaaS signup flow it is negligent.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>This is the item I am least confident about. Free-with-no-account services of this kind disappear without notice, and I cannot confirm it still exists or still delivers reliably.</p><p class="nosources">No source cited for this recommendation.</p></li>
+</ol>
+<aside class="caveat">
+<p class="caveat-label">What the model said it was not sure about</p>
+<ul><li>I had no live web access in this run, so I have not read a single current pricing page. Every free-tier allowance described above is from memory, and free-tier submission caps are among the fastest-changing facts in software — assume every number implied here is stale.</li><li>Because I could not fetch anything, I cannot supply the documentation and pricing sources you asked me to list for each claim. I would rather say so than fabricate citations.</li><li>Your &quot;no vendor branding on the confirmation page&quot; constraint is satisfiable on essentially all of these, but only if you configure a redirect to a thank-you page on your own domain. If you accept the vendor&#39;s default hosted confirmation, several of the free tiers will show their name on it. This is a configuration step, not a product-selection step, and it is the one thing most likely to be missed.</li><li>The self-hosted answer is deliberately absent. Options like a Formbricks instance, a Cloudflare Worker writing to a KV store, or a Google Apps Script endpoint would all cost you nothing, but every one of them is a server or a function you would be maintaining, which your constraints forbid. If that constraint is softer than you wrote it, a twenty-line Worker with Turnstile in front of it is the cheapest and most durable answer on this page.</li><li>Typeform, Jotform, Tally and Google Forms are missing on purpose. They are form builders that host the form itself, not backends for a form you already wrote, and their free tiers are exactly where the vendor branding you excluded tends to live.</li></ul>
+</aside>
+</section>
+<div class="cta">
+<p><strong>Named here and want out?</strong> <a href="https://github.com/astroanand-6e/answer-ledger/issues/new?template=delist-brand.yml&amp;title=Delist%20request%3A%20">Open a delist request</a>. No email, no account beyond GitHub, no payment — ever. It is removed from this page, the index and the sitemap on the next build.</p>
+<p><strong>Want a question added?</strong> <a href="https://github.com/astroanand-6e/answer-ledger/issues/new?template=request-category.yml&amp;title=Category%20request%3A%20">Request a category</a>.</p>
+</div>
+<p class="mono"><a href="https://github.com/astroanand-6e/answer-ledger/blob/main/data/categories/form-backend-for-static-sites.json">View the raw data for this page &rarr;</a></p>
+</main>
+<footer><div class="wrap">
+<span>Answer Ledger &mdash; every entry names its model, its prompt and its UTC timestamp. Nothing here is for sale to the vendors it names.</span>
+<span><a href="/answer-ledger/method/">How this was made</a> &nbsp;·&nbsp; <a href="https://github.com/astroanand-6e/answer-ledger/issues">Delist or request</a></span>
+</div></footer>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What&#39;s the cheapest managed Postgres in the EU with real backups? — recorded answer | Answer Ledger</title>
+<meta name="description" content="A dated record of what one AI assistant answered when asked for managed PostgreSQL under $25 a month in an EU region, with automated daily backups and point-in-time recovery that can actually be restored, and no auto-pause on the paid tier.">
+<link rel="canonical" href="https://astroanand-6e.github.io/answer-ledger/answers/managed-postgres-cheap-eu-with-backups/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What&#39;s the cheapest managed Postgres in the EU with real backups? — recorded answer | Answer Ledger">
+<meta property="og:description" content="A dated record of what one AI assistant answered when asked for managed PostgreSQL under $25 a month in an EU region, with automated daily backups and point-in-time recovery that can actually be restored, and no auto-pause on the paid tier.">
+<meta property="og:url" content="https://astroanand-6e.github.io/answer-ledger/answers/managed-postgres-cheap-eu-with-backups/">
+<meta property="og:site_name" content="Answer Ledger">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:opsz,wght@6..72,400;6..72,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>:root{
+  --paper:#f4f1ea; --ink:#1a1815; --ink-soft:#59524a; --rule:#cfc6b6;
+  --mark:#7a2b1e; --tint:#e9e3d6; --machine:#3c3a35;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --paper:#14130f; --ink:#ece7dc; --ink-soft:#9d968a; --rule:#3a362e;
+         --mark:#d97a5f; --tint:#1e1c17; --machine:#c6c0b4; }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:Newsreader,Georgia,'Times New Roman',serif;
+  font-size:19px; line-height:1.6; font-optical-sizing:auto;
+}
+.wrap{max-width:46rem;margin:0 auto;padding:0 1.5rem}
+a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
+a:hover{border-bottom-color:var(--mark);color:var(--mark)}
+h1,h2,h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;letter-spacing:-.01em;line-height:1.12;margin:0}
+h1{font-size:clamp(2.1rem,5.5vw,3.1rem)}
+h2{font-size:1.6rem;margin-top:3rem}
+h3{font-size:1.15rem}
+p{margin:1rem 0}
+.mono,code{font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78rem;letter-spacing:.01em}
+
+/* masthead */
+header.mast{border-bottom:2px solid var(--ink);margin-bottom:2.5rem}
+header.mast .wrap{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding-top:1.1rem;padding-bottom:.7rem;flex-wrap:wrap}
+.logo{font-family:'Instrument Serif',Georgia,serif;font-size:1.5rem;border:0;letter-spacing:-.02em}
+.logo b{color:var(--mark);font-weight:400}
+nav.mast-nav{display:flex;gap:1.25rem}
+nav.mast-nav a{border:0;font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;font-family:'IBM Plex Mono',monospace;color:var(--ink-soft)}
+nav.mast-nav a:hover{color:var(--mark)}
+
+/* the machine record block: this is the credibility of the whole site */
+.record{border:1px solid var(--rule);border-left:3px solid var(--mark);background:var(--tint);padding:1rem 1.1rem;margin:1.5rem 0}
+.record dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem}
+.record dt{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.11em;color:var(--ink-soft);padding-top:.2em}
+.record dd{margin:0;font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--machine);word-break:break-word}
+.record .prompt{white-space:pre-wrap;background:var(--paper);border:1px solid var(--rule);padding:.55rem .65rem;display:block}
+@media (max-width:34rem){.record dl{grid-template-columns:1fr}.record dt{padding-top:.6em}}
+
+.kicker{font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.16em;color:var(--mark);margin:0 0 .75rem}
+.lede{font-size:1.15rem;color:var(--ink-soft);margin-top:1rem}
+.excerpt{border-left:2px solid var(--rule);padding-left:1.1rem;margin:1.5rem 0;font-style:italic;color:var(--ink-soft)}
+
+/* ranked brands */
+ol.brands{list-style:none;margin:1.5rem 0 0;padding:0;counter-reset:b}
+ol.brands>li{counter-increment:b;border-top:1px solid var(--rule);padding:1.15rem 0 1.15rem 3rem;position:relative}
+ol.brands>li:last-child{border-bottom:1px solid var(--rule)}
+ol.brands>li::before{content:counter(b,decimal-leading-zero);position:absolute;left:0;top:1.15rem;font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--mark)}
+.brand-name{font-family:'Instrument Serif',Georgia,serif;font-size:1.35rem;display:block}
+.brand-note{margin:.35rem 0 0;font-size:.95rem;color:var(--ink-soft)}
+ul.sources{list-style:none;margin:.7rem 0 0;padding:0}
+ul.sources li{font-size:.85rem;padding:.15rem 0}
+ul.sources .dom{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--ink-soft);margin-left:.4rem}
+.nosources{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--ink-soft);margin-top:.6rem}
+
+/* index */
+ul.catlist{list-style:none;margin:2rem 0;padding:0}
+ul.catlist li{border-top:1px solid var(--rule);padding:1rem 0}
+ul.catlist li:last-child{border-bottom:1px solid var(--rule)}
+ul.catlist a{border:0;font-family:'Instrument Serif',Georgia,serif;font-size:1.3rem;display:block}
+ul.catlist a:hover{color:var(--mark)}
+ul.catlist .meta{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.1em;margin-top:.3rem}
+
+/* model-stated uncertainty: content, not small print */
+.caveat{border:1px solid var(--mark);background:var(--tint);padding:.9rem 1.1rem;margin:1.75rem 0}
+.caveat-label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mark);margin:0 0 .5rem}
+.caveat ul{margin:0;padding-left:1.1rem;font-size:.92rem;color:var(--ink-soft)}
+.caveat li{margin:.3rem 0}
+.brand-row{margin:.4rem 0 0;font-size:.88rem;color:var(--ink-soft)}
+.brand-row .lbl{display:block;font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mark);opacity:.85}
+.caveat-row{border-left:2px solid var(--mark);padding-left:.7rem}
+
+/* editor's note: deliberately NOT in the accent colour the model's own voice
+   uses. A caveat is the model speaking; a correction is us. Solid ink frame
+   with a reversed label bar, so the two can never be confused at a glance. */
+.correction{margin:.9rem 0 0;border:1px solid var(--ink);background:var(--paper)}
+.correction-label{margin:0;padding:.32rem .65rem;background:var(--ink);color:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em}
+.correction-note{margin:.6rem .75rem;font-size:.88rem;color:var(--ink)}
+.correction-sources{margin:.5rem .75rem .7rem;padding:0}
+.verdict-only{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:1.5rem 0;margin:1.5rem 0}
+.verdict-label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:var(--mark);margin:0 0 .6rem}
+.verdict-only p:last-child{margin:0;font-family:'Instrument Serif',Georgia,serif;font-size:1.3rem;line-height:1.35}
+.notice{border:1px dashed var(--mark);padding:.85rem 1rem;font-size:.9rem;margin:1.5rem 0;color:var(--ink-soft)}
+.notice strong{color:var(--mark);font-weight:400}
+.cta{margin:2.5rem 0;padding:1.25rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+footer{margin:4rem 0 3rem;border-top:2px solid var(--ink);padding-top:1rem;font-size:.82rem;color:var(--ink-soft)}
+footer .wrap{display:flex;gap:1.25rem;flex-wrap:wrap;justify-content:space-between}
+main{padding-bottom:1rem}
+hr{border:0;border-top:1px solid var(--rule);margin:2.5rem 0}</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://astroanand-6e.github.io/answer-ledger/answers/managed-postgres-cheap-eu-with-backups/#record",
+  "url": "https://astroanand-6e.github.io/answer-ledger/answers/managed-postgres-cheap-eu-with-backups/",
+  "headline": "What's the cheapest managed Postgres in the EU with real backups?",
+  "description": "A dated record of what one AI assistant answered when asked for managed PostgreSQL under $25 a month in an EU region, with automated daily backups and point-in-time recovery that can actually be restored, and no auto-pause on the paid tier.",
+  "inLanguage": "en",
+  "datePublished": "2026-08-31T16:53:22Z",
+  "dateModified": "2026-08-31T16:53:22Z",
+  "isAccessibleForFree": true,
+  "author": {
+    "@type": "Organization",
+    "name": "Answer Ledger",
+    "url": "https://astroanand-6e.github.io/answer-ledger/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Answer Ledger",
+    "url": "https://astroanand-6e.github.io/answer-ledger/"
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "What's the cheapest managed Postgres in the EU with real backups?"
+  },
+  "isBasedOn": [
+    {
+      "@type": "CreativeWork",
+      "name": "Answer from Claude Opus 5 (Anthropic)",
+      "dateCreated": "2026-08-31T16:53:22Z",
+      "text": "The binding constraint here is not the price and it is not the EU region — it is demanding point-in-time recovery under $25 a month. PITR is the feature that hyperscaler-adjacent providers use to separate a hobby tier from a production tier, so the moment you require it, most of the sub-$25 market falls away and what remains is a short list of providers who include pgBackRest-style continuous archiving in their base product. Add \"no auto-pause\" and you also lose most of the serverless generation on their entry plans. DigitalOcean is where I would start.",
+      "creator": {
+        "@type": "SoftwareApplication",
+        "name": "Claude Opus 5 (Anthropic)",
+        "identifier": "claude-opus-5[1m]",
+        "applicationCategory": "AI assistant"
+      }
+    }
+  ],
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "Crunchy Bridge"
+    },
+    {
+      "@type": "Thing",
+      "name": "DigitalOcean Managed Databases for PostgreSQL"
+    },
+    {
+      "@type": "Thing",
+      "name": "Neon (paid plan with scale-to-zero disabled)"
+    },
+    {
+      "@type": "Thing",
+      "name": "Render PostgreSQL"
+    },
+    {
+      "@type": "Thing",
+      "name": "Scaleway Managed Database for PostgreSQL"
+    },
+    {
+      "@type": "Thing",
+      "name": "Self-managed Postgres on a Hetzner VPS with pgBackRest to a Storage Box"
+    }
+  ],
+  "citation": []
+}
+</script>
+</head>
+<body>
+<header class="mast"><div class="wrap">
+<a class="logo" href="/answer-ledger/">Answer<b> Ledger</b></a>
+<nav class="mast-nav">
+<a href="/answer-ledger/">Index</a>
+<a href="/answer-ledger/method/">Method</a>
+<a href="https://github.com/astroanand-6e/answer-ledger">Source</a>
+</nav>
+</div></header>
+<main class="wrap">
+<p class="kicker">Recorded answer · Developer and SaaS infrastructure tooling, bought by small bootstrapped teams</p>
+<h1>What&#39;s the cheapest managed Postgres in the EU with real backups?</h1>
+<p class="lede">A dated record of what one AI assistant answered when asked for managed PostgreSQL under $25 a month in an EU region, with automated daily backups and point-in-time recovery that can actually be restored, and no auto-pause on the paid tier.</p>
+
+
+<p>This page is a record of one question put to Claude Opus 5 (Anthropic), kept exactly as answered. It is not a ranking, not a review and not an endorsement by Answer Ledger, and nothing on it is for sale to the vendors it names. <a href="/answer-ledger/method/">Read the method</a>.</p>
+<section>
+
+<div class="record">
+<dl>
+<dt>Model</dt><dd>Claude Opus 5 (Anthropic) <span style="opacity:.7">(claude-opus-5[1m])</span></dd>
+<dt>Answered</dt><dd>2026-08-31 16:53:22 UTC</dd>
+<dt>Retrieval</dt><dd>no — answered from training data only, so it cited nothing</dd>
+<dt>Prompt</dt><dd><span class="prompt">I run a 3-person bootstrapped SaaS company. I need managed PostgreSQL for a small production app. My hard constraints are: under $25/month; EU region available; automated daily backups with point-in-time recovery I can actually restore from; no cold-start or auto-pause on the paid tier. Recommend at least five specific, named products or open-source projects, ranked best-fit first, and include self-hosted or free-tier options where they genuinely fit rather than defaulting to paid SaaS. For each one give: the current pricing model, the single strongest reason it satisfies my constraints, and the one thing most likely to make me regret choosing it. Then list the documentation, pricing pages, or other sources you are relying on for each claim. If you are not confident that a product still exists, or that its pricing is current, say so explicitly rather than guessing.</span></dd>
+</dl>
+</div>
+<h3>What it said, verbatim (opening)</h3>
+<blockquote class="excerpt">The binding constraint here is not the price and it is not the EU region — it is demanding point-in-time recovery under $25 a month. PITR is the feature that hyperscaler-adjacent providers use to separate a hobby tier from a production tier, so the moment you require it, most of the sub-$25 market falls away and what remains is a short list of providers who include pgBackRest-style continuous archiving in their base product. Add &quot;no auto-pause&quot; and you also lose most of the serverless generation on their entry plans. DigitalOcean is where I would start.</blockquote>
+<h3>What it recommended, in the order it named them</h3>
+<p class="lede">Two or three providers genuinely clear all four constraints at once, and they do it by being unfashionable single-node managed Postgres rather than serverless anything. Whatever you pick, budget an afternoon in month one to perform a real restore into a scratch database — an untested backup is a belief, not a backup, and that test will tell you more than any comparison table including this one.</p>
+<ol class="brands">
+<li><span class="brand-name">DigitalOcean Managed Databases for PostgreSQL</span><p class="brand-note">The smallest single-node plan sits comfortably under your budget, Frankfurt and Amsterdam are both available, the instance is always on with no pause behaviour at all, and point-in-time recovery within the retention window is included in the base plan rather than sold as an add-on.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Fixed monthly price per node size, billed hourly up to a monthly cap. The entry-level single-node plan is the one that fits your budget; standby nodes and storage add-ons are priced separately.</p><p class="brand-row"><span class="lbl">Most likely regret</span>The cheapest node is genuinely small, and Postgres on a shared-CPU box with a gigabyte or so of RAM will hit a wall sooner than you expect — usually the first time you run an unindexed query against a table that has grown past memory. The upgrade path exists but involves a restart, and the price roughly doubles at each step.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I recall PITR being available on managed Postgres including the entry tier, with a retention window measured in days, but I am not fully confident it is not restricted to larger plans. Confirm this on the pricing page before you rely on it — it is the single claim here most worth checking.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Crunchy Bridge</span><p class="brand-note">It is run by people whose entire business is Postgres, continuous WAL archiving with pgBackRest is the default rather than an upsell, and the smallest hobby-class instance has historically been priced well under your ceiling with EU regions available on the underlying cloud.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Per-instance hourly pricing by size plus storage, with a small entry instance intended for exactly this use case. No pause or scale-to-zero behaviour.</p><p class="brand-row"><span class="lbl">Most likely regret</span>It is a small company with a small company&#39;s blast radius, and the entry instance is a single node — there is no high availability at this price point, so a host failure means a restore, not a failover. You are also on a less-travelled path than the hyperscalers when something odd happens.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am reasonably confident about the pricing shape but not about the current entry-instance price or which EU regions are offered today. Do not plan a budget on my recollection of the number.</p><p class="nosources">No source cited for this recommendation.</p><div class="correction">
+<p class="correction-label">Editor&#39;s note &mdash; not part of the answer &mdash; checked 2026-08-31</p>
+<p class="correction-note">Crunchy Data, the company behind Crunchy Bridge, was acquired by Snowflake in June 2025. Crunchy Bridge continues to be sold as an independent managed Postgres service and the pricing described above is still accurate; this note records the change of ownership only, not a change to the product or its terms.</p>
+<ul class="sources correction-sources"><li><a href="https://www.crunchydata.com/blog/crunchy-data-joins-snowflake" rel="nofollow noopener ugc">Crunchy Data Joins Snowflake</a><span class="dom">crunchydata.com</span></li><li><a href="https://www.snowflake.com/en/blog/snowflake-postgres-enterprise-ai-database/" rel="nofollow noopener ugc">Delivering the Most Enterprise-Ready Postgres, Built for Snowflake</a><span class="dom">snowflake.com</span></li></ul>
+</div></li>
+<li><span class="brand-name">Scaleway Managed Database for PostgreSQL</span><p class="brand-note">A French provider with Paris, Amsterdam and Warsaw regions, which means EU data residency under an EU-headquartered company rather than an EU region operated by a US one — and its smallest development instances are among the cheapest managed Postgres you can buy.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Hourly per-node pricing by instance class, with cheap development-class nodes and separately billed storage and backups.</p><p class="brand-row"><span class="lbl">Most likely regret</span>The development-class instances are explicitly not sold as production-grade, and if you run production on one you have accepted an SLA that does not exist. Documentation in English has also historically lagged the French version and the console.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am not confident that Scaleway offers true point-in-time recovery as opposed to scheduled snapshot backups on the low-cost tiers, and that distinction is exactly what you asked about. Verify it explicitly — if it is snapshots only, this option fails your third constraint and should drop off the list.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Neon (paid plan with scale-to-zero disabled)</span><p class="brand-note">Its storage layer keeps a continuous history, so restoring to an arbitrary point in the retention window is a native operation rather than a backup-restore procedure, and the entry paid plan has historically been under your ceiling with EU regions available.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Plan-based with an included allowance of compute and storage, plus usage above it. The entry paid tier is the relevant one.</p><p class="brand-row"><span class="lbl">Most likely regret</span>Scale-to-zero is the default and the thing you must remember to turn off, and doing so means you are paying for compute around the clock on a plan whose economics assume you are not — you can drift over the included allowance and past $25 without a single traffic spike. The architecture is also genuinely novel, which is a strange thing to want from a database.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>Neon&#39;s plan names, allowances and prices changed repeatedly over the period I know about, and the company was acquired, which usually precedes further repricing. Treat my description as the shape only.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Self-managed Postgres on a Hetzner VPS with pgBackRest to a Storage Box</span><p class="brand-note">This is the only option on the list where you can prove the fourth constraint rather than trust it, and it is dramatically the cheapest — a small Hetzner instance in Falkenstein or Helsinki plus offsite WAL archiving costs a fraction of your ceiling and gives you real PITR to the second.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>VPS monthly price plus a Storage Box or object-storage bucket for archives. Realistically well under half your budget for hardware that outclasses every managed entry tier above.</p><p class="brand-row"><span class="lbl">Most likely regret</span>You are now the DBA. Minor version upgrades, disk-full incidents, vacuum tuning, and the 3am page when the volume fills with WAL because archiving silently broke are all yours — and for a 3-person team, the hour you spend on that is an hour not spent on the product. It is the cheapest option and the most expensive one.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>This is not a managed service and does not satisfy the literal word &#39;managed&#39; in your question. I am including it because at this price point the gap between what you get here and what you get from an entry-tier managed plan is large enough that you should make the trade consciously.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Render PostgreSQL</span><p class="brand-note">Frankfurt is available, the paid instances do not sleep, and if your application already runs on Render the operational simplicity of having the database next to it is worth real money to a small team.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Fixed monthly plans by instance size, with a low-cost entry paid tier and separately priced storage.</p><p class="brand-row"><span class="lbl">Most likely regret</span>Point-in-time recovery has historically been gated to plans above the cheapest one, so the tier that fits your budget may be the tier that fails your backup constraint — and you will discover this at the worst possible moment. Check which plan the PITR line actually applies to before subscribing.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am not confident which Render plan tier includes PITR versus daily snapshots only, and their database plans were restructured at least once. This is the claim to verify first.</p><p class="nosources">No source cited for this recommendation.</p></li>
+</ol>
+<aside class="caveat">
+<p class="caveat-label">What the model said it was not sure about</p>
+<ul><li>I had no live web access in this run, so I have read no current pricing page for any of these. Every price and tier boundary above is recalled, and database pricing pages are revised often. Verify all of it, and treat any specific figure I have implied as stale by default.</li><li>Because I could not fetch anything, I cannot supply the documentation and pricing-page sources you asked for. I would rather say that outright than invent citations that look authoritative and point nowhere.</li><li>The claim I am least sure about across this entire answer is which providers include true point-in-time recovery at their cheapest paid tier, as opposed to nightly snapshots described loosely as backups. That distinction is your third constraint, and it is the one most often blurred in marketing copy. Read the docs, not the comparison table.</li><li>Amazon RDS, Aurora, Google Cloud SQL, Azure Database for PostgreSQL, Aiven and Timescale Cloud are all absent deliberately. Every one of them prices a production instance with PITR well above $25 a month once you include storage, backup storage and egress — the hyperscalers in particular have no meaningful sub-$25 production tier. Supabase is also absent: the Pro plan sits right at your ceiling and PITR is a paid add-on on top of it, which puts the combination over. If your ceiling is soft rather than hard, Supabase Pro plus the PITR add-on is a strong option and should go back on the list.</li><li>None of this substitutes for testing a restore. Whichever you choose, restore a backup into a throwaway database in the first week and time how long it takes. The providers that fail this exercise are not always the ones you would predict.</li></ul>
+</aside>
+</section>
+<div class="cta">
+<p><strong>Named here and want out?</strong> <a href="https://github.com/astroanand-6e/answer-ledger/issues/new?template=delist-brand.yml&amp;title=Delist%20request%3A%20">Open a delist request</a>. No email, no account beyond GitHub, no payment — ever. It is removed from this page, the index and the sitemap on the next build.</p>
+<p><strong>Want a question added?</strong> <a href="https://github.com/astroanand-6e/answer-ledger/issues/new?template=request-category.yml&amp;title=Category%20request%3A%20">Request a category</a>.</p>
+</div>
+<p class="mono"><a href="https://github.com/astroanand-6e/answer-ledger/blob/main/data/categories/managed-postgres-cheap-eu-with-backups.json">View the raw data for this page &rarr;</a></p>
+</main>
+<footer><div class="wrap">
+<span>Answer Ledger &mdash; every entry names its model, its prompt and its UTC timestamp. Nothing here is for sale to the vendors it names.</span>
+<span><a href="/answer-ledger/method/">How this was made</a> &nbsp;·&nbsp; <a href="https://github.com/astroanand-6e/answer-ledger/issues">Delist or request</a></span>
+</div></footer>
+</body>
+</html>

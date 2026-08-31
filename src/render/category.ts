@@ -1,5 +1,6 @@
 import type { LoadedCategory, Run } from "../types.ts";
-import { esc, jsonLd, utc } from "../html.ts";
+import type { Correction } from "../types.ts";
+import { esc, jsonLd, utc, utcDate } from "../html.ts";
 import { SITE, canonical, href, issueUrl, CANONICAL_ORIGIN, BASE_PATH } from "../config.ts";
 import { renderPage } from "./shell.ts";
 
@@ -36,6 +37,27 @@ function caveatBlock(caveats: string[]): string {
 </aside>`;
 }
 
+/**
+ * THE ONLY BLOCK ON THIS PAGE THAT IS NOT THE MODEL SPEAKING. It is rendered
+ * inside the brand it concerns, because a reader who stops at that entry must
+ * see it — but it is fenced off, labelled, dated and sourced so that it can
+ * never be read back as part of the answer. It does not touch the recorded
+ * text above it; the answer stays exactly as the model gave it.
+ */
+function correctionBlock(c: Correction | undefined): string {
+  if (!c) return "";
+  const sources = c.sources.length
+    ? `<ul class="sources correction-sources">${c.sources.map((s) =>
+        `<li><a href="${esc(s.url)}" rel="nofollow noopener ugc">${esc(s.title ?? s.url)}</a><span class="dom">${esc(s.domain)}</span></li>`,
+      ).join("")}</ul>`
+    : "";
+  return `<div class="correction">
+<p class="correction-label">Editor&#39;s note &mdash; not part of the answer &mdash; checked ${esc(utcDate(c.checkedAt))}</p>
+<p class="correction-note">${esc(c.note)}</p>
+${sources}
+</div>`;
+}
+
 function brandsBlock(run: Run): string {
   if (run.brands.length === 0) {
     // A category whose constraints disqualify every vendor is a RESULT, not an
@@ -57,7 +79,7 @@ function brandsBlock(run: Run): string {
     if (b.caveat) rows.push(`<p class="brand-row caveat-row"><span class="lbl">Model unsure</span>${esc(b.caveat)}</p>`);
     return `<li><span class="brand-name">${esc(b.name)}</span>${
       b.note ? `<p class="brand-note">${esc(b.note)}</p>` : ""
-    }${rows.join("")}${sources}</li>`;
+    }${rows.join("")}${sources}${correctionBlock(b.correction)}</li>`;
   }).join("\n");
   return `<ol class="brands">\n${items}\n</ol>`;
 }

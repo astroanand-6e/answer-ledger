@@ -4,7 +4,7 @@
   "question": "What status page doesn't stamp the vendor's logo on my page?",
   "summary": "A dated record of what one AI assistant answered when asked for a public status page with no vendor branding and a custom domain on the free or cheapest tier, usable by a two-person team.",
   "delisted": false,
-  "provisional": true,
+  "provisional": false,
   "runs": [
     {
       "engine": "claude",
