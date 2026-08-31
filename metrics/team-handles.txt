@@ -1,0 +1,21 @@
+# metrics/team-handles.txt — INADMISSIBLE AUTHORS
+#
+# Munger, Cycle 6 pre-mortem, Ruling 4 (BLOCKING): the Traffic Gate counts
+# NON-TEAM category requests. An issue authored by us is not demand, it is
+# us talking to ourselves. scripts/traffic-snapshot.sh reads this file and
+# emits `category_requests_nonteam` / `delist_requests_nonteam` by excluding
+# every author listed here.
+#
+# RULES
+#  - One GitHub login per line, lowercase. Blank lines and #-comments ignored.
+#  - Matching is case-insensitive and exact (not substring).
+#  - Any login ending in "[bot]" is excluded automatically and need not be listed.
+#  - Any author GitHub reports with `is_bot: true` is excluded automatically.
+#  - ADDING a handle after a reading has been taken VOIDS that reading
+#    (see metrics/README.md, "What voids a reading"). Add handles the day you
+#    learn of them, never on gate day.
+#
+# Created 2026-08-31 (Cycle 8). Amendments must be dated in the git log.
+
+astroanand-6e
+answer-ledger-metrics

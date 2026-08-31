@@ -1,0 +1,19 @@
+# metrics/excluded-referrers.txt — REFERRERS THAT DO NOT COUNT
+#
+# Munger, Cycle 6 pre-mortem, V4 / Ruling 9 (BINDING): anything produced by the
+# five vendor notifications is excluded from the gate count. That is the only
+# thing that makes "we want nothing from you" true rather than asserted, and it
+# is the only enforcement of the no-ask rule that survives contact with our own
+# incentives.
+#
+# RULES
+#  - One referrer domain per line, exactly as the GitHub traffic API spells it
+#    (e.g. `cal.com`, `t.co`). Matching is case-insensitive and exact.
+#  - Add a domain the moment a notified vendor is contacted, WITH the date, in
+#    the same commit as the outreach artifact — never after a reading.
+#  - Adding a line after a reading has been taken VOIDS that reading.
+#  - This file is read by the Criterion 2 one-liner in metrics/README.md. If it
+#    is empty, nothing is excluded and the reading is still valid.
+#
+# Created 2026-08-31 (Cycle 8), intentionally empty: no vendor has been
+# contacted yet. When Getform/Forminit is notified, its domain goes here that day.

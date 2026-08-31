@@ -2,6 +2,13 @@ name: metrics
 
 # The traffic API keeps a rolling 14-day window. A day that is not snapshotted
 # is a number that no longer exists anywhere. This must run daily.
+#
+# THIS WORKFLOW IS ALLOWED TO GO RED, AND MUST. Cycle 6/8 lesson: the previous
+# version wrote {"error":"snapshot failed"} and exited 0, so a meter that had
+# never once produced a number showed a green check on the Actions tab for two
+# runs and nobody noticed. A run that could not read a single number is a
+# failed run. The snapshot line is still committed first — a partial line is
+# evidence — and only then does the job fail.
 on:
   schedule:
     - cron: "17 4 * * *"
@@ -9,21 +16,111 @@ on:
 
 permissions:
   contents: write
+  issues: read        # gh issue list needs this; a `permissions:` block sets
+                      # every unlisted scope to none, which is why the Cycle 6
+                      # version could not read issues either.
+
+concurrency:
+  group: metrics-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   snapshot:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Snapshot traffic and referrers
+
+      # CREDENTIAL NOTE — READ BEFORE "FIXING" THIS.
+      # repos/{owner}/{repo}/traffic/* requires a token with repository
+      # Administration:read (classic scope: `repo`). `administration` is NOT an
+      # available key in a workflow `permissions:` block, so secrets.GITHUB_TOKEN
+      # can never hold it and will always 403 on the traffic endpoints. The
+      # fallback below is therefore expected to fail; it is kept only so the
+      # failure is recorded rather than the job being skipped.
+      #
+      # TO MAKE THIS WORK: create a fine-grained PAT scoped to THIS repository
+      # only, with Administration:read + Issues:read + Contents:write, and
+      #   gh secret set METRICS_TOKEN --repo astroanand-6e/answer-ledger
+      # Nothing else in this repo needs a secret.
+      - name: Snapshot traffic, referrers and requests
+        id: snap
+        continue-on-error: true
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.METRICS_TOKEN || secrets.GITHUB_TOKEN }}
+          METRICS_TOKEN_PRESENT: ${{ secrets.METRICS_TOKEN != '' }}
           REPO: ${{ github.repository }}
-        run: bash scripts/traffic-snapshot.sh
+        run: |
+          echo "METRICS_TOKEN configured: $METRICS_TOKEN_PRESENT"
+          bash scripts/traffic-snapshot.sh
+
+      # Commit BEFORE asserting: the degraded line is the evidence that the
+      # meter was broken on this date, and it must survive the red X.
       - name: Commit the snapshot
         run: |
+          set -euo pipefail
           git config user.name "answer-ledger-metrics"
           git config user.email "actions@github.com"
           git add metrics/traffic.jsonl
-          git diff --cached --quiet || git commit -m "metrics: traffic snapshot $(date -u +%F)"
-          git push || echo "nothing to push"
+          if git diff --cached --quiet; then
+            echo "no change to commit"
+            exit 0
+          fi
+          git commit -m "metrics: traffic snapshot $(date -u +%F)"
+          for i in 1 2 3; do
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" && git push && exit 0
+            echo "push attempt $i failed; retrying"
+            sleep 5
+          done
+          echo "::error::could not push the snapshot; today's numbers are NOT recorded"
+          exit 1
+
+      - name: Assert the meter actually read something
+        run: |
+          set -euo pipefail
+          LAST="$(tail -n 1 metrics/traffic.jsonl)"
+          echo "$LAST" | jq .
+          if [ "$(echo "$LAST" | jq -r '.degraded // true')" != "false" ]; then
+            echo "::error::the meter is DEGRADED. api_errors: $(echo "$LAST" | jq -c '.api_errors // ["record has no api_errors field"]')"
+            echo "::error::A 403 on traffic/* means the token lacks Administration:read. See the credential note in this file."
+            exit 1
+          fi
+          if [ "$(echo "$LAST" | jq -r '.uniques_14d')" = "null" ]; then
+            echo "::error::uniques_14d is null. The gate cannot be read from a null."
+            exit 1
+          fi
+          echo "meter OK: uniques_14d=$(echo "$LAST" | jq -r .uniques_14d)"
+
+      - name: Fail the run if the snapshot step failed
+        if: steps.snap.outcome != 'success'
+        run: |
+          echo "::error::scripts/traffic-snapshot.sh exited non-zero. See the snapshot step log."
+          exit 1
+
+  # Enforces the day-14 stop rule from consensus.md, which was unenforceable
+  # until Cycle 8 because nothing measured indexation. This job does not measure
+  # anything: it checks that a HUMAN has measured recently. A stale meter is a
+  # broken meter.
+  indexation-freshness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require an indexation reading in the last 8 days
+        run: |
+          set -euo pipefail
+          F=metrics/indexation.jsonl
+          if [ ! -s "$F" ]; then
+            echo "::error::$F is empty. Run: bash scripts/indexation-check.sh"
+            exit 1
+          fi
+          LAST_AT="$(tail -n 1 "$F" | jq -r .at)"
+          AGE=$(( ( $(date -u +%s) - $(date -u -d "$LAST_AT" +%s) ) / 86400 ))
+          echo "newest indexation reading: $LAST_AT (${AGE}d old)"
+          tail -n 1 "$F" | jq .
+          if [ "$(tail -n 1 "$F" | jq -r '.indexed')" = "null" ]; then
+            echo "::warning::the newest indexation record has indexed=null — no human has counted yet"
+          fi
+          if [ "$AGE" -gt 8 ]; then
+            echo "::error::no indexation reading for ${AGE} days. The '>=20 URLs indexed' criterion is unmeasured."
+            echo "::error::Run: bash scripts/indexation-check.sh   (it prints the procedure)"
+            exit 1
+          fi
