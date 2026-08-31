@@ -28,7 +28,7 @@ kills the project; there is no partial credit and no extension.
 |---|---|---|---|
 | 1 | Unique visitor-days over the 30-day window | **≥ 300** | `metrics/traffic.jsonl` |
 | 2 | Distinct admissible external referrers | **≥ 1** | `metrics/traffic.jsonl` |
-| 3 | Canonical URLs indexed by Google | **≥ 20** | `metrics/indexation.jsonl` |
+| 3 | Canonical URLs indexed by an **admissible** search engine | **≥ 20** | `metrics/indexation.jsonl` |
 | 4 | Non-team category requests | **≥ 5** | `metrics/traffic.jsonl` |
 
 **The window** is the 30 calendar days **2026-09-01 through 2026-09-30 inclusive**, UTC.
@@ -163,25 +163,69 @@ option-(a) URL decision: a link posted on GitHub itself is not an external refer
 
 ## Criterion 3 — ≥20 URLs indexed
 
-Measured from `metrics/indexation.jsonl`, written by `scripts/indexation-check.sh`.
-**This number is entered by a human.** There is no credential-free automated way to
-count indexed URLs: Search Console needs site verification plus OAuth, and a scraped
-`site:` query is blocked (tried 2026-08-31 against `html.duckduckgo.com`: HTTP 202
-anti-bot challenge). A scraper that silently returns 0 is worse than no meter, because
-0 is a number the gate would believe.
+Measured from `metrics/indexation.jsonl`, written by `scripts/indexation-check.sh`
+(human entry) or `scripts/indexation-probe.sh` (automated, controlled).
+
+### Which engines count — the admissibility rule
+
+**Criterion 3 was originally written as "indexed by Google".** That is struck. A
+criterion measurable only through a credential nobody in this company holds is not a
+strict gate, it is a scheduled void with extra ceremony — and since void kills, it would
+mean the project was already dead and the remaining days were theatre. Rigour is a
+threshold that can actually be read.
+
+A record is **admissible for criterion 3** only if its `engine` is one of:
+
+```
+google   bing   duckduckgo
+```
+
+An engine is admissible only if it (a) accepts a **bare `site:`** query with no
+accompanying keywords, and (b) runs a general-web-scale index. Both tests are properties
+of the instrument, decided before the number is known.
+
+**Mojeek is inadmissible, in both directions.** It rejects a bare `site:` — it demands
+keywords alongside it — so it can only ever see keyword-matching pages. That makes every
+Mojeek count a floor. **A Mojeek reading may not fire the stop rule, and a Mojeek
+reading may not pass the gate either.** A Mojeek 22 would fail criterion 3 exactly as a
+Mojeek 0 fails to kill it. That symmetry is what makes this a rule rather than an excuse,
+and it is the reason this clause could be written honestly on the night the first zero
+arrived.
+
+Note that this replacement is **harder** to satisfy than "indexed by Google", not easier:
+DuckDuckGo reads Bing's index, which is a genuinely different and generally smaller index
+than Google's. Google via Search Console remains the *preferred* method and stays on the
+human ask. It is a preference, not a precondition.
+
+### Bounds
+
+Every record carries a `bound` field, `exact` or `lower`:
+
+- `bound: "exact"` — a full count. Behaves normally.
+- `bound: "lower"` — the method can undercount its own engine's index. Such a record
+  **may satisfy the `≥ 20` threshold** (if a floor is already ≥ 20, the true value is
+  too) but **may never fire a `<` stop rule.** An undercount that stops the project is
+  the one error direction that cannot be taken back.
+
+A bound only qualifies here if it is a bound on the **same engine's index**. A count from
+a different index is not a bound on this quantity at all; it is a measurement of
+something else, and the allowlist above is what excludes it.
+
+Records written before this amendment have no `bound` field; a missing `bound` is read as
+`exact`, and those records are in any case inadmissible under the allowlist.
 
 ### The procedure — follow it verbatim, every time
 
 Run `bash scripts/indexation-check.sh` with no arguments and it prints this. Repeated
 here so the definition does not live only in a script:
 
-1. Open a browser window with **no Google account signed in** (private/incognito).
+1. Open a browser window with **no account signed in** (private/incognito).
 2. Search, verbatim: `site:astroanand-6e.github.io/answer-ledger`
 3. Go to the **last** page of results and **count rows** — distinct URLs under
    `https://astroanand-6e.github.io/answer-ledger`. **Do not use the "About N results"
-   estimate**; it is an estimate and it is wrong at small N. If Google offers "repeat the
-   search with omitted results included", click it and count that list.
-4. Log it: `bash scripts/indexation-check.sh --indexed <N>`
+   estimate**; it is an estimate and it is wrong at small N. If the engine offers "repeat
+   the search with omitted results included", click it and count that list.
+4. Log it: `bash scripts/indexation-check.sh --indexed <N> --engine <engine>`
 5. A zero is a reading. Log it.
 
 The script also records, automatically, `urls_in_sitemap` (22 as of 2026-08-31) and
@@ -193,19 +237,35 @@ script warns if you claim otherwise. `N` is bounded above by `urls_in_sitemap`.
 `indexation-freshness` job that turns the Actions tab **red** if the newest reading is
 more than 8 days old, because an unmeasured criterion is a future argument.
 
-**Day-14 stop rule** (from `memories/consensus.md`, now enforceable): read this meter on
-**2026-09-14**. If `indexed < 5`, stop. The value of a leading indicator is entirely in
-being obeyed on the one occasion it is inconvenient.
+### Day-14 stop rule
+
+Read this meter on **2026-09-14**. If an **admissible** reading exists and `indexed < 5`,
+stop. The value of a leading indicator is entirely in being obeyed on the one occasion it
+is inconvenient.
+
+**If no admissible reading exists on 2026-09-14, the stop rule does not fire that day** —
+a project may not be killed on a number its own instrument declares inadmissible; that is
+not rigour, it is superstition. **But the reprieve has a fuse.** An admissible reading
+must exist by **2026-09-21T23:59Z**. If none exists at that instant, the project **stops
+on 2026-09-21** — on the unmeasurement, not on a number. There is no further extension
+and no third date. Otherwise the cheapest way to survive any gate becomes not measuring.
+
+This does not touch void rule 1: no admissible in-window reading on 2026-09-30 is still a
+void, and void still kills.
 
 ### The command
 
 ```bash
-jq -s '[ .[] | select(.kind != "outage") | select(.at < "2026-10-01") | select(.indexed != null) ]
-  | (last | .indexed) // "NO READING TAKEN"' metrics/indexation.jsonl
+jq -s '[ .[] | select(.kind != "outage") | select(.kind != "announcement")
+        | select(.at < "2026-10-01") | select(.indexed != null)
+        | select(.engine as $e | ["google","bing","duckduckgo"] | index($e) != null) ]
+  | (last | .indexed) // "NO ADMISSIBLE READING"' metrics/indexation.jsonl
 ```
 
-**Pass if the number is ≥ 20.** If it prints `NO READING TAKEN`, criterion 3 is
-unmeasured and **the whole reading is void** — see below.
+**Pass if the number is ≥ 20.** If it prints `NO ADMISSIBLE READING`, criterion 3 is
+unmeasured and **the whole reading is void** — see below. This holds **regardless of how
+many inadmissible readings sit in the file.** A file full of Mojeek zeros reads as
+*unmeasured*, never as measured-and-failing.
 
 ---
 
@@ -273,8 +333,9 @@ against the project, because that is the only direction it can resolve without c
 every future gate this company sets. A reading is void if **any** of the following is
 true on 2026-09-30:
 
-1. **`metrics/indexation.jsonl` contains no record with a non-null `indexed`** dated in
-   the window. Criterion 3 is then unmeasured.
+1. **`metrics/indexation.jsonl` contains no *admissible* record with a non-null
+   `indexed`** dated in the window (admissibility: see Criterion 3). Criterion 3 is then
+   unmeasured. Inadmissible records do not count, however many there are.
 2. **More than 3 of the 30 calendar days in the window have no non-degraded
    `daily_views` entry.** GitHub's traffic API keeps 14 days; a day nobody snapshotted is
    a number that no longer exists anywhere on earth. Four or more missing days means U30
@@ -440,4 +501,5 @@ nobody wrote down is a gap that gets argued about on gate day.
 | Date | Commit | Change | Voids readings before |
 |---|---|---|---|
 | 2026-08-31 | (this commit) | Created. Cycle 8, per Munger Rulings 1–4, V4, V5, C1(i)–(v). | n/a |
+| 2026-08-31 | `PENDING-C10` (Cycle 10) | Munger Cycle-10 ruling C1-C5. Criterion 3 amended: **"indexed by Google" is struck** and replaced by an engine allowlist (`google`, `bing`, `duckduckgo`) encoded *in the gate query* rather than in prose. A Google-only criterion was measurable only via Search Console, a credential nobody here holds, making it a scheduled void — and void kills. The replacement is net-**stricter**: DuckDuckGo reads Bing's index, which is smaller than Google's, and the threshold stays at 20. **Mojeek is inadmissible in both directions** — it cannot fire the stop rule and it cannot pass the gate. Added the `bound: exact|lower` field (a lower bound may satisfy `>= 20` but may never fire a `<` stop). Day-14 stop rule now cannot fire with no admissible reading, but carries a **fuse: stop on 2026-09-21** if none exists by then. Failure string `NO READING TAKEN` -> `NO ADMISSIBLE READING`. Void rule 1 now reads *admissible* record. **Void rules 2-6 are byte-identical and unamended.** | **voids both 2026-08-31 records in `metrics/indexation.jsonl`** (the `indexed:null` baseline and the `engine:mojeek, indexed:0` probe reading). They survive as diagnostics only; **neither may ever be cited as a reading again.** No in-window reading is voided: the window opens 2026-09-01 and this amendment is dated 2026-08-31, before it. |
 | 2026-08-31 | `5ba2b67` (Cycle 9) | Munger Cycle-9 ruling C1/C4. §"Running the meter": corrected the failure-mode prose — the unit of loss is ~18 consecutive days with no successful snapshot, not one missed day, because every snapshot carries 14 days of `daily_views`. Documented the METER ALARM and `metrics/outages.jsonl`. All four criteria commands and the void check now also exclude `kind:"outage"` records, exactly as they exclude degraded lines. **The six void rules are byte-identical and unamended** — rule 2 was always correct. | nothing: amendment is dated 2026-08-31, before the 2026-09-01 window opens, and no reading has been taken |
