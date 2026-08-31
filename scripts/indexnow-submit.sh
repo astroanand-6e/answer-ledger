@@ -49,7 +49,7 @@ KEY="$(sed -n 's/^export const INDEXNOW_KEY = "\([0-9A-Za-z-]*\)";$/\1/p' "$DIR/
 ORIGIN="$(sed -n 's|^export const CANONICAL_ORIGIN = "\(.*\)";$|\1|p' "$DIR/src/config.ts")"
 BASE_PATH="$(sed -n 's|^export const BASE_PATH = "\(.*\)";$|\1|p' "$DIR/src/config.ts")"
 
-DRY=0; FORCE=0; MIN_INTERVAL_HOURS="${INDEXNOW_MIN_INTERVAL_HOURS:-6}"
+DRY=0; FORCE=0; ANNOUNCE=0; MIN_INTERVAL_HOURS="${INDEXNOW_MIN_INTERVAL_HOURS:-6}"
 # api.indexnow.org is the shared endpoint: it fans a submission out to every
 # participating engine. bing and yandex are addressed directly as well, because
 # they are the two that matter most to us and a per-endpoint status code is a
@@ -60,6 +60,7 @@ ENDPOINTS_RAW="${INDEXNOW_ENDPOINTS:-api.indexnow.org,www.bing.com,yandex.com}"
 while [ $# -gt 0 ]; do
   case "$1" in
     --dry-run)   DRY=1; shift ;;
+    --announce)  ANNOUNCE=1; shift ;;
     --force)     FORCE=1; shift ;;
     --endpoints) ENDPOINTS_RAW="${2:-}"; shift 2 ;;
     --sitemap)   SITEMAP_FILE="${2:-}"; shift 2 ;;
@@ -152,7 +153,7 @@ recently_sent() {
   [ $(( (NOW_EPOCH - then_epoch) / 3600 )) -lt "$MIN_INTERVAL_HOURS" ]
 }
 
-EXIT=0
+EXIT=0; RESULTS=""
 IFS=',' read -r -a ENDPOINTS <<< "$ENDPOINTS_RAW"
 for ep in "${ENDPOINTS[@]}"; do
   ep="$(printf '%s' "$ep" | tr -d ' ')"
@@ -161,6 +162,7 @@ for ep in "${ENDPOINTS[@]}"; do
 
   if [ "$FORCE" != 1 ] && recently_sent "$ep"; then
     echo "SKIP  $ep — same $URL_COUNT-URL set accepted within the last ${MIN_INTERVAL_HOURS}h (--force to override)"
+    RESULTS="${RESULTS}${RESULTS:+, }${ep}=skipped"
     log "$ep" 0 false "skipped: identical URL set accepted within ${MIN_INTERVAL_HOURS}h; nothing was sent" ',"kind":"skip"'
     continue
   fi
@@ -184,9 +186,32 @@ for ep in "${ENDPOINTS[@]}"; do
     *)   OK=false; NOTE="unexpected HTTP $CODE, treated as failure. Body: $SNIP" ;;
   esac
 
+  RESULTS="${RESULTS}${RESULTS:+, }${ep}=${CODE}"
   [ "$OK" = true ] && echo "OK    $ep -> HTTP $CODE" || { echo "FAIL  $ep -> HTTP $CODE  ($NOTE)" >&2; EXIT=1; }
   log "$ep" "$CODE" "$OK" "$NOTE"
 done
 
 echo "indexnow-submit: appended $(printf '%s' "${#ENDPOINTS[@]}") record(s) to metrics/indexnow.jsonl"
+
+# --- C6: record the ANNOUNCEMENT in the criterion-3 ledger -----------------
+# Munger condition C6 (Cycle 10) requires that the act of announcing the corpus
+# to an admissible engine be logged in metrics/indexation.jsonl. This is NOT a
+# reading: `indexed` is null and `kind` is "announcement", which the criterion-3
+# gate query excludes explicitly, exactly as it excludes kind:"outage". It
+# records that the corpus stopped being invisible, and when.
+if [ "$ANNOUNCE" = 1 ]; then
+  if [ "$EXIT" != 0 ]; then
+    echo "indexnow-submit: NOT logging an announcement — at least one endpoint failed." >&2
+  else
+    IDX="$DIR/metrics/indexation.jsonl"
+    SITEMAP_URL="${ORIGIN}${BASE_PATH}/sitemap.xml"
+    ANOTE="IndexNow submission accepted for ${URL_COUNT} sitemap URLs. Per-endpoint HTTP status this run: ${RESULTS}. 200 = URLs submitted and key validated; 202 = received, key validation pending. keyLocation=${KEY_LOCATION}. Satisfies Munger condition C6 branch 2: the sitemap was submitted directly to an admissible engine (bing). Per-endpoint status codes are in metrics/indexnow.jsonl, url_set=${URLS_HASH}. NOT A READING: indexed is null. Google does not participate in IndexNow, so this announces to bing/yandex/seznam/naver only. Origin-root robots.txt (branch 1) remains impossible: astroanand-6e.github.io is a user-site repo we do not own."
+    printf '{"at":"%s","kind":"announcement","method":"indexnow","engine":"bing","indexed":null,"sitemap":"%s","urls_in_sitemap":%s,"checked_by":"%s","note":"%s"}\n' \
+      "$NOW" "$SITEMAP_URL" "$URL_COUNT" \
+      "$(json_str "${INDEXATION_CHECKED_BY:-$(git -C "$DIR" config user.name 2>/dev/null || echo unknown)}")" \
+      "$(json_str "$ANOTE")" >> "$IDX"
+    echo "indexnow-submit: logged kind=announcement to metrics/indexation.jsonl"
+  fi
+fi
+
 exit $EXIT
