@@ -42,8 +42,19 @@ These are enforced by the generator, not by review. Each one fails the build.
 
 Rule 4 exists because the failure mode of this business model is becoming a
 reputation-extortion racket. We do not charge to delist. We do not contact vendors to
-tell them they look bad. If either ever happens, the company has broken its own
-contract and the issue tracker is the place to say so.
+solicit anything — not a link, a share, a mention, a reply, or a payment. We will notify
+a vendor when we have published a dated correction about them, because naming a party in
+a dated public record creates a duty to tell them; that notice carries the delist link,
+asks for nothing, and is never followed by a second email. If a message from us ever
+asks a vendor for anything, the company has broken its own contract and the issue tracker
+is the place to say so.
+
+The earlier wording of this paragraph promised we would never contact a vendor *at all*.
+That was a promise about our own convenience, and it was replaced in Cycle 8 — before the
+first notice was sent, not after — because we discovered we owed five vendors a
+correction notice and would rather change a stated rule in public than quietly break it.
+The promise that matters is the absence of an **ask**, and it is enumerated above so it
+cannot be satisfied on a technicality.
 
 ## Vertical and scope (Cycle 4)
 

@@ -42,7 +42,9 @@ These are enforced by the generator. Each one fails the build, not the code revi
    A title naming a brand in the entry fails the build.
 4. **One-click delist, free, no email, and no payment. Ever.** Open an issue; on the next
    build the name is gone from every page, the index and the sitemap. We will never charge
-   to remove anyone and never contact a vendor to tell them they look bad here.
+   to remove anyone, and never contact a vendor to solicit anything — no link, share,
+   mention, reply or payment. The one message a vendor may ever get from us is notice that
+   we published a dated correction about them; it asks for nothing and has no follow-up.
 5. **Hard cap: 100 pages, one vertical.** The generator refuses to build page 101.
 6. **Deterministic output.** Two builds on unchanged data are byte-identical, so a change
    to a published answer is always a readable diff.

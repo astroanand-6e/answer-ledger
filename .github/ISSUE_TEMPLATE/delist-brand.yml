@@ -10,8 +10,16 @@ body:
 
         To be explicit, because this pattern has a bad history elsewhere:
         we do not charge to delist, we never have, and there is no mechanism by
-        which we could. We also do not contact vendors to tell them they look
-        bad here.
+        which we could.
+
+        We never contact a vendor to solicit anything — not a link, a share, a
+        mention, a reply, or a payment. There is exactly one reason we will ever
+        write to you: if we have published a dated correction about your
+        product, we tell you, so that you hear it from us rather than from a
+        customer. That notice carries this delist link, asks you for nothing,
+        and is never followed by a second email. If a message from us ever asks
+        you for anything at all, it has broken this promise, and this issue
+        tracker is the place to say so, in public.
 
         On the next build your name is removed from every answer page, from the
         index and from the sitemap. Where your name appeared inside an otherwise
