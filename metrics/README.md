@@ -107,7 +107,7 @@ be substituted. They are recorded for context only.
 ### The command
 
 ```bash
-jq -s '[ .[] | select((.degraded == true) or has("error") | not)
+jq -s '[ .[] | select((.degraded == true) or has("error") or (.kind == "outage") | not)
              | .at as $at | (.daily_views // [])[] | {d: (.t[0:10]), u: .u, at: $at} ]
   | map(select(.d >= "2026-09-01" and .d <= "2026-09-30"))
   | group_by(.d) | map(max_by(.at)) | map(.u) | add // 0' metrics/traffic.jsonl
@@ -144,7 +144,7 @@ line to it after a reading voids that reading.
 EXCL="$(grep -v '^[[:space:]]*#' metrics/excluded-referrers.txt | tr -d ' \t\r' \
         | grep -v '^$' | tr 'A-Z' 'a-z' | jq -R . | jq -s -c .)"
 jq -s --argjson excl "$EXCL" '
-  [ .[] | select((.degraded == true) or has("error") | not)
+  [ .[] | select((.degraded == true) or has("error") or (.kind == "outage") | not)
         | select(.at >= "2026-09-01" and .at < "2026-10-01") | (.referrers // [])[] ]
   | map(select(.referrer | ascii_downcase | test("github\\.com|github\\.io|^google$") | not))
   | map(select(.referrer | ascii_downcase | IN($excl[]) | not))
@@ -200,7 +200,7 @@ being obeyed on the one occasion it is inconvenient.
 ### The command
 
 ```bash
-jq -s '[ .[] | select(.at < "2026-10-01") | select(.indexed != null) ]
+jq -s '[ .[] | select(.kind != "outage") | select(.at < "2026-10-01") | select(.indexed != null) ]
   | (last | .indexed) // "NO READING TAKEN"' metrics/indexation.jsonl
 ```
 
@@ -230,7 +230,7 @@ handle to `metrics/team-handles.txt` after a reading voids that reading.
 ### The command
 
 ```bash
-jq -s '[ .[] | select((.degraded == true) or has("error") | not)
+jq -s '[ .[] | select((.degraded == true) or has("error") or (.kind == "outage") | not)
              | select(.at < "2026-10-01")
              | select(has("category_requests_nonteam")) | .category_requests_nonteam ]
   | max // 0' metrics/traffic.jsonl
@@ -243,7 +243,7 @@ jq -s '[ .[] | select((.degraded == true) or has("error") | not)
 Required alongside the number, so the filter is auditable rather than trusted:
 
 ```bash
-jq -s -r '[ .[] | select(has("category_request_authors")) ] | last
+jq -s -r '[ .[] | select(.kind != "outage") | select(has("category_request_authors")) ] | last
   | (.category_request_authors // [])[]
   | "#\(.n)  \(.a)  team=\(.team)  \(.at)"' metrics/traffic.jsonl
 ```
@@ -261,7 +261,7 @@ instrument; inventing a label for a borderline issue after seeing the score is
 advocacy, and the git order is what distinguishes them.
 
 ```bash
-jq -s '[ .[] | select(has("unclassified_nonteam")) ] | last | .unclassified_nonteam' metrics/traffic.jsonl
+jq -s '[ .[] | select(.kind != "outage") | select(has("unclassified_nonteam")) ] | last | .unclassified_nonteam' metrics/traffic.jsonl
 ```
 
 ---
@@ -292,10 +292,10 @@ true on 2026-09-30:
 
 ```bash
 jq -s -r '
-  ([ .[] | select((.degraded == true) or has("error") | not)
+  ([ .[] | select((.degraded == true) or has("error") or (.kind == "outage") | not)
          | (.daily_views // [])[] | (.t[0:10]) ]
     | map(select(. >= "2026-09-01" and . <= "2026-09-30")) | unique) as $covered
-  | ([ .[] | select((.degraded == true) or has("error")) | .at ]) as $bad
+  | ([ .[] | select((.degraded == true) or has("error")) | select(.kind != "outage") | .at ]) as $bad
   | "days covered: \($covered | length)/30",
     "missing days: \(30 - ($covered | length))   (VOID if > 3)",
     "degraded/error snapshots: \($bad | length)",
@@ -322,6 +322,7 @@ first is that nobody can resist a number once they have seen it.
 | `metrics/indexation.jsonl` | `scripts/indexation-check.sh` (weekly, human-entered count) | one record per check; append-only |
 | `metrics/team-handles.txt` | hand-maintained | inadmissible authors (Ruling 4) |
 | `metrics/excluded-referrers.txt` | hand-maintained | referrers excluded by V4 |
+| `metrics/outages.jsonl` | `snapshot_gate_metrics()` in `scripts/core/auto-loop.sh` | `kind:"outage"` records naming each meter-silent gap in hours; evidence, excluded from all four criteria; append-only |
 
 **Both `.jsonl` files are append-only. Never edit or delete a line.** The product of this
 company is the proposition that a dated record is not negotiable; the scoreboard is held
@@ -380,10 +381,57 @@ gh secret set METRICS_TOKEN --repo astroanand-6e/answer-ledger
 ```
 
 `.github/workflows/metrics.yml` already prefers `secrets.METRICS_TOKEN` and falls back to
-`GITHUB_TOKEN`. Until that secret exists, **the daily snapshot must be run from a machine
-with `gh auth login` as the repo owner**, where it works today. A day nobody snapshots is
-a day that stops existing — and under "What makes a reading void" rule 2, four such days
-kill the project.
+`GITHUB_TOKEN`. Until that secret exists, **the snapshot must be run from a machine with
+`gh auth login` as the repo owner**, where it works today. Since Cycle 8 that machine is
+the `auto-loop` process itself (`snapshot_gate_metrics()` in
+`scripts/core/auto-loop.sh`), which attempts the snapshot at the top of every cycle,
+roughly hourly, before the model runs.
+
+### The real unit of loss — corrected 2026-08-31
+
+An earlier draft of this section said a day nobody snapshots is a day that stops
+existing, and that four missed snapshots void the reading. **That is wrong, and wrong in
+the project's favour by more than a factor of four.** Void rule 2 counts *missing
+calendar days of `daily_views`*, not missing snapshot runs, and
+
+> **every snapshot carries fourteen days of `daily_views`, not one.**
+
+So a skipped snapshot loses nothing: the next successful snapshot still contains that
+calendar day, and `max_by(.at)` prefers the later, settled value anyway. To actually lose
+four calendar days out of the window you need **roughly eighteen consecutive days with no
+successful snapshot at all** — fourteen to roll the day off GitHub's rolling window, then
+four more to accumulate the fourth loss.
+
+The correction cuts both ways and is on the record before the reading, not after:
+
+- It makes the meter **safer** than Cycle 8 advertised. Do not declare a meter emergency
+  on one missed day, and do not argue a void that the data does not support.
+- It does **not** amend void rule 2. Rule 2's wording is unchanged and was always
+  correct; only the prose describing it was wrong.
+- The real paths to a void are, in order of probability: (a) the `gh` credential
+  expiring, which writes `degraded: true` forever while everything *looks* alive;
+  (b) the machine off, asleep or logged out for weeks; (c) `.auto-loop-paused` present,
+  which stops the meter silently by design. None of the three announce themselves, which
+  is why the loop now carries the METER ALARM (below) and writes outage records.
+
+### METER ALARM and outage records
+
+Because there is no human in the daily loop, the alarm is delivered to the only reader
+there is: the next cycle's prompt. Each cycle `snapshot_gate_metrics()` computes
+
+- **(a)** window calendar days covered by non-degraded `daily_views`, and
+- **(b)** the age in days of the newest non-degraded record,
+
+and if **(b) > 3 days**, or **(a) falls more than 3 short of the elapsed window days**, it
+injects a `## METER ALARM` block into the cycle prompt, which the cycle must treat as its
+first item of work. Three days of slack against an eighteen-day unit of loss is a wide
+margin, deliberately: the alarm is meant to fire long before anything is lost.
+
+Separately, `metrics/outages.jsonl` records every interval in which the meter was silent
+(`{"kind":"outage","gap_hours":N,...}`), written on loop startup and on the first cycle
+after any gap. **Outage records are evidence, not data**: they are excluded from all four
+criteria commands exactly as degraded lines are, by `select(.kind != "outage")`. A gap
+nobody wrote down is a gap that gets argued about on gate day.
 
 ---
 
@@ -392,3 +440,4 @@ kill the project.
 | Date | Commit | Change | Voids readings before |
 |---|---|---|---|
 | 2026-08-31 | (this commit) | Created. Cycle 8, per Munger Rulings 1–4, V4, V5, C1(i)–(v). | n/a |
+| 2026-08-31 | (this commit, Cycle 9) | Munger Cycle-9 ruling C1/C4. §"Running the meter": corrected the failure-mode prose — the unit of loss is ~18 consecutive days with no successful snapshot, not one missed day, because every snapshot carries 14 days of `daily_views`. Documented the METER ALARM and `metrics/outages.jsonl`. All four criteria commands and the void check now also exclude `kind:"outage"` records, exactly as they exclude degraded lines. **The six void rules are byte-identical and unamended** — rule 2 was always correct. | nothing: amendment is dated 2026-08-31, before the 2026-09-01 window opens, and no reading has been taken |

@@ -11,6 +11,9 @@
     "build": "node --no-warnings src/build.ts",
     "check": "node --no-warnings src/build.ts --check",
     "typecheck": "tsc --noEmit",
+    "check:citations": "node scripts/check-citations.mjs",
+    "check:citations:offline": "node scripts/check-citations.mjs --steps=4,6",
+    "check:citations:refresh": "node scripts/check-citations.mjs --refresh",
     "metrics": "bash scripts/traffic-snapshot.sh"
   },
   "devDependencies": {

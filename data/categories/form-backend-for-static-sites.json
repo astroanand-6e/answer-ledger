@@ -69,6 +69,10 @@
                 "title": "Getform.io Is Now Forminit: Same Team, New Name"
               },
               {
+                "url": "https://getform.io/",
+                "title": null
+              },
+              {
                 "url": "https://forminit.com/",
                 "title": "Forminit (formerly Getform.io) - Headless Form Backend API"
               }

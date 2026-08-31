@@ -1,0 +1,25 @@
+{
+  "url": "https://highlight.io/",
+  "sha256": "0d20784a2ee5d258ae2491f2bca0952bd807aa6c5935055ee2cdba05c63c52e9",
+  "fetchedAt": "2026-08-31T22:48:16.265Z",
+  "ok": true,
+  "status": 308,
+  "finalUrl": "https://launchdarkly.com/",
+  "location": "https://launchdarkly.com/",
+  "redirectChain": [
+    {
+      "url": "https://highlight.io/",
+      "status": 308,
+      "location": "https://launchdarkly.com/"
+    }
+  ],
+  "contentType": null,
+  "title": null,
+  "h1": [],
+  "publishedAt": null,
+  "text": "",
+  "metaText": "",
+  "github": null,
+  "error": null,
+  "followedRedirects": "same-host only; a cross-host redirect is the fact, and its target's body is not stored under this URL"
+}

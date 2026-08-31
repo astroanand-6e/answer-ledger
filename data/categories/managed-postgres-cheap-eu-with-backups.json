@@ -34,8 +34,8 @@
           "caveat": "I am reasonably confident about the pricing shape but not about the current entry-instance price or which EU regions are offered today. Do not plan a budget on my recollection of the number.",
           "sources": [],
           "correction": {
-            "note": "Crunchy Data, the company behind Crunchy Bridge, was acquired by Snowflake in June 2025. Crunchy Bridge continues to be sold as an independent managed Postgres service and the pricing described above is still accurate; this note records the change of ownership only, not a change to the product or its terms.",
-            "checkedAt": "2026-08-31T17:30:00Z",
+            "note": "Crunchy Data, the company behind Crunchy Bridge, was acquired by Snowflake. The announcement was published on Crunchy Data's own blog on 2 June 2025 and states that \"Crunchy Data is joining Snowflake to bring Postgres to the AI Data Cloud\". Checked again on 31 August 2026: Crunchy Bridge is still sold as a managed Postgres service, and its pricing page is live and advertises hourly billing with \"plans starting at $10/mo\". This note records the change of ownership only; it does not assert that every pricing detail described above is still current.",
+            "checkedAt": "2026-08-31T22:40:00Z",
             "sources": [
               {
                 "url": "https://www.crunchydata.com/blog/crunchy-data-joins-snowflake",
@@ -43,7 +43,11 @@
               },
               {
                 "url": "https://www.snowflake.com/en/blog/snowflake-postgres-enterprise-ai-database/",
-                "title": "Delivering the Most Enterprise-Ready Postgres, Built for Snowflake"
+                "title": "Delivering the Most Enterprise-Ready Postgres, Built for the Snowflake AI Data Cloud"
+              },
+              {
+                "url": "https://www.crunchydata.com/pricing",
+                "title": "Pricing"
               }
             ]
           }

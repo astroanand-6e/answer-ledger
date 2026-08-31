@@ -1,0 +1,27 @@
+{
+  "url": "https://www.crunchydata.com/pricing",
+  "sha256": "53a4d65472ad2537d968411802731f6ba35b35a4de0d98d91c3acfe58170156b",
+  "fetchedAt": "2026-08-31T22:48:14.681Z",
+  "ok": true,
+  "status": 200,
+  "finalUrl": "https://www.crunchydata.com/pricing",
+  "location": null,
+  "redirectChain": [
+    {
+      "url": "https://www.crunchydata.com/pricing",
+      "status": 200,
+      "location": null
+    }
+  ],
+  "contentType": "text/html; charset=utf-8",
+  "title": "Pricing on Hosted Postgres | Crunchy Data",
+  "h1": [
+    "Pricing"
+  ],
+  "publishedAt": null,
+  "text": "Pricing on Hosted Postgres | Crunchy Data Products Cloud Developer? Customers Pricing Blog Contact Login Access Portal Crunchy Bridge Create Account Open menu Pricing Bridge Crunchy Bridge Fully managed cloud (AWS, Azure, GCP) Crunchy Data Warehouse Optimized for Warehouse Workloads Fully-Managed Postgres Ready to launch on the provider of your choice (AWS, Azure, GCP) with plans starting at $10/mo . Get Started Pricing Calculator → Prices include infrastructure, backups, and data transfer Performance-Optimized Optimized instances and configs for peak Postgres performance. 24/7 Monitoring Around-the-clock monitoring by the Crunchy Data team. Hourly Pricing Pay only for usage, billed in hourly increments. No-Cost Backups Daily and WAL backups included Point-in-Time Recovery Restore to any point in time with continuous WAL archiving. Team Access Controls Manage team access with granular role-based permissions. Hosted Deployed on the cloud of your choice Machine costs included Performance-tuned deployments Single tenant and private networking Fully Managed Continuous protection Point-in-time recovery Automated Backups at no-cost Team management with access controls Secure SOC2 Type 2 SSO enforcement included HIPAA Compliant Built-in audit logs Encryption at rest Encryption in transit Connect to your virtual private network Leading Postgres Price to Performance Crunchy Bridge provides leading Postgres price to performance, with improved Postgres simplicity and support. Learn how others have benefited from improved performance and support with reduced cost. CareRev Case Study 10% cost reduction 40% more IOPS Learn More → Learn More YNAB Case Study 10% cost reduction 30% more IOPS Learn More → Learn More Curious About Monthly Provision Costs? Storage costs are $0.10 per GB. For example, 100 GB would be $10 per month. Costs listed are full monthly costs, prorated by use. Fully inclusive for all machine costs, hosting, backups, and connection pooling. See platform-specific details below. AWS Azure Google Cloud Hobby-0 Cores 2 Memory .5GB Price $9 Hobby-1 Cores 2 Memory 1GB Price $18 Hobby-2 Cores 1 Memory 2GB Price $35 Hobby-4 Cores 1 Memory 4GB Price $70 Standard-4 Cores 1 Memory 4GB Price $70 Standard-8 Cores 2 Memory 8GB Price $140 Standard-16 Cores 4 Memory 16GB Price $280 Standard-32 Cores 8 Memory 32GB Price $560 Standard-64 Cores 16 Memory 64GB Price $1,120 Standard-128 Cores 32 Memory 128GB Price $2,240 Standard-192 Cores 48 Memory 192GB Price $3,360 Standard-384 Cores 96 Memory 384GB Price $6,720 Memory-16 Cores 2 Memory 16GB Price $240 Memory-32 Cores 4 Memory 32GB Price $480 Memory-64 Cores 8 Memory 64GB Price $960 Memory-128 Cores 16 Memory 128GB Price $1,920 Memory-256 Cores 32 Memory 256GB Price $3,840 Memory-512 Cores 64 Memory 512GB Price $7,680 AWS Machine Tier Cores Memory Price Hobby-0 2 .5GB $9 Hobby-1 2 1GB $18 Hobby-2 1 2GB $35 Hobby-4 1 4GB $70 Standard-4 1 4GB $70 Standard-8 2 8GB $140 Standard-16 4 16GB $280 Standard-32 8 32GB $560 Standard-64 16 64GB $1,120 Standard-128 32 128GB $2,240 Standard-192 48 192GB $3,360 Standard-384 96 384GB $6,720 Memory-16 2 16GB $240 Memory-32 4 32GB $480 Memory-64 8 64GB $960 Memory-128 16 128GB $1,920 Memory-256 32 256GB $3,840 Memory-512 64 512GB $7,680 Products Crunchy Postgres Crunchy Postgres for Kubernetes Crunchy Bridge Crunchy Certified Postgres Crunchy Spatial Migrate to Crunchy Data Migrate from RDS Migrate from Heroku Resources Customer Portal Documentation Postgres Tutorials Crunchy Bridge Walkthrough Postgres Operator Walkthrough Blog Company About Trusted PostgreSQL News Contact Us Newsletter Branding Privacy Notice Security Cookies Settings Subscribe to the Crunchy Data Newsletter and receive Postgres content every month. Do not fill this out please: Do not fill this out please, it will be pre-filled: Email address Subscribe © 2018- 2026 Crunchy Data Solutions, Inc. YouTube LinkedIn X GitHub",
+  "metaText": "viewport: width=device-width,initial-scale=1 | color-scheme: light dark | og:image:type: image/png | og:image: https://www.crunchydata.com/card.png | og:image:width: 1200 | og:image:height: 627 | og:url: https://www.crunchydata.com/pricing | og:site_name: Crunchy Data | twitter:card: summary_large_image | twitter:site: @crunchydata | twitter:creator: @crunchydata | description: Crunchy Bridge is the cloud-hosted, managed Postgres service from Crunchy Data. Prices start as low as $10 / month. | og:title: Pricing on Hosted Postgres | Crunchy Data | og:description: Crunchy Bridge is the cloud-hosted, managed Postgres service from Crunchy Data. Prices start as low as $10 / month.",
+  "github": null,
+  "error": null,
+  "followedRedirects": "same-host only; a cross-host redirect is the fact, and its target's body is not stored under this URL"
+}

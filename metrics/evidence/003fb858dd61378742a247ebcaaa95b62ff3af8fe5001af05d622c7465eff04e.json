@@ -1,0 +1,25 @@
+{
+  "url": "https://getform.io/",
+  "sha256": "003fb858dd61378742a247ebcaaa95b62ff3af8fe5001af05d622c7465eff04e",
+  "fetchedAt": "2026-08-31T22:48:13.741Z",
+  "ok": true,
+  "status": 301,
+  "finalUrl": "https://forminit.com/",
+  "location": "https://forminit.com/",
+  "redirectChain": [
+    {
+      "url": "https://getform.io/",
+      "status": 301,
+      "location": "https://forminit.com/"
+    }
+  ],
+  "contentType": null,
+  "title": null,
+  "h1": [],
+  "publishedAt": null,
+  "text": "",
+  "metaText": "",
+  "github": null,
+  "error": null,
+  "followedRedirects": "same-host only; a cross-host redirect is the fact, and its target's body is not stored under this URL"
+}

@@ -53,6 +53,7 @@ I run a 3-person bootstrapped SaaS company. I need a form backend for a static s
    - _no source cited_
    - **Editor's note (checked 2026-08-31) — not part of the answer:** Getform was renamed Forminit on 14 January 2026. The vendor's own announcement describes this as a rebrand and not an acquisition — the same independent team, operating since 2015 — and states that existing Getform endpoints continue to work, so no migration or code change is required. Checked again on 31 August 2026: getform.io returns an HTTP 301 redirect to forminit.com, which presents itself as "Forminit (formerly Getform.io)". The service described here is still operating; only the name is out of date.
      - Evidence: [Getform.io Is Now Forminit: Same Team, New Name](https://forminit.com/blog/getform-is-now-forminit/) (forminit.com)
+     - Evidence: [https://getform.io/](https://getform.io/) (getform.io)
      - Evidence: [Forminit (formerly Getform.io) - Headless Form Backend API](https://forminit.com/) (forminit.com)
 6. **Formcarry** — Clean, developer-oriented endpoint with built-in spam filtering, notification emails and custom success redirects — a solid, unsurprising fit for exactly the constraints you listed.
    - Pricing, as described: Free tier with a monthly submission allowance, paid plans above it.
