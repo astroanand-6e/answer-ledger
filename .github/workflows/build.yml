@@ -1,0 +1,36 @@
+name: build
+
+# The committed site IS the published site. If data/ and docs/ ever disagree,
+# a stale corpus ships silently — so disagreement is a build failure.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  site-is-current:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      # No lockfile install needed for the build itself: the generator has zero
+      # runtime dependencies. typescript/@types/node are only for `npm run typecheck`.
+      - name: Verify committed site matches data/
+        run: node --no-warnings src/build.ts --check
+      - name: Install dev deps
+        run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Verify the build is deterministic
+        run: |
+          node --no-warnings src/build.ts
+          git diff --exit-code -- docs answers || {
+            echo "::error::Building twice produced a diff. The generator is not deterministic."
+            exit 1
+          }

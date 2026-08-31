@@ -1,0 +1,20 @@
+{
+  "name": "answer-ledger",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "A permanent public record of what an AI assistant recommends for buying-intent questions, and which sources it cited.",
+  "engines": {
+    "node": ">=22.6"
+  },
+  "scripts": {
+    "build": "node --no-warnings src/build.ts",
+    "check": "node --no-warnings src/build.ts --check",
+    "typecheck": "tsc --noEmit",
+    "metrics": "bash scripts/traffic-snapshot.sh"
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.0",
+    "typescript": "^5.7.3"
+  }
+}

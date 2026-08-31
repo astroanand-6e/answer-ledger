@@ -1,0 +1,52 @@
+name: Request a category
+description: Ask us to put a specific buying question to the model and publish the answer.
+title: "Category request: "
+labels: ["category-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This is a public GitHub issue rather than an email box. That is a higher
+        bar on purpose: fewer requests, each of which means more.
+
+        Good requests share a shape: a real purchase, and at least one **hard
+        constraint that disqualifies most of the market**. "Best CRM" has no
+        honest answer. "CRM that does not charge per seat and lets me export
+        everything" does.
+
+        Read [the method](https://astroanand-6e.github.io/answer-ledger/method/)
+        first so you know what you are asking for. In particular: this is one
+        model's answer at one moment, we run one assistant, and no vendor can
+        pay to appear, to rank, or to be worded differently.
+  - type: input
+    id: question
+    attributes:
+      label: The question, as a buyer would type it
+      placeholder: error tracking that doesn't charge me per developer
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Your hard constraints
+      description: One per line. These are what make the page worth publishing.
+      placeholder: |
+        flat monthly price, no per-seat charge
+        under $30/month at ~50k events
+        usable free tier for a side project
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why existing answers failed you (optional)
+      description: If you searched for this and got affiliate listicles, say so. It helps us rank the queue.
+    validations:
+      required: false
+  - type: checkboxes
+    id: interest
+    attributes:
+      label: Disclosure
+      options:
+        - label: I do not work for, and am not being paid by, any vendor that would benefit from this page.
+          required: false

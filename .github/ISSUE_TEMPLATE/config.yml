@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: How these answers were produced
+    url: https://astroanand-6e.github.io/answer-ledger/method/
+    about: The model, the verbatim prompt, the timestamp, and an honest list of what this record is not. Read this first.

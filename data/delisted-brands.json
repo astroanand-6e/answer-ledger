@@ -1,0 +1,4 @@
+{
+  "_comment": "Brands that asked to be removed. Lowercase. Matched against brand names and source domains on every build. Removal is free, permanent, and never requires payment. Add an entry, run `npm run build`, commit. Nothing else is needed.",
+  "brands": []
+}

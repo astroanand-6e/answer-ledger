@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "slug": "auth-predictable-pricing-at-scale",
+  "question": "What auth provider won't rug-pull my pricing when I hit 10,000 users?",
+  "summary": "A dated record of what one AI assistant answered when asked for authentication that keeps predictable pricing from 100 to 50,000 monthly active users, with no per-organisation or per-SSO-connection surcharge and a clean exit.",
+  "delisted": false,
+  "provisional": true,
+  "runs": [
+    {
+      "engine": "claude",
+      "model": "claude-opus-5[1m]",
+      "modelDisplay": "Claude Opus 5 (Anthropic)",
+      "prompt": "I run a 3-person bootstrapped SaaS company. I need user authentication for a B2B web app. My hard constraints are: pricing must stay predictable from 100 to 50,000 monthly active users with no cliff or forced enterprise upgrade; no per-organisation or per-SSO-connection surcharge; I must be able to export users and leave. Recommend at least five specific, named products or open-source projects, ranked best-fit first, and include self-hosted or free-tier options where they genuinely fit rather than defaulting to paid SaaS. For each one give: the current pricing model, the single strongest reason it satisfies my constraints, and the one thing most likely to make me regret choosing it. Then list the documentation, pricing pages, or other sources you are relying on for each claim. If you are not confident that a product still exists, or that its pricing is current, say so explicitly rather than guessing.",
+      "ranAt": "2026-08-31T16:20:52Z",
+      "retrieval": false,
+      "answerExcerpt": "Your three constraints, taken together, eliminate almost every hosted auth vendor in the B2B space — not by accident, but because per-organisation and per-SSO-connection pricing is the B2B auth business model. If \"no per-connection surcharge\" is genuinely hard, the honest ranking is dominated by self-hosted open source, and the hosted options come further down with caveats attached. I would start with Keycloak.",
+      "verdict": "The constraints as written are satisfied cleanly only by self-hosted open source. Every hosted option named below satisfies them partially at best, and the two best-known B2B auth vendors are priced in exactly the way the question rules out.",
+      "brands": [
+        {
+          "name": "Keycloak",
+          "rank": 1,
+          "note": "Pricing cannot rug-pull you because there is no pricing: it is Apache-2.0 software you run, so cost scales with your infrastructure rather than with your user count, and organisations and SSO connections are unlimited by construction.",
+          "pricing": "Free and open source (Apache 2.0). Your only cost is hosting it — realistically one small VM plus a Postgres database.",
+          "regret": "You are now operating an identity provider. Version upgrades are genuinely disruptive, the admin console is dense, and a 3-person team will feel the on-call weight of it the first time login breaks at 2am.",
+          "sources": []
+        },
+        {
+          "name": "Zitadel",
+          "rank": 2,
+          "note": "Self-hostable under Apache 2.0 with multi-tenancy and SSO in the core product rather than gated behind a plan, which is precisely the axis the question is worried about.",
+          "pricing": "Self-hosted: free, open source. There is also a managed cloud offering, which historically had a low-cost tier plus usage-based components.",
+          "regret": "Much smaller community than Keycloak, so when you hit an edge case you are more likely to be reading source code than a Stack Overflow answer.",
+          "caveat": "I am not confident about Zitadel Cloud's current tier structure or prices and I am not going to guess at numbers. Check their pricing page directly before you rely on the managed option.",
+          "sources": []
+        },
+        {
+          "name": "Ory Kratos",
+          "rank": 3,
+          "note": "Apache-2.0 identity server with no user-count licensing, and it is deliberately API-first, so exporting your users is a normal operation rather than a support ticket.",
+          "pricing": "Self-hosted: free, open source. Ory Network is the paid hosted version.",
+          "regret": "It is a set of composable services rather than a finished product — Kratos does identity, and you assemble the rest. Expect to write more glue than you planned, including your own login UI.",
+          "caveat": "I am not confident of current Ory Network pricing and am deliberately not quoting figures.",
+          "sources": []
+        },
+        {
+          "name": "Authentik",
+          "rank": 4,
+          "note": "Self-hosted and considerably easier to stand up than Keycloak, with SSO and per-application policies included rather than surcharged.",
+          "pricing": "Open-source core, free to self-host. There is a separate paid enterprise offering.",
+          "regret": "Its centre of gravity is internal/homelab SSO rather than being the customer-facing identity layer of a commercial B2B product; you may find yourself off the documented path.",
+          "caveat": "I am reasonably confident the project is active, but I cannot verify from here that the enterprise tier's terms are unchanged.",
+          "sources": []
+        },
+        {
+          "name": "Supabase Auth",
+          "rank": 5,
+          "note": "The best-fitting hosted option, because it prices by plan with a monthly-active-user allowance rather than charging per organisation or per SSO connection, and because the underlying data lives in a Postgres database you can dump.",
+          "pricing": "Bundled into Supabase's plan tiers, with an included monthly-active-user allowance and per-MAU overage above it.",
+          "regret": "There is still a per-MAU overage, so at 50,000 monthly active users this is a real and growing bill — predictable, but not flat. Enterprise SSO features have historically sat on higher tiers.",
+          "caveat": "Supabase's MAU allowances and overage rates have changed more than once. Treat any figure I might give as stale and read the current pricing page.",
+          "sources": []
+        },
+        {
+          "name": "Better Auth",
+          "rank": 6,
+          "note": "A library rather than a service: it runs inside your own application against your own database, so there is no vendor with the ability to change your pricing at all.",
+          "pricing": "Free, open-source library. No hosted component to pay for.",
+          "regret": "It is young. You are taking on the maintenance risk of a fast-moving library in the single most security-sensitive part of your product, and enterprise SSO is not the thing it is best at.",
+          "caveat": "This ecosystem moves quickly and I am less confident about its current state than about the older projects above.",
+          "sources": []
+        }
+      ],
+      "caveats": [
+        "I have no live web access in this run, so I have not read a single current pricing page. Every pricing description above is from memory of how these products were priced, and pricing is the fastest-decaying fact about any of them. Verify before you commit.",
+        "Because I could not fetch anything, I am not able to give you the source list you asked for. I would rather say that than invent citations.",
+        "I am confident all six projects existed and were actively maintained as of my knowledge cutoff. I cannot confirm any of them still is today.",
+        "Two obvious names are missing on purpose rather than by oversight: the best-known B2B auth vendors in this space price per SSO connection or per organisation, which is the exact thing your constraints exclude. If that constraint is softer than you wrote it, they come back into contention immediately."
+      ]
+    }
+  ]
+}

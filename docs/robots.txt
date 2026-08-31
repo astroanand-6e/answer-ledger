@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://astroanand-6e.github.io/answer-ledger/sitemap.xml

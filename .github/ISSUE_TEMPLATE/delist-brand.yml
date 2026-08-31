@@ -1,0 +1,56 @@
+name: Delist my brand
+description: Remove a product or company from every page on this site. Free, permanent, no payment, no email required.
+title: "Delist request: "
+labels: ["delist"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **We will remove you, for free, and we will not ask you for anything in return.**
+
+        To be explicit, because this pattern has a bad history elsewhere:
+        we do not charge to delist, we never have, and there is no mechanism by
+        which we could. We also do not contact vendors to tell them they look
+        bad here.
+
+        On the next build your name is removed from every answer page, from the
+        index and from the sitemap. Where your name appeared inside an otherwise
+        verbatim quote, it is replaced with a visible redaction marker rather
+        than silently rewritten — an edited quote should look edited. Each
+        affected page carries a neutral note that the record was edited, without
+        naming you.
+
+        You do not need to give us an email address, and please do not put one
+        in this issue — it is public.
+  - type: input
+    id: brand
+    attributes:
+      label: Product or company name
+      description: Exactly as it appears on the page. If it appears under more than one spelling, list all of them.
+      placeholder: Acme Status
+    validations:
+      required: true
+  - type: input
+    id: domain
+    attributes:
+      label: Your domain (optional)
+      description: If given, we also drop any cited source on this domain.
+      placeholder: acme.example
+    validations:
+      required: false
+  - type: textarea
+    id: pages
+    attributes:
+      label: Which pages (optional)
+      description: Leave blank to be removed from all of them, which is the default.
+    validations:
+      required: false
+  - type: checkboxes
+    id: authority
+    attributes:
+      label: Confirmation
+      options:
+        - label: I am connected to this product or company, or am otherwise acting on its behalf.
+          required: true
+        - label: I understand this removal is free and that nobody here will ask me for payment. If anyone does, I will say so publicly in this repository.
+          required: true

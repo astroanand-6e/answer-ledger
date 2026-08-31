@@ -1,0 +1,29 @@
+name: metrics
+
+# The traffic API keeps a rolling 14-day window. A day that is not snapshotted
+# is a number that no longer exists anywhere. This must run daily.
+on:
+  schedule:
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Snapshot traffic and referrers
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: bash scripts/traffic-snapshot.sh
+      - name: Commit the snapshot
+        run: |
+          git config user.name "answer-ledger-metrics"
+          git config user.email "actions@github.com"
+          git add metrics/traffic.jsonl
+          git diff --cached --quiet || git commit -m "metrics: traffic snapshot $(date -u +%F)"
+          git push || echo "nothing to push"

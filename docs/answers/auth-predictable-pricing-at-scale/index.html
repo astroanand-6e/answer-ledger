@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What auth provider won&#39;t rug-pull my pricing when I hit 10,000 users? — recorded answer | Answer Ledger</title>
+<meta name="description" content="A dated record of what one AI assistant answered when asked for authentication that keeps predictable pricing from 100 to 50,000 monthly active users, with no per-organisation or per-SSO-connection surcharge and a clean exit.">
+<link rel="canonical" href="https://astroanand-6e.github.io/answer-ledger/answers/auth-predictable-pricing-at-scale/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What auth provider won&#39;t rug-pull my pricing when I hit 10,000 users? — recorded answer | Answer Ledger">
+<meta property="og:description" content="A dated record of what one AI assistant answered when asked for authentication that keeps predictable pricing from 100 to 50,000 monthly active users, with no per-organisation or per-SSO-connection surcharge and a clean exit.">
+<meta property="og:url" content="https://astroanand-6e.github.io/answer-ledger/answers/auth-predictable-pricing-at-scale/">
+<meta property="og:site_name" content="Answer Ledger">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:opsz,wght@6..72,400;6..72,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>:root{
+  --paper:#f4f1ea; --ink:#1a1815; --ink-soft:#59524a; --rule:#cfc6b6;
+  --mark:#7a2b1e; --tint:#e9e3d6; --machine:#3c3a35;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --paper:#14130f; --ink:#ece7dc; --ink-soft:#9d968a; --rule:#3a362e;
+         --mark:#d97a5f; --tint:#1e1c17; --machine:#c6c0b4; }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:Newsreader,Georgia,'Times New Roman',serif;
+  font-size:19px; line-height:1.6; font-optical-sizing:auto;
+}
+.wrap{max-width:46rem;margin:0 auto;padding:0 1.5rem}
+a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
+a:hover{border-bottom-color:var(--mark);color:var(--mark)}
+h1,h2,h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;letter-spacing:-.01em;line-height:1.12;margin:0}
+h1{font-size:clamp(2.1rem,5.5vw,3.1rem)}
+h2{font-size:1.6rem;margin-top:3rem}
+h3{font-size:1.15rem}
+p{margin:1rem 0}
+.mono,code{font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78rem;letter-spacing:.01em}
+
+/* masthead */
+header.mast{border-bottom:2px solid var(--ink);margin-bottom:2.5rem}
+header.mast .wrap{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding-top:1.1rem;padding-bottom:.7rem;flex-wrap:wrap}
+.logo{font-family:'Instrument Serif',Georgia,serif;font-size:1.5rem;border:0;letter-spacing:-.02em}
+.logo b{color:var(--mark);font-weight:400}
+nav.mast-nav{display:flex;gap:1.25rem}
+nav.mast-nav a{border:0;font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;font-family:'IBM Plex Mono',monospace;color:var(--ink-soft)}
+nav.mast-nav a:hover{color:var(--mark)}
+
+/* the machine record block: this is the credibility of the whole site */
+.record{border:1px solid var(--rule);border-left:3px solid var(--mark);background:var(--tint);padding:1rem 1.1rem;margin:1.5rem 0}
+.record dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem}
+.record dt{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.11em;color:var(--ink-soft);padding-top:.2em}
+.record dd{margin:0;font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--machine);word-break:break-word}
+.record .prompt{white-space:pre-wrap;background:var(--paper);border:1px solid var(--rule);padding:.55rem .65rem;display:block}
+@media (max-width:34rem){.record dl{grid-template-columns:1fr}.record dt{padding-top:.6em}}
+
+.kicker{font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.16em;color:var(--mark);margin:0 0 .75rem}
+.lede{font-size:1.15rem;color:var(--ink-soft);margin-top:1rem}
+.excerpt{border-left:2px solid var(--rule);padding-left:1.1rem;margin:1.5rem 0;font-style:italic;color:var(--ink-soft)}
+
+/* ranked brands */
+ol.brands{list-style:none;margin:1.5rem 0 0;padding:0;counter-reset:b}
+ol.brands>li{counter-increment:b;border-top:1px solid var(--rule);padding:1.15rem 0 1.15rem 3rem;position:relative}
+ol.brands>li:last-child{border-bottom:1px solid var(--rule)}
+ol.brands>li::before{content:counter(b,decimal-leading-zero);position:absolute;left:0;top:1.15rem;font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--mark)}
+.brand-name{font-family:'Instrument Serif',Georgia,serif;font-size:1.35rem;display:block}
+.brand-note{margin:.35rem 0 0;font-size:.95rem;color:var(--ink-soft)}
+ul.sources{list-style:none;margin:.7rem 0 0;padding:0}
+ul.sources li{font-size:.85rem;padding:.15rem 0}
+ul.sources .dom{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--ink-soft);margin-left:.4rem}
+.nosources{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--ink-soft);margin-top:.6rem}
+
+/* index */
+ul.catlist{list-style:none;margin:2rem 0;padding:0}
+ul.catlist li{border-top:1px solid var(--rule);padding:1rem 0}
+ul.catlist li:last-child{border-bottom:1px solid var(--rule)}
+ul.catlist a{border:0;font-family:'Instrument Serif',Georgia,serif;font-size:1.3rem;display:block}
+ul.catlist a:hover{color:var(--mark)}
+ul.catlist .meta{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.1em;margin-top:.3rem}
+
+/* model-stated uncertainty: content, not small print */
+.caveat{border:1px solid var(--mark);background:var(--tint);padding:.9rem 1.1rem;margin:1.75rem 0}
+.caveat-label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mark);margin:0 0 .5rem}
+.caveat ul{margin:0;padding-left:1.1rem;font-size:.92rem;color:var(--ink-soft)}
+.caveat li{margin:.3rem 0}
+.brand-row{margin:.4rem 0 0;font-size:.88rem;color:var(--ink-soft)}
+.brand-row .lbl{display:block;font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mark);opacity:.85}
+.caveat-row{border-left:2px solid var(--mark);padding-left:.7rem}
+.verdict-only{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:1.5rem 0;margin:1.5rem 0}
+.verdict-label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:var(--mark);margin:0 0 .6rem}
+.verdict-only p:last-child{margin:0;font-family:'Instrument Serif',Georgia,serif;font-size:1.3rem;line-height:1.35}
+.notice{border:1px dashed var(--mark);padding:.85rem 1rem;font-size:.9rem;margin:1.5rem 0;color:var(--ink-soft)}
+.notice strong{color:var(--mark);font-weight:400}
+.cta{margin:2.5rem 0;padding:1.25rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+footer{margin:4rem 0 3rem;border-top:2px solid var(--ink);padding-top:1rem;font-size:.82rem;color:var(--ink-soft)}
+footer .wrap{display:flex;gap:1.25rem;flex-wrap:wrap;justify-content:space-between}
+main{padding-bottom:1rem}
+hr{border:0;border-top:1px solid var(--rule);margin:2.5rem 0}</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://astroanand-6e.github.io/answer-ledger/answers/auth-predictable-pricing-at-scale/#record",
+  "url": "https://astroanand-6e.github.io/answer-ledger/answers/auth-predictable-pricing-at-scale/",
+  "headline": "What auth provider won't rug-pull my pricing when I hit 10,000 users?",
+  "description": "A dated record of what one AI assistant answered when asked for authentication that keeps predictable pricing from 100 to 50,000 monthly active users, with no per-organisation or per-SSO-connection surcharge and a clean exit.",
+  "inLanguage": "en",
+  "datePublished": "2026-08-31T16:20:52Z",
+  "dateModified": "2026-08-31T16:20:52Z",
+  "isAccessibleForFree": true,
+  "author": {
+    "@type": "Organization",
+    "name": "Answer Ledger",
+    "url": "https://astroanand-6e.github.io/answer-ledger/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Answer Ledger",
+    "url": "https://astroanand-6e.github.io/answer-ledger/"
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "What auth provider won't rug-pull my pricing when I hit 10,000 users?"
+  },
+  "isBasedOn": [
+    {
+      "@type": "CreativeWork",
+      "name": "Answer from Claude Opus 5 (Anthropic)",
+      "dateCreated": "2026-08-31T16:20:52Z",
+      "text": "Your three constraints, taken together, eliminate almost every hosted auth vendor in the B2B space — not by accident, but because per-organisation and per-SSO-connection pricing is the B2B auth business model. If \"no per-connection surcharge\" is genuinely hard, the honest ranking is dominated by self-hosted open source, and the hosted options come further down with caveats attached. I would start with Keycloak.",
+      "creator": {
+        "@type": "SoftwareApplication",
+        "name": "Claude Opus 5 (Anthropic)",
+        "identifier": "claude-opus-5[1m]",
+        "applicationCategory": "AI assistant"
+      }
+    }
+  ],
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "Authentik"
+    },
+    {
+      "@type": "Thing",
+      "name": "Better Auth"
+    },
+    {
+      "@type": "Thing",
+      "name": "Keycloak"
+    },
+    {
+      "@type": "Thing",
+      "name": "Ory Kratos"
+    },
+    {
+      "@type": "Thing",
+      "name": "Supabase Auth"
+    },
+    {
+      "@type": "Thing",
+      "name": "Zitadel"
+    }
+  ],
+  "citation": []
+}
+</script>
+</head>
+<body>
+<header class="mast"><div class="wrap">
+<a class="logo" href="/answer-ledger/">Answer<b> Ledger</b></a>
+<nav class="mast-nav">
+<a href="/answer-ledger/">Index</a>
+<a href="/answer-ledger/method/">Method</a>
+<a href="https://github.com/astroanand-6e/answer-ledger">Source</a>
+</nav>
+</div></header>
+<main class="wrap">
+<p class="kicker">Recorded answer · Developer and SaaS infrastructure tooling, bought by small bootstrapped teams</p>
+<h1>What auth provider won&#39;t rug-pull my pricing when I hit 10,000 users?</h1>
+<p class="lede">A dated record of what one AI assistant answered when asked for authentication that keeps predictable pricing from 100 to 50,000 monthly active users, with no per-organisation or per-SSO-connection surcharge and a clean exit.</p>
+<div class="notice"><strong>Provisional entry.</strong> This category was recorded while the site was being built and exists to demonstrate the format. The answer, model, prompt and timestamp below are real and unedited; the vertical is not final.</div>
+
+<p>This page is a record of one question put to Claude Opus 5 (Anthropic), kept exactly as answered. It is not a ranking, not a review and not an endorsement by Answer Ledger, and nothing on it is for sale to the vendors it names. <a href="/answer-ledger/method/">Read the method</a>.</p>
+<section>
+
+<div class="record">
+<dl>
+<dt>Model</dt><dd>Claude Opus 5 (Anthropic) <span style="opacity:.7">(claude-opus-5[1m])</span></dd>
+<dt>Answered</dt><dd>2026-08-31 16:20:52 UTC</dd>
+<dt>Retrieval</dt><dd>no — answered from training data only, so it cited nothing</dd>
+<dt>Prompt</dt><dd><span class="prompt">I run a 3-person bootstrapped SaaS company. I need user authentication for a B2B web app. My hard constraints are: pricing must stay predictable from 100 to 50,000 monthly active users with no cliff or forced enterprise upgrade; no per-organisation or per-SSO-connection surcharge; I must be able to export users and leave. Recommend at least five specific, named products or open-source projects, ranked best-fit first, and include self-hosted or free-tier options where they genuinely fit rather than defaulting to paid SaaS. For each one give: the current pricing model, the single strongest reason it satisfies my constraints, and the one thing most likely to make me regret choosing it. Then list the documentation, pricing pages, or other sources you are relying on for each claim. If you are not confident that a product still exists, or that its pricing is current, say so explicitly rather than guessing.</span></dd>
+</dl>
+</div>
+<h3>What it said, verbatim (opening)</h3>
+<blockquote class="excerpt">Your three constraints, taken together, eliminate almost every hosted auth vendor in the B2B space — not by accident, but because per-organisation and per-SSO-connection pricing is the B2B auth business model. If &quot;no per-connection surcharge&quot; is genuinely hard, the honest ranking is dominated by self-hosted open source, and the hosted options come further down with caveats attached. I would start with Keycloak.</blockquote>
+<h3>What it recommended, in the order it named them</h3>
+<p class="lede">The constraints as written are satisfied cleanly only by self-hosted open source. Every hosted option named below satisfies them partially at best, and the two best-known B2B auth vendors are priced in exactly the way the question rules out.</p>
+<ol class="brands">
+<li><span class="brand-name">Keycloak</span><p class="brand-note">Pricing cannot rug-pull you because there is no pricing: it is Apache-2.0 software you run, so cost scales with your infrastructure rather than with your user count, and organisations and SSO connections are unlimited by construction.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free and open source (Apache 2.0). Your only cost is hosting it — realistically one small VM plus a Postgres database.</p><p class="brand-row"><span class="lbl">Most likely regret</span>You are now operating an identity provider. Version upgrades are genuinely disruptive, the admin console is dense, and a 3-person team will feel the on-call weight of it the first time login breaks at 2am.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Zitadel</span><p class="brand-note">Self-hostable under Apache 2.0 with multi-tenancy and SSO in the core product rather than gated behind a plan, which is precisely the axis the question is worried about.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Self-hosted: free, open source. There is also a managed cloud offering, which historically had a low-cost tier plus usage-based components.</p><p class="brand-row"><span class="lbl">Most likely regret</span>Much smaller community than Keycloak, so when you hit an edge case you are more likely to be reading source code than a Stack Overflow answer.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am not confident about Zitadel Cloud&#39;s current tier structure or prices and I am not going to guess at numbers. Check their pricing page directly before you rely on the managed option.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Ory Kratos</span><p class="brand-note">Apache-2.0 identity server with no user-count licensing, and it is deliberately API-first, so exporting your users is a normal operation rather than a support ticket.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Self-hosted: free, open source. Ory Network is the paid hosted version.</p><p class="brand-row"><span class="lbl">Most likely regret</span>It is a set of composable services rather than a finished product — Kratos does identity, and you assemble the rest. Expect to write more glue than you planned, including your own login UI.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am not confident of current Ory Network pricing and am deliberately not quoting figures.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Authentik</span><p class="brand-note">Self-hosted and considerably easier to stand up than Keycloak, with SSO and per-application policies included rather than surcharged.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Open-source core, free to self-host. There is a separate paid enterprise offering.</p><p class="brand-row"><span class="lbl">Most likely regret</span>Its centre of gravity is internal/homelab SSO rather than being the customer-facing identity layer of a commercial B2B product; you may find yourself off the documented path.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>I am reasonably confident the project is active, but I cannot verify from here that the enterprise tier&#39;s terms are unchanged.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Supabase Auth</span><p class="brand-note">The best-fitting hosted option, because it prices by plan with a monthly-active-user allowance rather than charging per organisation or per SSO connection, and because the underlying data lives in a Postgres database you can dump.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Bundled into Supabase&#39;s plan tiers, with an included monthly-active-user allowance and per-MAU overage above it.</p><p class="brand-row"><span class="lbl">Most likely regret</span>There is still a per-MAU overage, so at 50,000 monthly active users this is a real and growing bill — predictable, but not flat. Enterprise SSO features have historically sat on higher tiers.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>Supabase&#39;s MAU allowances and overage rates have changed more than once. Treat any figure I might give as stale and read the current pricing page.</p><p class="nosources">No source cited for this recommendation.</p></li>
+<li><span class="brand-name">Better Auth</span><p class="brand-note">A library rather than a service: it runs inside your own application against your own database, so there is no vendor with the ability to change your pricing at all.</p><p class="brand-row"><span class="lbl">Pricing, as described</span>Free, open-source library. No hosted component to pay for.</p><p class="brand-row"><span class="lbl">Most likely regret</span>It is young. You are taking on the maintenance risk of a fast-moving library in the single most security-sensitive part of your product, and enterprise SSO is not the thing it is best at.</p><p class="brand-row caveat-row"><span class="lbl">Model unsure</span>This ecosystem moves quickly and I am less confident about its current state than about the older projects above.</p><p class="nosources">No source cited for this recommendation.</p></li>
+</ol>
+<aside class="caveat">
+<p class="caveat-label">What the model said it was not sure about</p>
+<ul><li>I have no live web access in this run, so I have not read a single current pricing page. Every pricing description above is from memory of how these products were priced, and pricing is the fastest-decaying fact about any of them. Verify before you commit.</li><li>Because I could not fetch anything, I am not able to give you the source list you asked for. I would rather say that than invent citations.</li><li>I am confident all six projects existed and were actively maintained as of my knowledge cutoff. I cannot confirm any of them still is today.</li><li>Two obvious names are missing on purpose rather than by oversight: the best-known B2B auth vendors in this space price per SSO connection or per organisation, which is the exact thing your constraints exclude. If that constraint is softer than you wrote it, they come back into contention immediately.</li></ul>
+</aside>
+</section>
+<div class="cta">
+<p><strong>Named here and want out?</strong> <a href="https://github.com/astroanand-6e/answer-ledger/issues/new?template=delist-brand.yml&amp;title=Delist%20request%3A%20">Open a delist request</a>. No email, no account beyond GitHub, no payment — ever. It is removed from this page, the index and the sitemap on the next build.</p>
+<p><strong>Want a question added?</strong> <a href="https://github.com/astroanand-6e/answer-ledger/issues/new?template=request-category.yml&amp;title=Category%20request%3A%20">Request a category</a>.</p>
+</div>
+<p class="mono"><a href="https://github.com/astroanand-6e/answer-ledger/blob/main/data/categories/auth-predictable-pricing-at-scale.json">View the raw data for this page &rarr;</a></p>
+</main>
+<footer><div class="wrap">
+<span>Answer Ledger &mdash; every entry names its model, its prompt and its UTC timestamp. Nothing here is for sale to the vendors it names.</span>
+<span><a href="/answer-ledger/method/">How this was made</a> &nbsp;·&nbsp; <a href="https://github.com/astroanand-6e/answer-ledger/issues">Delist or request</a></span>
+</div></footer>
+</body>
+</html>
