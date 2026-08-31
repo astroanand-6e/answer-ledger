@@ -61,12 +61,20 @@
           "caveat": "I have real doubt about this one. I am not confident it still exists as an independent product, under this name, or with a usable free tier. I am including it because it genuinely fit the constraints when I last knew about it, but verify that it is still alive before you evaluate it further.",
           "sources": [],
           "correction": {
-            "note": "Highlight.io was acquired by LaunchDarkly, announced in March 2025 and completed in April 2025. Session replay is now part of the LaunchDarkly platform, offered through an Early Access programme, rather than a standalone product with its own free tier and pricing page. The independent product this entry describes no longer exists in that form.",
-            "checkedAt": "2026-08-31T17:30:00Z",
+            "note": "LaunchDarkly announced its acquisition of Highlight on 21 April 2025, in a post on its own blog stating that Highlight was \"officially joining the LaunchDarkly team\". Checked again on 31 August 2026: highlight.io now returns an HTTP 308 permanent redirect to launchdarkly.com, so the standalone product this entry describes is no longer reachable under its own domain. That is true of the commercial product only — the open-source repository at github.com/highlight/highlight is still public, is not archived, and was last updated on 20 August 2026, so the code remains available to self-host.",
+            "checkedAt": "2026-08-31T22:20:00Z",
             "sources": [
               {
                 "url": "https://launchdarkly.com/blog/welcome-highlight-to-launchdarkly/",
                 "title": "Welcome Highlight to LaunchDarkly: building the future of Guarded Releases together"
+              },
+              {
+                "url": "https://highlight.io/",
+                "title": null
+              },
+              {
+                "url": "https://github.com/highlight/highlight",
+                "title": "GitHub - highlight/highlight: highlight.io: The open source, full-stack monitoring platform. Error monitoring, session replay, logging, distributed tracing, and more."
               }
             ]
           }

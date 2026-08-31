@@ -42,12 +42,16 @@
           "caveat": "I am less confident about this one than about Fider. I believe it existed and was active, but I would check the repository's recent commit history before adopting it.",
           "sources": [],
           "correction": {
-            "note": "Astuto reached end of life. The repository was archived and made read-only on 8 February 2026, and the maintainer's closing issue states the project is no longer maintained and points users to Fider instead — which is already ranked on this page. Astuto can still be run from the archived source, but it will receive no further fixes or security updates.",
-            "checkedAt": "2026-08-31T17:30:00Z",
+            "note": "Astuto reached end of life. The maintainer's closing issue, opened 9 January 2026, states \"Astuto is now officially unmantained\" and suggests Fider instead — which is already ranked on this page. The repository page records that it was archived by the owner on 8 February 2026 and is now read-only; checked again on 31 August 2026, it is still archived. Astuto can still be run from the archived source, but it will receive no further fixes or security updates.",
+            "checkedAt": "2026-08-31T22:20:00Z",
             "sources": [
               {
                 "url": "https://github.com/astuto/astuto/issues/487",
-                "title": "Astuto end of life – Thanks everyone (astuto/astuto issue #487)"
+                "title": "👋🏻 Astuto end of life – Thanks everyone"
+              },
+              {
+                "url": "https://github.com/astuto/astuto",
+                "title": "GitHub - astuto/astuto: A free, open source, self-hosted customer feedback tool 🦊"
               }
             ]
           }

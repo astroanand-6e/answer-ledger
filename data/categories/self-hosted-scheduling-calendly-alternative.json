@@ -26,15 +26,15 @@
           "sources": [],
           "correction": {
             "note": "Cal.com stopped being open source in April 2026: the production codebase moved to a private repository, and the public repository was renamed to calcom/cal.diy and relicensed from AGPL 3.0 to MIT with the enterprise features removed. The self-hostable product named here now exists under the name Cal.diy. Anyone acting on this recommendation in order to self-host should follow the Cal.diy repository rather than cal.com, which is now the hosted commercial product.",
-            "checkedAt": "2026-08-31T17:30:00Z",
+            "checkedAt": "2026-08-31T22:20:00Z",
             "sources": [
               {
                 "url": "https://cal.com/blog/cal-diy-open-source-to-closed-source",
-                "title": "Going Closed-Source: Technical Changes Behind Cal.diy"
+                "title": "Moving to closed-source: the technical changes"
               },
               {
                 "url": "https://github.com/calcom/cal.diy",
-                "title": "calcom/cal.diy — scheduling infrastructure for absolutely everyone (MIT)"
+                "title": "GitHub - calcom/cal.diy: Scheduling infrastructure for absolutely everyone."
               }
             ]
           }

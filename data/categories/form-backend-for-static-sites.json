@@ -61,12 +61,16 @@
           "caveat": "I am not confident of Getform's current free-tier submission limit or its paid pricing and am deliberately not quoting figures.",
           "sources": [],
           "correction": {
-            "note": "Getform was renamed Forminit in January 2026. getform.io now redirects to forminit.com, which presents itself as \"Forminit (formerly Getform.io)\", and existing accounts, data and form endpoints carried over unchanged. The service described here is still operating; only the name is out of date.",
-            "checkedAt": "2026-08-31T17:30:00Z",
+            "note": "Getform was renamed Forminit on 14 January 2026. The vendor's own announcement describes this as a rebrand and not an acquisition — the same independent team, operating since 2015 — and states that existing Getform endpoints continue to work, so no migration or code change is required. Checked again on 31 August 2026: getform.io returns an HTTP 301 redirect to forminit.com, which presents itself as \"Forminit (formerly Getform.io)\". The service described here is still operating; only the name is out of date.",
+            "checkedAt": "2026-08-31T22:20:00Z",
             "sources": [
               {
+                "url": "https://forminit.com/blog/getform-is-now-forminit/",
+                "title": "Getform.io Is Now Forminit: Same Team, New Name"
+              },
+              {
                 "url": "https://forminit.com/",
-                "title": "Forminit (formerly Getform.io) — Headless Form Backend API"
+                "title": "Forminit (formerly Getform.io) - Headless Form Backend API"
               }
             ]
           }
