@@ -35,7 +35,10 @@ REQ="$(gh issue list --repo "$REPO" --label "category-request" --state all --lim
 DELIST="$(gh issue list --repo "$REPO" --label "delist" --state all --limit 200 \
         --json number,createdAt 2>/dev/null)"
 
-jq -n \
+# -c: ONE record per line. This file is .jsonl and the Traffic Gate is read
+# from it line by line; pretty-printed output makes an 84-line record and the
+# second append makes the file unparseable as anything at all.
+jq -c -n \
   --arg at "$NOW" --arg repo "$REPO" \
   --argjson views "${VIEWS:-null}" \
   --argjson clones "${CLONES:-null}" \
@@ -62,4 +65,12 @@ jq -n \
    }' >> "$OUT" 2>/dev/null \
   || echo "{\"at\":\"$NOW\",\"repo\":\"$REPO\",\"error\":\"snapshot failed; api unreachable or jq missing\"}" >> "$OUT"
 
-echo "traffic-snapshot: appended to metrics/traffic.jsonl ($(wc -l < "$OUT" | tr -d ' ') lines total)"
+# Guard the invariant rather than trusting it: one record MUST be one line.
+BAD="$(grep -cve '^{.*}$' "$OUT" || true)"
+if [ "${BAD:-0}" -gt 0 ]; then
+  echo "traffic-snapshot: ERROR — $BAD line(s) in $OUT are not a complete JSON object." >&2
+  echo "traffic-snapshot: the gate cannot be read from this file. Fix before trusting any number." >&2
+  exit 1
+fi
+
+echo "traffic-snapshot: appended to metrics/traffic.jsonl ($(wc -l < "$OUT" | tr -d ' ') records total)"
