@@ -1,0 +1,1 @@
+{"at":"2026-09-01T06:13:31Z","kind":"outage","schema":1,"gap_hours":7.06,"since":"2026-08-31T23:10:07Z","until":"2026-09-01T06:13:31Z","cycle":1,"detected_by":"auto-loop/snapshot_gate_metrics","reason":"meter silent: no snapshot attempted between these timestamps"}
