@@ -48,6 +48,11 @@ set -uo pipefail
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 ORIGIN_HOST="astroanand-6e.github.io"
+# Engine identifiers here MUST match metrics/README.md's admissibility allowlist
+# (google, bing, duckduckgo) verbatim. "ddg" is not "duckduckgo" — a probe that
+# logged the former would produce a reading no gate query or freshness check
+# would ever recognize as admissible, silently reproducing the exact void this
+# probe exists to close.
 target_for() { case "$1" in mojeek) echo "site:${ORIGIN_HOST} answer ledger" ;; *) echo "site:${ORIGIN_HOST}" ;; esac; }
 # Mojeek rejects a bare `site:` with "Site search requires a search query", so its
 # query carries keywords. That makes any Mojeek count a LOWER BOUND — it can only
@@ -69,8 +74,8 @@ run_query() {
   local engine="$1" q="$2" url tmp
   tmp="$(mktemp)"
   case "$engine" in
-    ddg)    url="https://lite.duckduckgo.com/lite/" ;;
-    mojeek) url="https://www.mojeek.com/search" ;;
+    duckduckgo) url="https://lite.duckduckgo.com/lite/" ;;
+    mojeek)     url="https://www.mojeek.com/search" ;;
     *) rm -f "$tmp"; return 2 ;;
   esac
   local code
@@ -97,7 +102,7 @@ PY
 
 count_on_host() { grep -c "^https\?://${ORIGIN_HOST}" 2>/dev/null || true; }
 
-for engine in ddg mojeek; do
+for engine in duckduckgo mojeek; do
   echo "== engine: $engine"
 
   CONTROL_A="$(control_for "$engine")"; CTL_HOST="$(control_host "$engine")"
