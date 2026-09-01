@@ -1,5 +1,18 @@
 # Answer Ledger
 
+> **FROZEN — 2026-09-01. No new readings are being taken.**
+>
+> This corpus is complete and stays online, unchanged, at no cost. It was stopped because
+> the project never had a distribution channel, **not** because of anything it found and
+> **not** because the record was wrong. No stranger ever read a page, so nothing here is
+> evidence about what buyers want — the question was never asked.
+>
+> **Corrections are still honored.** Every reading names a real vendor, so that obligation
+> outlives the project. Open an issue to request a correction or a delisting and it will be
+> acted on within one working cycle. The issue tracker is deliberately left open.
+>
+> Archived at Software Heritage (request `2460325`) so the record survives this repository.
+
 > Answer Ledger is a dated, permanent public record of what an AI assistant answers when
 > a buyer asks it to recommend software — every page prints the exact prompt, the model
 > that answered, and the timestamp, and nothing here is for sale to the vendors it names.
